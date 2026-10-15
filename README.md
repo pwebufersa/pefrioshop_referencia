@@ -71,15 +71,10 @@ usam Archivo, e o corpo usa Source Sans 3.
 
 ## Publicação
 
-O PéFrioShop é uma aplicação Java, e não roda no Netlify nem no GitHub Pages.
-O que é publicado nesses serviços é a documentação estática da pasta `docs/`.
-
-- GitHub Pages: publicado em https://pwebufersa.github.io/pefrioshop_referencia/,
-  a partir da pasta `/docs` da branch `main`.
-- Netlify: o `netlify.toml` já aponta a publicação para `docs`. A implantação é
-  iniciada pelo botão a seguir.
-
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/pwebufersa/pefrioshop_referencia)
+O PéFrioShop é uma aplicação Java, e não roda no GitHub Pages. O que é
+publicado é a documentação estática da pasta `docs/`, em
+https://pwebufersa.github.io/pefrioshop_referencia/, a partir da pasta `/docs`
+da branch `main`.
 
 Para executar de fato, a aplicação precisa de um serviço que rode Java, como
 Railway, Render ou um servidor próprio.
