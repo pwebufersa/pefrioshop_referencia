@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: cabecalho('Desconto')}"></head>
+<body>
+<header th:replace="~{layout :: menu}"></header>
+
+<main class="conteudo">
+	<h1>Desconto nos 4 produtos mais novos</h1>
+	<p>Desconto aplicado: <strong th:text="${#numbers.formatDecimal(descontoPercentual, 1, 1)} + '%'">7,3%</strong></p>
+
+	<p th:if="${#lists.isEmpty(itens)}">Nenhum produto cadastrado.</p>
+
+	<table th:unless="${#lists.isEmpty(itens)}">
+		<thead><tr><th>Nome</th><th>Preço original</th><th>Preço com desconto</th></tr></thead>
+		<tbody>
+			<tr th:each="linha : ${itens}">
+				<td th:text="${linha.produto.nome}">Produto</td>
+				<td th:text="'R$ ' + ${#numbers.formatDecimal(linha.produto.precoVenda, 1, 2)}">R$ 0,00</td>
+				<td th:text="'R$ ' + ${#numbers.formatDecimal(linha.precoComDesconto, 1, 2)}">R$ 0,00</td>
+			</tr>
+		</tbody>
+	</table>
+</main>
+
+<footer th:replace="~{layout :: rodape}"></footer>
+</body>
+</html>

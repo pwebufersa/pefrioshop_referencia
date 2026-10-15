@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: cabecalho('Faturamento')}"></head>
+<body>
+<header th:replace="~{layout :: menu}"></header>
+
+<main class="conteudo">
+	<h1>Faturamento dos últimos 12 meses</h1>
+
+	<form class="linha" method="get" th:action="@{/relatorios/faturamento}">
+		<label>Data de referência
+			<input type="date" name="referencia" th:value="${referencia}"/>
+		</label>
+		<button class="botao" type="submit">Atualizar</button>
+	</form>
+
+	<table>
+		<thead><tr><th>Mês</th><th>Faturamento</th></tr></thead>
+		<tbody>
+			<tr th:each="linha : ${linhas}">
+				<td th:text="${linha.mes}">01/2026</td>
+				<td th:text="'R$ ' + ${#numbers.formatDecimal(linha.faturamento, 1, 2)}">R$ 0,00</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<dl class="detalhes">
+		<dt>Faturamento total</dt>
+		<dd th:text="'R$ ' + ${#numbers.formatDecimal(total, 1, 2)}">R$ 0,00</dd>
+		<dt>Imposto</dt>
+		<dd>
+			<span th:text="'R$ ' + ${#numbers.formatDecimal(imposto, 1, 2)}">R$ 0,00</span>
+			<span class="nota" th:text="'(' + ${#numbers.formatDecimal(taxaPercentual, 1, 1)} + '%)'">(18,5%)</span>
+		</dd>
+		<dt>Total com imposto</dt>
+		<dd th:text="'R$ ' + ${#numbers.formatDecimal(totalComImposto, 1, 2)}">R$ 0,00</dd>
+	</dl>
+</main>
+
+<footer th:replace="~{layout :: rodape}"></footer>
+</body>
+</html>

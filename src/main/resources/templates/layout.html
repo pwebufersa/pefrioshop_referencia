@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="cabecalho(titulo)">
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<title th:text="${titulo} + ' - PéFrioShop'">PéFrioShop</title>
+	<link rel="icon" th:href="@{/imagens/favicon.svg}" type="image/svg+xml"/>
+	<link rel="stylesheet" href="/css/style.css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+
+<nav th:fragment="menu" class="menu">
+	<!--
+	THESIS: o balcão da loja como painel de trabalho, e não uma grade de cartões iguais.
+	OWN-WORLD: cal #f5f2ec e superfície branca sobre navegação azulejo #14425f; ação em couro #a2542a; apoio areia #d99a2b; Archivo nos títulos e Source Sans 3 no corpo; ícones próprios em traço de 1.75; cantos de 6 a 10px, sombra suave e numeral tabular.
+	STORY: o operador reconhece a tarefa pelo ícone e pelo rótulo, e registra o pedido sem ajuda.
+	FIRST VIEWPORT: navegação azulejo no topo, com marca e itens de ícone e rótulo; à esquerda, a lista de atalhos do balcão; à direita, o painel dos últimos pedidos.
+	FORM: painel de operação; a chave de seed não existe nesta versão do skill.
+	FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance.
+	-->
+	<a class="marca" th:href="@{/}">PéFrioShop</a>
+
+	<ul class="menu-lista">
+		<li>
+			<a class="menu-item" th:href="@{/clientes}">
+				<span th:replace="~{icones :: clientes}"></span>
+				<span>Clientes</span>
+			</a>
+		</li>
+		<li>
+			<a class="menu-item" th:href="@{/produtos}">
+				<span th:replace="~{icones :: produtos}"></span>
+				<span>Produtos</span>
+			</a>
+		</li>
+		<li>
+			<a class="menu-item" th:href="@{/produtos/busca}">
+				<span th:replace="~{icones :: busca}"></span>
+				<span>Busca</span>
+			</a>
+		</li>
+		<li>
+			<a class="menu-item" th:href="@{/pedidos}">
+				<span th:replace="~{icones :: pedidos}"></span>
+				<span>Pedidos</span>
+			</a>
+		</li>
+		<li class="submenu">
+			<details>
+				<summary>
+					<span th:replace="~{icones :: relatorios}"></span>
+					<span>Relatórios</span>
+				</summary>
+				<ul>
+					<li>
+						<a th:href="@{/relatorios/faturamento}">
+							<span th:replace="~{icones :: faturamento}"></span>
+							<span>Faturamento</span>
+						</a>
+					</li>
+					<li>
+						<a th:href="@{/relatorios/aniversariantes}">
+							<span th:replace="~{icones :: aniversariantes}"></span>
+							<span>Aniversariantes</span>
+						</a>
+					</li>
+					<li>
+						<a th:href="@{/relatorios/novatos}">
+							<span th:replace="~{icones :: novatos}"></span>
+							<span>Novatos</span>
+						</a>
+					</li>
+					<li>
+						<a th:href="@{/relatorios/frete-marte}">
+							<span th:replace="~{icones :: frete}"></span>
+							<span>Frete</span>
+						</a>
+					</li>
+					<li>
+						<a th:href="@{/relatorios/desconto}">
+							<span th:replace="~{icones :: desconto}"></span>
+							<span>Desconto</span>
+						</a>
+					</li>
+					<li>
+						<a th:href="@{/relatorios/contagem-tipo}">
+							<span th:replace="~{icones :: contagem}"></span>
+							<span>Por tipo</span>
+						</a>
+					</li>
+				</ul>
+			</details>
+		</li>
+		<li>
+			<a class="menu-item" th:href="@{/promocoes}">
+				<span th:replace="~{icones :: promocoes}"></span>
+				<span>Promoções</span>
+			</a>
+		</li>
+		<li>
+			<a class="menu-item" th:href="@{/contato}">
+				<span th:replace="~{icones :: contato}"></span>
+				<span>Contato</span>
+			</a>
+		</li>
+	</ul>
+
+	<script th:src="@{/js/nav.js}"></script>
+</nav>
+
+<footer th:fragment="rodape" class="rodape">
+	<span class="rodape-texto">PéFrioShop - projeto de referência da disciplina Programação Web 2026.2 - UFERSA Angicos.</span>
+</footer>
+
+</body>
+</html>

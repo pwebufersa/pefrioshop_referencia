@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: cabecalho('Contato')}"></head>
+<body>
+<header th:replace="~{layout :: menu}"></header>
+
+<main class="conteudo">
+	<h1>Fale com a loja</h1>
+	<p>Dúvidas sobre o seu pé ou sobre um pedido? Chame no WhatsApp.</p>
+
+	<p>
+		<a class="botao whatsapp"
+		   th:href="'https://wa.me/' + ${whatsapp} + '?text=' + 'Olá, quero falar com a PéFrioShop'"
+		   target="_blank" rel="noopener">
+			Iniciar conversa no WhatsApp
+		</a>
+	</p>
+
+	<p class="nota">Telefone configurado: <span th:text="${whatsapp}">5584999990000</span></p>
+</main>
+
+<footer th:replace="~{layout :: rodape}"></footer>
+</body>
+</html>

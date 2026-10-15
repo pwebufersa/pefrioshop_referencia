@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: cabecalho('Novo pedido')}"></head>
+<body>
+<header th:replace="~{layout :: menu}"></header>
+
+<main class="conteudo">
+	<h1>Novo pedido</h1>
+
+	<form class="formulario" th:object="${form}" method="post" th:action="@{/pedidos}">
+
+		<label>Cliente
+			<select th:field="*{clienteId}" required>
+				<option value="">Selecione</option>
+				<option th:each="c : ${clientes}" th:value="${c.id}" th:text="${c.nomeCompleto}">Cliente</option>
+			</select>
+		</label>
+
+		<label>Forma de pagamento
+			<select th:field="*{forma}" id="forma" required onchange="atualizarPagamento()">
+				<option value="">Selecione</option>
+				<option th:each="f : ${formas}" th:value="${f}" th:text="${f.rotulo}">Forma</option>
+			</select>
+		</label>
+
+		<label id="campo-cartao">4 últimos dígitos do cartão
+			<input type="text" th:field="*{cartaoUltimosDigitos}" maxlength="4" inputmode="numeric"/>
+		</label>
+
+		<label id="campo-pix">Chave Pix
+			<input type="text" th:field="*{chavePix}" maxlength="120"/>
+		</label>
+
+		<label id="campo-dinheiro">Valor pago
+			<input type="number" step="0.01" min="0" th:field="*{valorPago}"/>
+		</label>
+
+		<h2>Produtos</h2>
+		<table>
+			<thead>
+				<tr><th>Incluir</th><th>Produto</th><th>Marca</th><th>Tipo</th><th>Nº BR</th><th>Preço</th><th>Quantidade</th></tr>
+			</thead>
+			<tbody>
+				<tr th:each="p, linha : ${produtos}">
+					<td><input type="checkbox" th:field="*{itens[__${linha.index}__].incluir}"/></td>
+					<td th:text="${p.nome}">Produto</td>
+					<td th:text="${p.marca}">Marca</td>
+					<td th:text="${p.tipo.rotulo}">Tipo</td>
+					<td th:text="${p.numeroBr}">40</td>
+					<td th:text="'R$ ' + ${#numbers.formatDecimal(p.precoVenda, 1, 2)}">R$ 0,00</td>
+					<td>
+						<input type="hidden" th:field="*{itens[__${linha.index}__].produtoId}"/>
+						<input type="number" min="1" th:field="*{itens[__${linha.index}__].quantidade}"/>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<div class="acoes-formulario">
+			<button class="botao" type="submit">Registrar pedido</button>
+			<a th:href="@{/pedidos}">Cancelar</a>
+		</div>
+	</form>
+</main>
+
+<footer th:replace="~{layout :: rodape}"></footer>
+<script th:src="@{/js/pagamento.js}"></script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: cabecalho('Pedidos')}"></head>
+<body>
+<header th:replace="~{layout :: menu}"></header>
+
+<main class="conteudo">
+	<div class="titulo-linha">
+		<h1>Pedidos</h1>
+		<a class="botao" th:href="@{/pedidos/novo}">Novo pedido</a>
+	</div>
+
+	<p th:if="${#lists.isEmpty(pedidos)}">Nenhum pedido registrado.</p>
+
+	<table th:unless="${#lists.isEmpty(pedidos)}">
+		<thead>
+			<tr>
+				<th>Id</th><th>Cliente</th><th>Data</th><th>Total</th>
+				<th>Imposto</th><th>Total com imposto</th><th>Pagamento</th><th>Ações</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="linha : ${pedidos}">
+				<td th:text="${linha.pedido.id}">1</td>
+				<td th:text="${linha.pedido.cliente.nomeCompleto}">Cliente</td>
+				<td th:text="${#temporals.format(linha.pedido.dataPedido, 'dd/MM/yyyy HH:mm')}">01/01/2026 10:00</td>
+				<td th:text="'R$ ' + ${#numbers.formatDecimal(linha.resumo.valorTotal, 1, 2)}">R$ 0,00</td>
+				<td th:text="'R$ ' + ${#numbers.formatDecimal(linha.resumo.imposto, 1, 2)}">R$ 0,00</td>
+				<td th:text="'R$ ' + ${#numbers.formatDecimal(linha.resumo.totalComImposto, 1, 2)}">R$ 0,00</td>
+				<td th:text="${linha.pedido.pagamento?.forma?.rotulo}">Pagamento</td>
+				<td class="acoes">
+					<a th:href="@{/pedidos/{id}(id=${linha.pedido.id})}">Ver</a>
+					<form th:action="@{/pedidos/{id}/excluir(id=${linha.pedido.id})}" method="post"
+					      onsubmit="return confirm('Excluir o pedido? Cliente e produtos não são afetados.');">
+						<button class="link-perigo" type="submit">Excluir</button>
+					</form>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</main>
+
+<footer th:replace="~{layout :: rodape}"></footer>
+</body>
+</html>

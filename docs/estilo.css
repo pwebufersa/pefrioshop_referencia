@@ -1,0 +1,224 @@
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap");
+
+:root {
+	--cal: #f5f2ec;
+	--cal-fundo: #ebe6dc;
+	--superficie: #ffffff;
+	--tinta: #14202a;
+	--tinta-suave: #46545f;
+	--azulejo: #14425f;
+	--azulejo-claro: #2f6f96;
+	--couro: #a2542a;
+	--couro-escuro: #7f3f1f;
+	--areia: #d99a2b;
+	--borda: #d5cec0;
+	--fonte-titulo: "Archivo", "Segoe UI", system-ui, sans-serif;
+	--fonte-corpo: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+	--sombra: 0 1px 2px rgba(20, 32, 42, 0.08), 0 6px 18px rgba(20, 32, 42, 0.06);
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	background-color: var(--cal);
+	color: var(--tinta);
+	font-family: var(--fonte-corpo);
+	font-size: 1.05rem;
+	line-height: 1.65;
+}
+
+::selection {
+	background-color: var(--areia);
+	color: var(--tinta);
+}
+
+a {
+	color: var(--azulejo);
+	text-underline-offset: 3px;
+}
+
+a:hover {
+	color: var(--couro-escuro);
+}
+
+.cabecalho {
+	background-color: var(--azulejo);
+	border-bottom: 3px solid var(--areia);
+	padding: 2.5rem clamp(1rem, 5vw, 3rem) 2rem;
+	color: #f4f8fb;
+}
+
+.cabecalho .marca {
+	font-family: var(--fonte-titulo);
+	font-size: 2rem;
+	font-weight: 700;
+	letter-spacing: -0.02em;
+	color: #ffffff;
+}
+
+.cabecalho p {
+	max-width: 60ch;
+	margin: 0.5rem 0 0;
+	color: #dbe7ee;
+}
+
+main {
+	max-width: 1000px;
+	margin: 0 auto;
+	padding: 2.5rem clamp(1rem, 5vw, 3rem) 4rem;
+}
+
+h1,
+h2,
+h3 {
+	font-family: var(--fonte-titulo);
+	line-height: 1.15;
+	letter-spacing: -0.015em;
+	text-wrap: balance;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin: 3rem 0 1rem;
+	border-bottom: 1px solid var(--borda);
+	padding-bottom: 0.5rem;
+}
+
+h3 {
+	font-size: 1.1rem;
+	margin: 1.5rem 0 0.5rem;
+}
+
+p {
+	max-width: 68ch;
+}
+
+code,
+pre {
+	font-family: "Cascadia Code", Consolas, monospace;
+	font-size: 0.95rem;
+}
+
+pre {
+	background-color: var(--superficie);
+	border: 1px solid var(--borda);
+	border-radius: 10px;
+	padding: 1rem;
+	box-shadow: var(--sombra);
+	overflow-x: auto;
+}
+
+.cartoes {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+	gap: 1rem;
+}
+
+.cartao {
+	background-color: var(--superficie);
+	border: 1px solid var(--borda);
+	border-radius: 10px;
+	padding: 1.25rem;
+	box-shadow: var(--sombra);
+}
+
+.cartao h3 {
+	margin-top: 0;
+}
+
+.listas {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+	gap: 2rem;
+}
+
+.listas ol {
+	margin: 0;
+	padding-left: 1.25rem;
+}
+
+.listas li {
+	margin-bottom: 0.35rem;
+}
+
+.cores {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+	gap: 1rem;
+}
+
+.cor {
+	border: 1px solid var(--borda);
+	border-radius: 10px;
+	overflow: hidden;
+	background-color: var(--superficie);
+}
+
+.cor .amostra {
+	height: 72px;
+}
+
+.cor .rotulo {
+	padding: 0.6rem 0.8rem;
+	font-size: 0.9rem;
+}
+
+.cor .rotulo strong {
+	display: block;
+	font-family: var(--fonte-titulo);
+}
+
+.tipografia {
+	background-color: var(--superficie);
+	border: 1px solid var(--borda);
+	border-radius: 10px;
+	padding: 1.25rem;
+	box-shadow: var(--sombra);
+}
+
+.tipografia .titulo {
+	font-family: var(--fonte-titulo);
+	font-weight: 700;
+	font-size: 2rem;
+	letter-spacing: -0.02em;
+	margin: 0;
+}
+
+.tipografia .corpo {
+	margin: 0.5rem 0 0;
+}
+
+.botao {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 2.6rem;
+	background-color: var(--couro);
+	color: #ffffff;
+	border: 1px solid var(--couro-escuro);
+	border-radius: 6px;
+	padding: 0.5rem 1rem;
+	font-family: var(--fonte-titulo);
+	font-weight: 600;
+	text-decoration: none;
+}
+
+.botao:hover {
+	background-color: var(--couro-escuro);
+	color: #ffffff;
+}
+
+.rodape {
+	max-width: 1000px;
+	margin: 0 auto;
+	padding: 2rem clamp(1rem, 5vw, 3rem);
+	color: var(--tinta-suave);
+	font-size: 0.9rem;
+	text-align: center;
+	border-top: 1px solid var(--borda);
+}

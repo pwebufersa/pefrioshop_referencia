@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: cabecalho('Aniversariantes')}"></head>
+<body>
+<header th:replace="~{layout :: menu}"></header>
+
+<main class="conteudo">
+	<h1>Aniversariantes do mês</h1>
+
+	<form class="linha" method="get" th:action="@{/relatorios/aniversariantes}">
+		<label>Mês (1 a 12)
+			<input type="number" name="mes" min="1" max="12" th:value="${mes}"/>
+		</label>
+		<button class="botao" type="submit">Consultar</button>
+	</form>
+
+	<p th:if="${#lists.isEmpty(clientes)}">Nenhum aniversariante no mês informado.</p>
+
+	<table th:unless="${#lists.isEmpty(clientes)}">
+		<thead><tr><th>Nome completo</th><th>Data de nascimento</th></tr></thead>
+		<tbody>
+			<tr th:each="c : ${clientes}">
+				<td th:text="${c.nomeCompleto}">Nome</td>
+				<td th:text="${#temporals.format(c.dataNascimento, 'dd/MM/yyyy')}">01/01/2000</td>
+			</tr>
+		</tbody>
+	</table>
+</main>
+
+<footer th:replace="~{layout :: rodape}"></footer>
+</body>
+</html>

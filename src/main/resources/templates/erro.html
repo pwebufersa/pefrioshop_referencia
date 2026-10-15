@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: cabecalho('Erro')}"></head>
+<body>
+<header th:replace="~{layout :: menu}"></header>
+
+<main class="conteudo">
+	<h1>Não foi possível concluir</h1>
+	<p class="erro" th:text="${mensagem}">Mensagem do erro.</p>
+	<p><a th:href="@{/}">Voltar ao início</a></p>
+</main>
+
+<footer th:replace="~{layout :: rodape}"></footer>
+</body>
+</html>

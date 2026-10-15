@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: cabecalho('Produtos por tipo')}"></head>
+<body>
+<header th:replace="~{layout :: menu}"></header>
+
+<main class="conteudo">
+	<h1>Produtos por tipo</h1>
+
+	<p th:if="${#lists.isEmpty(itens)}">Nenhum produto cadastrado.</p>
+
+	<table th:unless="${#lists.isEmpty(itens)}">
+		<thead><tr><th>Tipo</th><th>Quantidade</th></tr></thead>
+		<tbody>
+			<tr th:each="linha : ${itens}">
+				<td th:text="${linha.tipo.rotulo}">Tipo</td>
+				<td th:text="${linha.quantidade}">0</td>
+			</tr>
+		</tbody>
+	</table>
+</main>
+
+<footer th:replace="~{layout :: rodape}"></footer>
+</body>
+</html>

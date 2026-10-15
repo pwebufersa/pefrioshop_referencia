@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: cabecalho('Produto')}"></head>
+<body>
+<header th:replace="~{layout :: menu}"></header>
+
+<main class="conteudo">
+	<h1 th:text="${produto.id == null} ? 'Novo produto' : 'Editar produto'">Produto</h1>
+
+	<form class="formulario" th:object="${produto}" method="post" enctype="multipart/form-data"
+	      th:action="${produto.id == null} ? @{/produtos} : @{/produtos/{id}(id=${produto.id})}">
+
+		<label>Nome
+			<input type="text" th:field="*{nome}" required maxlength="120"/>
+			<span class="campo-erro" th:errors="*{nome}"></span>
+		</label>
+
+		<label>Marca
+			<input type="text" th:field="*{marca}" required maxlength="80"/>
+			<span class="campo-erro" th:errors="*{marca}"></span>
+		</label>
+
+		<label>Tipo
+			<select th:field="*{tipo}" required>
+				<option value="">Selecione</option>
+				<option th:each="t : ${T(br.edu.ufersa.pefrioshop.domain.TipoProduto).values()}"
+				        th:value="${t}" th:text="${t.rotulo}">Tipo</option>
+			</select>
+			<span class="campo-erro" th:errors="*{tipo}"></span>
+		</label>
+
+		<label>Gênero alvo
+			<select th:field="*{generoAlvo}" required>
+				<option value="">Selecione</option>
+				<option th:each="g : ${T(br.edu.ufersa.pefrioshop.domain.GeneroAlvo).values()}"
+				        th:value="${g}" th:text="${g.rotulo}">Público</option>
+			</select>
+			<span class="campo-erro" th:errors="*{generoAlvo}"></span>
+		</label>
+
+		<label>Número BR
+			<input type="number" min="1" th:field="*{numeroBr}" required/>
+			<span class="campo-erro" th:errors="*{numeroBr}"></span>
+		</label>
+
+		<label>Preço de compra
+			<input type="number" step="0.01" min="0" th:field="*{precoCompra}" required/>
+			<span class="campo-erro" th:errors="*{precoCompra}"></span>
+		</label>
+
+		<label>Preço de venda
+			<input type="number" step="0.01" min="0.01" th:field="*{precoVenda}" required/>
+			<span class="campo-erro" th:errors="*{precoVenda}"></span>
+		</label>
+
+		<label>Foto do produto (guardada no banco)
+			<input type="file" name="foto" accept="image/*"/>
+		</label>
+
+		<div class="acoes-formulario">
+			<button class="botao" type="submit">Salvar</button>
+			<a th:href="@{/produtos}">Cancelar</a>
+		</div>
+	</form>
+</main>
+
+<footer th:replace="~{layout :: rodape}"></footer>
+</body>
+</html>

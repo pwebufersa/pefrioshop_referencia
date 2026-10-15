@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<title>PéFrioShop - implementação de referência</title>
+	<link rel="icon" href="imagens/favicon.svg" type="image/svg+xml"/>
+	<link rel="stylesheet" href="estilo.css"/>
+</head>
+<body>
+
+<header class="cabecalho">
+	<div class="marca">PéFrioShop</div>
+	<p>Implementação de referência do projeto da disciplina Programação Web 2026.2 - UFERSA Angicos. Sistema para loja de calçados, com ficha clínica do pé do cliente.</p>
+</header>
+
+<main>
+	<h2>O que é</h2>
+	<div class="cartoes">
+		<article class="cartao">
+			<h3>Operação de balcão</h3>
+			<p>Clientes, produtos e pedidos, com ficha clínica do pé em cascata, item com valor unitário no momento da compra e pagamento em dinheiro, cartão ou Pix.</p>
+		</article>
+		<article class="cartao">
+			<h3>Relatórios</h3>
+			<p>Faturamento dos últimos doze meses, aniversariantes, novatos, frete para Marte, desconto e contagem por tipo.</p>
+		</article>
+		<article class="cartao">
+			<h3>Identidade visual</h3>
+			<p>Paleta de cal, azulejo, couro e areia, com Archivo nos títulos e Source Sans 3 no corpo. Ícones próprios, em um único traço.</p>
+		</article>
+	</div>
+
+	<h2>Como executar</h2>
+	<p>O projeto roda com o wrapper do Maven, sem instalação prévia do Maven.</p>
+<pre><code>./mvnw spring-boot:run</code></pre>
+	<p>A aplicação sobe em <code>http://localhost:8080</code>. O console do H2 fica em <code>/h2-console</code>, com usuário <code>admin</code> e senha <code>admin</code>. A carga inicial vem do <code>import.sql</code>.</p>
+
+	<h2>User stories</h2>
+	<div class="listas">
+		<div>
+			<h3>Milestone 1</h3>
+			<ol>
+				<li>Manter e exibir informações de um cliente.</li>
+				<li>Manter e exibir informações de produtos.</li>
+				<li>Manter e exibir a ficha clínica do pé.</li>
+				<li>Manter e exibir pedidos, com itens e pagamento.</li>
+			</ol>
+		</div>
+		<div>
+			<h3>Milestone 2</h3>
+			<ol start="5">
+				<li>Faturamento dos últimos doze meses.</li>
+				<li>Busca de produto pelo nome.</li>
+				<li>Busca de produto por qualquer campo.</li>
+				<li>Contato pelo WhatsApp.</li>
+				<li>E-mail promocional.</li>
+				<li>Endereço preenchido pelo CEP.</li>
+				<li>Aniversariantes do mês.</li>
+				<li>Foto do produto guardada no banco.</li>
+				<li>Frete estimado para Marte.</li>
+				<li>Desconto nos quatro produtos mais novos.</li>
+				<li>Contagem de produtos por tipo.</li>
+				<li>Novatos do mês e do ano.</li>
+			</ol>
+		</div>
+	</div>
+
+	<h2>Design system</h2>
+	<div class="cores">
+		<div class="cor">
+			<div class="amostra" style="background:#14425f"></div>
+			<div class="rotulo"><strong>Azulejo</strong>#14425f</div>
+		</div>
+		<div class="cor">
+			<div class="amostra" style="background:#a2542a"></div>
+			<div class="rotulo"><strong>Couro</strong>#a2542a</div>
+		</div>
+		<div class="cor">
+			<div class="amostra" style="background:#d99a2b"></div>
+			<div class="rotulo"><strong>Areia</strong>#d99a2b</div>
+		</div>
+		<div class="cor">
+			<div class="amostra" style="background:#f5f2ec"></div>
+			<div class="rotulo"><strong>Cal</strong>#f5f2ec</div>
+		</div>
+	</div>
+
+	<h3>Tipografia</h3>
+	<div class="tipografia">
+		<p class="titulo">Archivo nos títulos</p>
+		<p class="corpo">Source Sans 3 no corpo de texto, com medida de leitura de sessenta e oito caracteres e numeral tabular nos valores.</p>
+	</div>
+
+	<h2>Publicação</h2>
+	<p>O PéFrioShop é uma aplicação Java e não roda no Netlify nem no GitHub Pages. Estas páginas são a documentação estática do projeto. Para executar de fato, é necessário um serviço que rode Java, como Railway, Render ou um servidor próprio.</p>
+	<p><a class="botao" href="https://github.com/pwebufersa/pefrioshop_referencia">Ver o repositório</a></p>
+</main>
+
+<footer class="rodape">
+	PéFrioShop - projeto de referência da disciplina Programação Web 2026.2 - UFERSA Angicos.
+</footer>
+
+</body>
+</html>

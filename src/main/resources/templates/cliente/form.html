@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: cabecalho('Cliente')}"></head>
+<body>
+<header th:replace="~{layout :: menu}"></header>
+
+<main class="conteudo">
+	<h1 th:text="${cliente.id == null} ? 'Novo cliente' : 'Editar cliente'">Cliente</h1>
+
+	<form class="formulario" th:object="${cliente}" method="post"
+	      th:action="${cliente.id == null} ? @{/clientes} : @{/clientes/{id}(id=${cliente.id})}">
+
+		<label>Nome completo
+			<input type="text" th:field="*{nomeCompleto}" required maxlength="120"/>
+			<span class="campo-erro" th:errors="*{nomeCompleto}"></span>
+		</label>
+
+		<label>Gênero
+			<select th:field="*{genero}" required>
+				<option value="">Selecione</option>
+				<option th:each="g : ${T(br.edu.ufersa.pefrioshop.domain.Genero).values()}"
+				        th:value="${g}" th:text="${g.rotulo}">Gênero</option>
+			</select>
+			<span class="campo-erro" th:errors="*{genero}"></span>
+		</label>
+
+		<label>E-mail
+			<input type="email" th:field="*{email}" maxlength="120"/>
+			<span class="campo-erro" th:errors="*{email}"></span>
+		</label>
+
+		<label>Telefone com DDD
+			<input type="text" th:field="*{telefone}" required maxlength="15" placeholder="(84) 99999-0000"/>
+			<span class="campo-erro" th:errors="*{telefone}"></span>
+		</label>
+
+		<label>Data de nascimento
+			<input type="date" th:field="*{dataNascimento}" required/>
+			<span class="campo-erro" th:errors="*{dataNascimento}"></span>
+		</label>
+
+		<fieldset>
+			<legend>Endereço</legend>
+
+			<label>CEP
+				<span class="linha">
+					<input type="text" th:field="*{endereco.cep}" id="cep" maxlength="9" placeholder="59650000"/>
+					<button type="button" class="botao" onclick="buscarCep()">Buscar CEP</button>
+				</span>
+				<small id="aviso-cep" class="nota"></small>
+			</label>
+
+			<label>Rua
+				<input type="text" th:field="*{endereco.rua}" maxlength="120"/>
+			</label>
+
+			<label>Bairro
+				<input type="text" th:field="*{endereco.bairro}" maxlength="80"/>
+			</label>
+
+			<label>Número
+				<input type="text" th:field="*{endereco.numero}" maxlength="10"/>
+			</label>
+
+			<label>Cidade
+				<input type="text" th:field="*{endereco.cidade}" maxlength="80"/>
+			</label>
+		</fieldset>
+
+		<div class="acoes-formulario">
+			<button class="botao" type="submit">Salvar</button>
+			<a th:href="@{/clientes}">Cancelar</a>
+		</div>
+	</form>
+</main>
+
+<footer th:replace="~{layout :: rodape}"></footer>
+<script th:src="@{/js/cep.js}"></script>
+<script th:src="@{/js/validacao.js}"></script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: cabecalho('Ficha clínica do pé')}"></head>
+<body>
+<header th:replace="~{layout :: menu}"></header>
+
+<main class="conteudo">
+	<h1>Ficha clínica do pé</h1>
+	<p>Cliente: <strong th:text="${ficha.cliente.nomeCompleto}">Nome</strong></p>
+
+	<form class="formulario" th:object="${ficha}" method="post"
+	      th:action="@{/clientes/{id}/ficha(id=${clienteId})}">
+
+		<label>Comprimento do pé (cm)
+			<input type="number" step="0.1" min="0.1" th:field="*{comprimentoCm}" required/>
+			<span class="campo-erro" th:errors="*{comprimentoCm}"></span>
+		</label>
+
+		<label>Largura
+			<select th:field="*{largura}" required>
+				<option value="">Selecione</option>
+				<option th:each="v : ${T(br.edu.ufersa.pefrioshop.domain.LarguraPe).values()}"
+				        th:value="${v}" th:text="${v.rotulo}">Largura</option>
+			</select>
+			<span class="campo-erro" th:errors="*{largura}"></span>
+		</label>
+
+		<label>Tipo de pisada
+			<select th:field="*{pisada}" required>
+				<option value="">Selecione</option>
+				<option th:each="v : ${T(br.edu.ufersa.pefrioshop.domain.TipoPisada).values()}"
+				        th:value="${v}" th:text="${v.rotulo}">Pisada</option>
+			</select>
+			<span class="campo-erro" th:errors="*{pisada}"></span>
+		</label>
+
+		<label>Número preferido BR
+			<input type="number" min="1" th:field="*{numeroPreferidoBr}" required/>
+			<span class="campo-erro" th:errors="*{numeroPreferidoBr}"></span>
+		</label>
+
+		<label>Marca preferida
+			<input type="text" th:field="*{marcaPreferida}" maxlength="80"/>
+		</label>
+
+		<label>Temperatura habitual do pé
+			<select th:field="*{temperatura}" required>
+				<option value="">Selecione</option>
+				<option th:each="v : ${T(br.edu.ufersa.pefrioshop.domain.TemperaturaPe).values()}"
+				        th:value="${v}" th:text="${v.rotulo}">Temperatura</option>
+			</select>
+			<span class="campo-erro" th:errors="*{temperatura}"></span>
+		</label>
+
+		<label>Odor
+			<select th:field="*{odor}" required>
+				<option value="">Selecione</option>
+				<option th:each="v : ${T(br.edu.ufersa.pefrioshop.domain.OdorPe).values()}"
+				        th:value="${v}" th:text="${v.rotulo}">Odor</option>
+			</select>
+			<span class="campo-erro" th:errors="*{odor}"></span>
+		</label>
+
+		<label>Data da última visita ao podólogo
+			<input type="date" th:field="*{dataUltimaVisitaPodologo}"/>
+		</label>
+
+		<label class="linha">
+			<input type="checkbox" th:field="*{temJoanete}"/>
+			Tem joanete
+		</label>
+
+		<div class="acoes-formulario">
+			<button class="botao" type="submit">Salvar ficha</button>
+			<a th:href="@{/clientes}">Cancelar</a>
+		</div>
+	</form>
+</main>
+
+<footer th:replace="~{layout :: rodape}"></footer>
+</body>
+</html>

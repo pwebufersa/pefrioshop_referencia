@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 320" width="480" height="320">
+	<defs>
+		<linearGradient id="ceu" x1="0" y1="0" x2="0" y2="1">
+			<stop offset="0%" stop-color="#1f5f8b"/>
+			<stop offset="100%" stop-color="#7fb3d5"/>
+		</linearGradient>
+	</defs>
+	<rect width="480" height="320" fill="url(#ceu)"/>
+	<rect y="220" width="480" height="100" fill="#f2a71b"/>
+	<text x="24" y="300" font-family="Segoe UI, Arial" font-size="18" fill="#1c2733">
+		Substituir por foto colorida de autoria propria
+	</text>
+</svg>

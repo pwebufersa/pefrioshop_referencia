@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: cabecalho('Balcão')}"></head>
+<body>
+<header th:replace="~{layout :: menu}"></header>
+
+<main class="conteudo">
+	<div class="titulo-linha">
+		<h1>Balcão</h1>
+		<a class="botao" th:href="@{/pedidos/novo}">Registrar pedido</a>
+	</div>
+
+	<div class="balcao">
+		<section>
+			<h2>O que fazer agora</h2>
+			<ul class="atalhos">
+				<li>
+					<a th:href="@{/pedidos/novo}">
+						<span class="nome">Novo pedido</span>
+						<span class="descricao">Seleciona o cliente, os itens e a forma de pagamento.</span>
+					</a>
+				</li>
+				<li>
+					<a th:href="@{/clientes}">
+						<span class="nome">Clientes</span>
+						<span class="descricao">Cadastro, endereço e ficha clínica do pé.</span>
+					</a>
+				</li>
+				<li>
+					<a th:href="@{/produtos}">
+						<span class="nome">Produtos</span>
+						<span class="descricao">Tênis, sandálias, botas e afins, com foto.</span>
+					</a>
+				</li>
+				<li>
+					<a th:href="@{/relatorios/faturamento}">
+						<span class="nome">Faturamento</span>
+						<span class="descricao">Doze meses, imposto e total com imposto.</span>
+					</a>
+				</li>
+				<li>
+					<a th:href="@{/relatorios/aniversariantes}">
+						<span class="nome">Aniversariantes</span>
+						<span class="descricao">Quem faz aniversário no mês informado.</span>
+					</a>
+				</li>
+				<li>
+					<a th:href="@{/promocoes}">
+						<span class="nome">Promoções</span>
+						<span class="descricao">Cinco por cento no tênis mais caro do último pedido.</span>
+					</a>
+				</li>
+			</ul>
+		</section>
+
+		<aside class="painel">
+			<h2>Últimos pedidos</h2>
+			<p th:if="${#lists.isEmpty(ultimosPedidos)}" class="nota">Nenhum pedido registrado ainda.</p>
+			<ul th:unless="${#lists.isEmpty(ultimosPedidos)}">
+				<li th:each="linha : ${ultimosPedidos}">
+					<a th:href="@{/pedidos/{id}(id=${linha.pedido.id})}">
+						<span th:text="${linha.pedido.cliente.nomeCompleto}">Cliente</span>
+					</a>
+					<div class="nota">
+						<span th:text="${#temporals.format(linha.pedido.dataPedido, 'dd/MM/yyyy')}">01/01/2026</span>
+						<span th:text="' - R$ ' + ${#numbers.formatDecimal(linha.resumo.totalComImposto, 1, 2)}">R$ 0,00</span>
+					</div>
+				</li>
+			</ul>
+		</aside>
+	</div>
+</main>
+
+<footer th:replace="~{layout :: rodape}"></footer>
+</body>
+</html>

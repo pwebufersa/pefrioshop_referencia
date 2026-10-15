@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: cabecalho('Clientes')}"></head>
+<body>
+<header th:replace="~{layout :: menu}"></header>
+
+<main class="conteudo">
+	<div class="titulo-linha">
+		<h1>Clientes</h1>
+		<a class="botao" th:href="@{/clientes/novo}">Novo cliente</a>
+	</div>
+
+	<p th:if="${#lists.isEmpty(clientes)}">Nenhum cliente cadastrado ainda.</p>
+
+	<table th:unless="${#lists.isEmpty(clientes)}">
+		<thead>
+			<tr>
+				<th>Id</th><th>Nome</th><th>Gênero</th><th>Telefone</th><th>Cidade</th><th>Ficha clínica</th><th>Ações</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="cliente : ${clientes}">
+				<td th:text="${cliente.id}">1</td>
+				<td th:text="${cliente.nomeCompleto}">Nome</td>
+				<td th:text="${cliente.genero.rotulo}">Gênero</td>
+				<td th:text="${cliente.telefone}">Telefone</td>
+				<td th:text="${cliente.endereco.cidade}">Cidade</td>
+				<td>
+					<span th:if="${cliente.fichaClinica != null}">Cadastrada</span>
+					<span th:unless="${cliente.fichaClinica != null}">Sem ficha</span>
+				</td>
+				<td class="acoes">
+					<a th:href="@{/clientes/{id}/editar(id=${cliente.id})}">Editar</a>
+					<a th:if="${cliente.fichaClinica == null}" th:href="@{/clientes/{id}/ficha/novo(id=${cliente.id})}">Nova ficha</a>
+					<a th:if="${cliente.fichaClinica != null}" th:href="@{/clientes/{id}/ficha/editar(id=${cliente.id})}">Editar ficha</a>
+					<form th:if="${cliente.fichaClinica != null}"
+					      th:action="@{/clientes/{id}/ficha/excluir(id=${cliente.id})}" method="post">
+						<button class="link-perigo" type="submit">Excluir ficha</button>
+					</form>
+					<form th:action="@{/clientes/{id}/excluir(id=${cliente.id})}" method="post"
+					      onsubmit="return confirm('Excluir o cliente e a ficha em cascata?');">
+						<button class="link-perigo" type="submit">Excluir</button>
+					</form>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</main>
+
+<footer th:replace="~{layout :: rodape}"></footer>
+</body>
+</html>

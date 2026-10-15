@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: cabecalho('Produtos')}"></head>
+<body>
+<header th:replace="~{layout :: menu}"></header>
+
+<main class="conteudo">
+	<div class="titulo-linha">
+		<h1>Produtos</h1>
+		<a class="botao" th:href="@{/produtos/novo}">Novo produto</a>
+	</div>
+
+	<form class="linha" method="get" th:action="@{/produtos}">
+		<label>Nome do produto
+			<input type="text" name="nome" th:value="${nome}" placeholder="Parte do nome"/>
+		</label>
+		<button class="botao" type="submit">Buscar</button>
+		<a th:href="@{/produtos/busca}">Busca avançada</a>
+	</form>
+
+	<p th:if="${#lists.isEmpty(produtos)}">Nenhum produto encontrado.</p>
+
+	<table th:unless="${#lists.isEmpty(produtos)}">
+		<thead>
+			<tr>
+				<th>Foto</th><th>Id</th><th>Nome</th><th>Marca</th><th>Tipo</th><th>Público</th>
+				<th>Nº BR</th><th>Compra</th><th>Venda</th><th>Cadastro</th><th>Ações</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="p : ${produtos}">
+				<td>
+					<img th:if="${p.temFoto}" class="miniatura" src="/imagens/sem-foto.svg"
+					     th:src="@{/produtos/{id}/foto(id=${p.id})}" alt="Foto do produto"/>
+					<img th:unless="${p.temFoto}" class="miniatura" src="/imagens/sem-foto.svg"
+					     alt="Produto sem foto"/>
+				</td>
+				<td th:text="${p.id}">1</td>
+				<td th:text="${p.nome}">Nome</td>
+				<td th:text="${p.marca}">Marca</td>
+				<td th:text="${p.tipo.rotulo}">Tipo</td>
+				<td th:text="${p.generoAlvo.rotulo}">Público</td>
+				<td th:text="${p.numeroBr}">40</td>
+				<td th:text="'R$ ' + ${#numbers.formatDecimal(p.precoCompra, 1, 2)}">R$ 0,00</td>
+				<td th:text="'R$ ' + ${#numbers.formatDecimal(p.precoVenda, 1, 2)}">R$ 0,00</td>
+				<td th:text="${#temporals.format(p.dataCadastro, 'dd/MM/yyyy')}">01/01/2026</td>
+				<td class="acoes">
+					<a th:href="@{/produtos/{id}/editar(id=${p.id})}">Editar</a>
+					<form th:action="@{/produtos/{id}/excluir(id=${p.id})}" method="post"
+					      onsubmit="return confirm('Excluir o produto?');">
+						<button class="link-perigo" type="submit">Excluir</button>
+					</form>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</main>
+
+<footer th:replace="~{layout :: rodape}"></footer>
+</body>
+</html>

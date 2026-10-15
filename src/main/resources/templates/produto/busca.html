@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: cabecalho('Busca de produtos')}"></head>
+<body>
+<header th:replace="~{layout :: menu}"></header>
+
+<main class="conteudo">
+	<h1>Busca de produtos</h1>
+
+	<form class="linha" method="get" th:action="@{/produtos/busca}">
+		<label>Nome ou marca
+			<input type="text" name="termo" th:value="${termo}" placeholder="Parte do nome ou da marca"/>
+		</label>
+		<label>Tipo
+			<select name="tipo">
+				<option value="">Qualquer tipo</option>
+				<option th:each="t : ${tipos}" th:value="${t}" th:text="${t.rotulo}"
+				        th:selected="${t == tipoSelecionado}">Tipo</option>
+			</select>
+		</label>
+		<label>Público
+			<select name="generoAlvo">
+				<option value="">Qualquer público</option>
+				<option th:each="g : ${generos}" th:value="${g}" th:text="${g.rotulo}"
+				        th:selected="${g == generoSelecionado}">Público</option>
+			</select>
+		</label>
+		<button class="botao" type="submit">Buscar</button>
+	</form>
+
+	<p th:if="${#lists.isEmpty(produtos)}">Nenhum produto encontrado.</p>
+
+	<table th:unless="${#lists.isEmpty(produtos)}">
+		<thead>
+			<tr><th>Id</th><th>Nome</th><th>Marca</th><th>Tipo</th><th>Público</th><th>Nº BR</th><th>Venda</th></tr>
+		</thead>
+		<tbody>
+			<tr th:each="p : ${produtos}">
+				<td th:text="${p.id}">1</td>
+				<td th:text="${p.nome}">Nome</td>
+				<td th:text="${p.marca}">Marca</td>
+				<td th:text="${p.tipo.rotulo}">Tipo</td>
+				<td th:text="${p.generoAlvo.rotulo}">Público</td>
+				<td th:text="${p.numeroBr}">40</td>
+				<td th:text="'R$ ' + ${#numbers.formatDecimal(p.precoVenda, 1, 2)}">R$ 0,00</td>
+			</tr>
+		</tbody>
+	</table>
+</main>
+
+<footer th:replace="~{layout :: rodape}"></footer>
+</body>
+</html>
