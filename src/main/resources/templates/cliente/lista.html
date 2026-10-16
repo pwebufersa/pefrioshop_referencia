@@ -19,16 +19,17 @@
 	<table th:unless="${#lists.isEmpty(clientes)}">
 		<thead>
 			<tr>
-				<th>Id</th><th>Nome</th><th>Gênero</th><th>Nascimento</th><th>Cadastro</th><th>Telefone</th><th>Cidade</th><th>Ações</th><th>Ficha</th>
+				<th>Id</th><th>Nome</th><th>Gênero</th><th>Nascimento</th><th>Cadastro</th><th>Hora</th><th>Telefone</th><th>Cidade</th><th>Ações</th><th>Ficha</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr th:each="cliente : ${clientes}">
-				<td data-rotulo="Id" th:text="${cliente.id}">1</td>
+				<td class="centro" data-rotulo="Id" th:text="${cliente.id}">1</td>
 				<td data-rotulo="Nome" th:text="${cliente.nomeCompleto}">Nome</td>
 				<td data-rotulo="Gênero" th:text="${cliente.genero.rotulo}">Gênero</td>
-				<td data-rotulo="Nascimento" th:text="${#temporals.format(cliente.dataNascimento, 'dd/MM/yyyy')}">01/01/2000</td>
-				<td data-rotulo="Cadastro" th:text="${#temporals.format(cliente.dataCadastro, 'dd/MM/yyyy HH:mm')}">01/01/2026 10:00</td>
+				<td class="centro" data-rotulo="Nascimento" th:text="${#temporals.format(cliente.dataNascimento, 'dd/MM/yyyy')}">01/01/2000</td>
+				<td class="centro" data-rotulo="Cadastro" th:text="${#temporals.format(cliente.dataCadastro, 'dd/MM/yyyy')}">01/01/2026</td>
+				<td class="centro" data-rotulo="Hora" th:text="${#temporals.format(cliente.dataCadastro, 'HH:mm')}">10:00</td>
 				<td data-rotulo="Telefone" th:text="${cliente.telefone}">Telefone</td>
 				<td data-rotulo="Cidade">
 					<span th:text="${cliente.endereco.cidade}">Cidade</span><br/>

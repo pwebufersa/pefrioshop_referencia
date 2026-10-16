@@ -14,7 +14,7 @@
 		<tbody>
 			<tr th:each="linha : ${itens}">
 				<td th:text="${linha.tipo.rotulo}">Tipo</td>
-				<td th:text="${linha.quantidade}">0</td>
+				<td class="centro" th:text="${linha.quantidade}">0</td>
 			</tr>
 		</tbody>
 	</table>

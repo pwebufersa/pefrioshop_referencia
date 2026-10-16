@@ -19,15 +19,16 @@
 	<table th:unless="${#lists.isEmpty(pedidos)}">
 		<thead>
 			<tr>
-				<th>Id</th><th>Cliente</th><th>Data</th><th>Total</th>
+				<th>Id</th><th>Cliente</th><th>Data</th><th>Hora</th><th>Total</th>
 				<th>Imposto</th><th>Total com imposto</th><th>Pagamento</th><th>Ações</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr th:each="linha : ${pedidos}">
-				<td data-rotulo="Id" th:text="${linha.pedido.id}">1</td>
+				<td class="centro" data-rotulo="Id" th:text="${linha.pedido.id}">1</td>
 				<td data-rotulo="Cliente" th:text="${linha.pedido.cliente.nomeCompleto}">Cliente</td>
-				<td data-rotulo="Data" th:text="${#temporals.format(linha.pedido.dataPedido, 'dd/MM/yyyy HH:mm')}">01/01/2026 10:00</td>
+				<td class="centro" data-rotulo="Data" th:text="${#temporals.format(linha.pedido.dataPedido, 'dd/MM/yyyy')}">01/01/2026</td>
+				<td class="centro" data-rotulo="Hora" th:text="${#temporals.format(linha.pedido.dataPedido, 'HH:mm')}">10:00</td>
 				<td class="numero" data-rotulo="Total" th:text="${#numbers.formatCurrency(linha.resumo.valorTotal)}">R$ 0,00</td>
 				<td class="numero" data-rotulo="Imposto" th:text="${#numbers.formatCurrency(linha.resumo.imposto)}">R$ 0,00</td>
 				<td class="numero" data-rotulo="Total com imposto" th:text="${#numbers.formatCurrency(linha.resumo.totalComImposto)}">R$ 0,00</td>

@@ -23,7 +23,7 @@
 		<tbody>
 			<tr th:each="item : ${pedido.itens}">
 				<td th:text="${item.produto.nome}">Produto</td>
-				<td th:text="${item.quantidade}">1</td>
+				<td class="centro" th:text="${item.quantidade}">1</td>
 				<td class="numero" th:text="${#numbers.formatCurrency(item.valorUnitario)}">R$ 0,00</td>
 				<td class="numero" th:text="${#numbers.formatCurrency(item.subtotal)}">R$ 0,00</td>
 			</tr>

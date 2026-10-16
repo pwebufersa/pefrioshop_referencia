@@ -24,7 +24,7 @@
 		<tbody>
 			<tr th:each="c : ${clientes}">
 				<td th:text="${c.nomeCompleto}">Nome</td>
-				<td th:text="${#temporals.format(c.dataNascimento, 'dd/MM/yyyy')}">01/01/2000</td>
+				<td class="centro" th:text="${#temporals.format(c.dataNascimento, 'dd/MM/yyyy')}">01/01/2000</td>
 			</tr>
 		</tbody>
 	</table>

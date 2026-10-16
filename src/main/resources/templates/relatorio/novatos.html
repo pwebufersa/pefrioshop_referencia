@@ -26,9 +26,9 @@
 		<thead><tr><th>Id</th><th>Nome completo</th><th>Data de cadastro</th></tr></thead>
 		<tbody>
 			<tr th:each="c : ${clientes}">
-				<td th:text="${c.id}">1</td>
+				<td class="centro" th:text="${c.id}">1</td>
 				<td th:text="${c.nomeCompleto}">Nome</td>
-				<td th:text="${#temporals.format(c.dataCadastro, 'dd/MM/yyyy HH:mm')}">01/01/2026 10:00</td>
+				<td class="centro" th:text="${#temporals.format(c.dataCadastro, 'dd/MM/yyyy HH:mm')}">01/01/2026 10:00</td>
 			</tr>
 		</tbody>
 	</table>

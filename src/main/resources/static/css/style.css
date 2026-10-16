@@ -367,10 +367,15 @@ td + td {
 	border-left: 1px solid var(--divisoria-coluna);
 }
 
-/* Colunas de valor, centralizadas e com numeral tabular. */
+/* Colunas de valor: alinhadas à direita, com numeral tabular. */
 .numero {
-	text-align: center;
+	text-align: right;
 	font-variant-numeric: tabular-nums;
+}
+
+/* Colunas curtas: identificador, código, data, hora e contagem. */
+.centro {
+	text-align: center;
 }
 
 .acoes {
