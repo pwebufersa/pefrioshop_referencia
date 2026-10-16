@@ -43,8 +43,8 @@ espaço anterior a um título é maior que o posterior.
 ## Componentes
 
 - Navegação: barra azulejo, com borda inferior de areia.
-- Tabela: superfície branca, cabeçalho em versalete, numeral tabular, cantos de
-  10px e sombra suave.
+- Tabela: superfície branca, cabeçalho em versalete, numeral tabular
+  (`tabular-nums`), cantos de 10px e sombra suave.
 - Rodapé de totalização: borda superior forte, fundo cal escuro, e o rótulo
   encostado nos valores da própria coluna.
 - Botão: couro, com texto branco; desabilitado em borda forte.

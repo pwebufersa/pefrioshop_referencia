@@ -7,26 +7,19 @@ Repositório: https://github.com/pwebufersa/pefrioshop_referencia
 
 ## Como executar
 
-No Windows, a partir da raiz do projeto:
+No Windows:
 
 ```
 cd C:\repos_github_2026\peFrioShop_referencia
 mvnw.cmd spring-boot:run
 ```
 
-No Linux, no macOS e no bash do Windows:
-
-```
-cd /c/repos_github_2026/peFrioShop_referencia
-./mvnw spring-boot:run
-```
+No bash do Windows, no Linux e no macOS, o comando é `./mvnw spring-boot:run`, a
+partir da mesma pasta.
 
 A aplicação sobe em http://localhost:8080, e o console do H2 fica em
-http://localhost:8080/h2-console, com usuário `admin` e senha `admin`. A
-execução é encerrada com Ctrl+C.
-
-Para gerar o jar, com o CSS e o JavaScript minificados, que é o que a
-hospedagem usa:
+http://localhost:8080/h2-console, com usuário `admin` e senha `admin`. O
+encerramento é feito com Ctrl+C. Para gerar e executar o jar:
 
 ```
 mvnw.cmd -DskipTests clean package
@@ -36,31 +29,19 @@ java -jar target\pefrioshop-0.0.1-SNAPSHOT.jar
 ## Tecnologias usadas
 
 Spring Boot 4.1.1, Java 21, Thymeleaf, Spring Data JPA, H2 em memória no modo
-MySQL e Maven com wrapper.
+MySQL e Maven com invólucro (wrapper).
 
 ## User stories
 
-**Milestone 1**
+**Milestone 1**: manter cliente, produto, ficha clínica do pé e pedido, este com
+itens, pagamento, imposto e total.
 
-1. Manter e exibir informações de um cliente.
-2. Manter e exibir informações de produtos.
-3. Manter e exibir a ficha clínica do pé, com exclusão em cascata.
-4. Manter e exibir pedidos, com itens, pagamento, imposto e total.
-
-**Milestone 2**
-
-5. Faturamento dos últimos doze meses.
-6. Busca de produto pelo nome.
-7. Busca de produto por qualquer campo.
-8. Contato pelo WhatsApp.
-9. E-mail promocional, com 5% no tênis mais caro do último pedido.
-10. Preenchimento do endereço pelo CEP, na BrasilAPI.
-11. Aniversariantes do mês.
-12. Foto do produto guardada no banco.
-13. Frete estimado para Marte, pela viagem e pelo peso do par.
-14. Desconto de 7,3% nos quatro produtos mais novos.
-15. Contagem de produtos por tipo.
-16. Novatos do mês e do ano.
+**Milestone 2**: faturamento dos últimos doze meses; busca de produto pelo nome
+e por qualquer campo; contato pelo WhatsApp; e-mail promocional, com 5% no tênis
+mais caro do último pedido; endereço pelo CEP, na BrasilAPI; aniversariantes do
+mês; foto do produto no banco; frete para Marte, pela viagem e pelo peso;
+desconto de 7,3% nos quatro produtos mais novos; contagem por tipo; e novatos do
+mês e do ano.
 
 ## Organização do código
 
@@ -68,8 +49,8 @@ MySQL e Maven com wrapper.
 - `repository`: acesso a dados.
 - `service`: regras de negócio e cálculos.
 - `web`: controladores e formulários.
-- `config`: parâmetros da loja, cliente HTTP e carga inicial.
-- `ferramenta`: minificação dos assets, executada no empacotamento.
+- `config`: parâmetros da loja, cliente HTTP e carga inicial (seed).
+- `ferramenta`: minificação do CSS e do JavaScript, executada no empacotamento.
 
 Os valores de negócio ficam em `application.properties`, sob o prefixo
 `pefrioshop`, e são lidos por `ParametrosLoja`. Nenhum cálculo é feito no
@@ -81,49 +62,40 @@ O frete soma a viagem, de `pefrioshop.frete-marte-baseline`, ao peso
 transportado, pelo preço do quilo de `pefrioshop.frete-marte-por-quilo-dolar`,
 convertido pelo `pefrioshop.cambio-dolar`. O preço do quilo é o publicado pela
 SpaceX para carga ao solo marciano, a partir de 2028: US$ 100 milhões por
-tonelada métrica, o equivalente a US$ 100.000,00 por quilo.
+tonelada métrica.
 
-O peso do par é guardado em gramas, e não em quilo. A conversão para quilo é
-feita em `BigDecimal`, com duas casas e arredondamento, porque a divisão
-inteira de gramas por mil daria zero em qualquer par abaixo de um quilo: o
-número pequeno desapareceria dentro do número grande, e o frete sairia sem o
-peso. O caso está fixado em `ResumoFreteMarteTest`.
+O peso do par é guardado em gramas, e não em quilo. A conversão é feita em
+`BigDecimal`, com duas casas e arredondamento, porque a divisão inteira de
+gramas por mil daria zero em qualquer par abaixo de um quilo, e o frete sairia
+sem o peso. O caso está fixado em `ResumoFreteMarteTest`.
 
-## Dados de exemplo e foto do produto
+## Dados e foto
 
-A carga inicial fica em `import.sql`: sete clientes, cinco fichas, nove
-produtos, seis pagamentos, seis pedidos e nove itens. Um dos produtos é um tênis
-de coleção, com preço na casa do milhão, para exercitar a formatação de valores
-altos.
+A carga inicial (seed) fica em `import.sql`, com sete clientes, cinco fichas,
+nove produtos, seis pagamentos, seis pedidos e nove itens. Um produto é um tênis
+de coleção, com preço na casa do milhão. A foto fica em `produto_foto`, e a
+miniatura (thumbnail) de 160 pixels é gerada no envio pelo próprio JDK, sem
+biblioteca externa.
 
-A foto do produto fica em `produto_foto`, e a miniatura de 160 pixels é gerada
-no envio pelo próprio JDK, por `ImageIO` e `Graphics2D`, sem ImageMagick e sem
-biblioteca externa. Sem foto, o endereço da miniatura devolve `sem-foto.svg`.
+## Sistema visual e modelo de dados
 
-## Sistema visual e contexto do produto
+O sistema visual está em [DESIGN.md](DESIGN.md), o contexto do produto em
+[PRODUCT.md](PRODUCT.md) e o modelo de dados em [MER.md](MER.md).
 
-O sistema visual está em [DESIGN.md](DESIGN.md), e o contexto do produto em
-[PRODUCT.md](PRODUCT.md).
-
-## Como o sistema é publicado
+## Publicação (deploy)
 
 No GitHub Pages é publicada a documentação estática de `docs/`, em
 https://pwebufersa.github.io/pefrioshop_referencia/. A aplicação precisa de um
-serviço que rode Java, como o Railway.
+serviço que rode Java, como o Railway, em que a porta é lida de `PORT`, por
+`server.port=${PORT:8080}`.
 
-Na hospedagem, a construção executa `./mvnw package`, e a porta é lida da
-variável `PORT`, por `server.port=${PORT:8080}`, com 8080 como valor local.
+O CSS e o JavaScript são minificados por `ferramenta.Minificador`, na fase
+`prepare-package` da construção (build), e gravados em `target/classes`, sem que
+os originais sejam tocados: o desenvolvimento permanece com os arquivos
+legíveis, e apenas a publicação recebe os compactos. A ferramenta não acompanha
+o jar, por exclusão no `maven-jar-plugin`.
 
-A minificação do CSS e do JavaScript é feita por `ferramenta.Minificador`,
-executado pelo `exec-maven-plugin` na fase `prepare-package`, e gravada em
-`target/classes`, sem que os originais de `src/main/resources/static` sejam
-tocados. Como `spring-boot:run` não chega ao empacotamento, o desenvolvimento
-permanece com os arquivos legíveis, e apenas a publicação recebe os compactos:
-o CSS cai de 13.960 para 11.250 bytes, e o JavaScript, de 3.116 para 2.916. A
-ferramenta não acompanha o jar, por exclusão no `maven-jar-plugin`.
-
-O CSS, o JavaScript e as imagens são entregues com o resumo do conteúdo no
-endereço, por `spring.web.resources.chain.strategy.content.enabled`. Assim, a
-versão escrita à mão no template é dispensada: quando o arquivo muda, o endereço
-muda junto, e o navegador busca o arquivo novo. Sem isso, a folha de estilo
-antiga permaneceria no cache do navegador depois de uma alteração.
+Cada arquivo é entregue com o resumo (hash) do conteúdo no endereço (URL), por
+`spring.web.resources.chain.strategy.content.enabled`. É uma soma de verificação
+(checksum): quando o conteúdo muda, o endereço muda, e o navegador busca a
+versão nova, sem que uma versão precise ser escrita à mão no template.
