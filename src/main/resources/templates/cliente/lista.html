@@ -16,7 +16,7 @@
 	<table th:unless="${#lists.isEmpty(clientes)}">
 		<thead>
 			<tr>
-				<th>Id</th><th>Nome</th><th>Gênero</th><th>Nascimento</th><th>Cadastro</th><th>Telefone</th><th>Cidade</th><th>Ações</th><th>Ficha</th>
+				<th>Id</th><th>Nome</th><th>Gênero</th><th>Nascimento</th><th>Cadastro</th><th>Telefone</th><th>Cidade</th><th>Ficha clínica</th><th>Ações</th><th>Ficha</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -30,6 +30,10 @@
 				<td>
 					<span th:text="${cliente.endereco.cidade}">Cidade</span><br/>
 					<span class="nota" th:text="${cliente.endereco.pais.rotulo}">País</span>
+				</td>
+				<td>
+					<span th:if="${cliente.fichaClinica != null}">Cadastrada</span>
+					<span th:unless="${cliente.fichaClinica != null}">Sem ficha</span>
 				</td>
 				<td class="acoes">
 					<a th:href="@{/clientes/{id}/editar(id=${cliente.id})}">Editar</a>

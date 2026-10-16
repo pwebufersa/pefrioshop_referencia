@@ -359,16 +359,21 @@ tbody tr:last-child td {
 }
 
 .acoes {
-	display: flex;
-	flex-wrap: nowrap;
-	gap: var(--passo-2) var(--passo-3);
-	align-items: center;
+	white-space: nowrap;
 }
 
-.acoes a,
-.acoes button {
-	flex: none;
-	white-space: nowrap;
+.acoes > * {
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: var(--passo-3);
+}
+
+.acoes > *:last-child {
+	margin-right: 0;
+}
+
+.acoes form {
+	margin: 0;
 }
 
 .rolagem {
