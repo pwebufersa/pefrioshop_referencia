@@ -8,11 +8,11 @@ INSERT INTO cliente (id, nome_completo, genero, email, telefone, data_nascimento
 
 INSERT INTO ficha_clinica_do_pe (id, cliente_id, comprimento_cm, largura, pisada, numero_preferido_br, marca_preferida, temperatura, odor, data_ultima_visita_podologo, tem_joanete) VALUES (1, 1, 24.50, 'NORMAL', 'NEUTRA', 37, 'PéFrioSports', 'FRIO', 'LEVE', DATE '2026-08-15', false);
 
-INSERT INTO produto (id, nome, marca, tipo, genero_alvo, numero_br, preco_compra, preco_venda, data_cadastro, foto, foto_content_type) VALUES (1, 'Tênis Corrida X', 'PéFrioSports', 'TENIS', 'UNISSEX', 42, 120.00, 259.90, DATE '2026-10-14', null, null);
-INSERT INTO produto (id, nome, marca, tipo, genero_alvo, numero_br, preco_compra, preco_venda, data_cadastro, foto, foto_content_type) VALUES (2, 'Sandália Verão', 'PéFrioSports', 'SANDALIA', 'FEMININO', 37, 45.00, 99.90, DATE '2026-10-13', null, null);
-INSERT INTO produto (id, nome, marca, tipo, genero_alvo, numero_br, preco_compra, preco_venda, data_cadastro, foto, foto_content_type) VALUES (3, 'Bota Campo', 'PéFrioSports', 'BOTA', 'MASCULINO', 41, 180.00, 349.90, DATE '2026-10-12', null, null);
-INSERT INTO produto (id, nome, marca, tipo, genero_alvo, numero_br, preco_compra, preco_venda, data_cadastro, foto, foto_content_type) VALUES (4, 'Sapatênis Casual', 'PéFrioSports', 'SAPATENIS', 'MASCULINO', 40, 95.00, 189.90, DATE '2026-10-11', null, null);
-INSERT INTO produto (id, nome, marca, tipo, genero_alvo, numero_br, preco_compra, preco_venda, data_cadastro, foto, foto_content_type) VALUES (5, 'Chinelo Praia', 'PéFrioSports', 'CHINELO', 'UNISSEX', 39, 15.00, 39.90, DATE '2026-10-10', null, null);
+INSERT INTO produto (id, nome, marca, tipo, genero_alvo, numero_br, preco_compra, preco_venda, data_cadastro) VALUES (1, 'Tênis Corrida X', 'PéFrioSports', 'TENIS', 'UNISSEX', 42, 120.00, 259.90, DATE '2026-10-14');
+INSERT INTO produto (id, nome, marca, tipo, genero_alvo, numero_br, preco_compra, preco_venda, data_cadastro) VALUES (2, 'Sandália Verão', 'PéFrioSports', 'SANDALIA', 'FEMININO', 37, 45.00, 99.90, DATE '2026-10-13');
+INSERT INTO produto (id, nome, marca, tipo, genero_alvo, numero_br, preco_compra, preco_venda, data_cadastro) VALUES (3, 'Bota Campo', 'PéFrioSports', 'BOTA', 'MASCULINO', 41, 180.00, 349.90, DATE '2026-10-12');
+INSERT INTO produto (id, nome, marca, tipo, genero_alvo, numero_br, preco_compra, preco_venda, data_cadastro) VALUES (4, 'Sapatênis Casual', 'PéFrioSports', 'SAPATENIS', 'MASCULINO', 40, 95.00, 189.90, DATE '2026-10-11');
+INSERT INTO produto (id, nome, marca, tipo, genero_alvo, numero_br, preco_compra, preco_venda, data_cadastro) VALUES (5, 'Chinelo Praia', 'PéFrioSports', 'CHINELO', 'UNISSEX', 39, 15.00, 39.90, DATE '2026-10-10');
 
 INSERT INTO pagamento_do_pedido (id, forma, cartao_ultimos_digitos, chave_pix, valor_pago) VALUES (1, 'PIX', null, 'ana@exemplo.com', null);
 INSERT INTO pagamento_do_pedido (id, forma, cartao_ultimos_digitos, chave_pix, valor_pago) VALUES (2, 'DINHEIRO', null, null, 349.90);

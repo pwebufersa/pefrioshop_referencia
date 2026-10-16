@@ -376,6 +376,15 @@ tbody tr:last-child td {
 	background-color: var(--cal-fundo);
 }
 
+.miniatura-grande {
+	width: 160px;
+	height: 160px;
+	object-fit: cover;
+	border-radius: var(--raio);
+	border: 1px solid var(--borda);
+	background-color: var(--cal-fundo);
+}
+
 .formulario {
 	display: flex;
 	flex-direction: column;

@@ -53,8 +53,14 @@
 			<span class="campo-erro" th:errors="*{precoVenda}"></span>
 		</label>
 
+		<label th:if="${produto.id != null}">Foto atual
+			<img class="miniatura-grande" th:src="@{/produtos/{id}/foto/miniatura(id=${produto.id})}"
+			     alt="Foto atual do produto"/>
+		</label>
+
 		<label>Foto do produto (guardada no banco)
-			<input type="file" name="foto" accept="image/*"/>
+			<input type="file" name="arquivo" accept="image/*"/>
+			<small class="nota">A foto só é substituída quando um arquivo novo é enviado.</small>
 		</label>
 
 		<div class="acoes-formulario">

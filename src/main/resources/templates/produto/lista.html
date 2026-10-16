@@ -30,10 +30,8 @@
 		<tbody>
 			<tr th:each="p : ${produtos}">
 				<td>
-					<img th:if="${p.temFoto}" class="miniatura" src="/imagens/sem-foto.svg"
-					     th:src="@{/produtos/{id}/foto(id=${p.id})}" alt="Foto do produto"/>
-					<img th:unless="${p.temFoto}" class="miniatura" src="/imagens/sem-foto.svg"
-					     alt="Produto sem foto"/>
+					<img class="miniatura" src="/imagens/sem-foto.svg"
+					     th:src="@{/produtos/{id}/foto/miniatura(id=${p.id})}" alt="Foto do produto"/>
 				</td>
 				<td th:text="${p.id}">1</td>
 				<td th:text="${p.nome}">Nome</td>

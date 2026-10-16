@@ -2,6 +2,7 @@ package br.edu.ufersa.pefrioshop.service;
 
 import br.edu.ufersa.pefrioshop.domain.GeneroAlvo;
 import br.edu.ufersa.pefrioshop.domain.Produto;
+import br.edu.ufersa.pefrioshop.domain.ProdutoFoto;
 import br.edu.ufersa.pefrioshop.domain.TipoProduto;
 import br.edu.ufersa.pefrioshop.repository.ContagemPorTipo;
 import br.edu.ufersa.pefrioshop.repository.ProdutoRepository;
@@ -15,10 +16,15 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class ProdutoService {
 
-	private final ProdutoRepository produtos;
+	private static final String TIPO_PADRAO = "application/octet-stream";
+	private static final String TIPO_MINIATURA = "image/png";
 
-	public ProdutoService(ProdutoRepository produtos) {
+	private final ProdutoRepository produtos;
+	private final GeradorDeMiniatura miniaturas;
+
+	public ProdutoService(ProdutoRepository produtos, GeradorDeMiniatura miniaturas) {
 		this.produtos = produtos;
+		this.miniaturas = miniaturas;
 	}
 
 	public List<Produto> listar() {
@@ -30,7 +36,9 @@ public class ProdutoService {
 				"Produto não encontrado: id=" + id + ". Verifique a lista de produtos."));
 	}
 
-	public Produto salvar(Produto produto) {
+	@Transactional
+	public Produto salvar(Produto produto, byte[] conteudo, String contentType) {
+		aplicarFoto(produto, conteudo, contentType);
 		return produtos.save(produto);
 	}
 
@@ -39,7 +47,7 @@ public class ProdutoService {
 	 * a foto so e substituida quando um arquivo novo chega.
 	 */
 	@Transactional
-	public Produto atualizar(Long id, Produto dados, byte[] foto, String fotoContentType) {
+	public Produto atualizar(Long id, Produto dados, byte[] conteudo, String contentType) {
 		Produto produto = buscar(id);
 		produto.setNome(dados.getNome());
 		produto.setMarca(dados.getMarca());
@@ -48,10 +56,7 @@ public class ProdutoService {
 		produto.setNumeroBr(dados.getNumeroBr());
 		produto.setPrecoCompra(dados.getPrecoCompra());
 		produto.setPrecoVenda(dados.getPrecoVenda());
-		if (foto != null && foto.length > 0) {
-			produto.setFoto(foto);
-			produto.setFotoContentType(fotoContentType);
-		}
+		aplicarFoto(produto, conteudo, contentType);
 		return produtos.save(produto);
 	}
 
@@ -93,19 +98,47 @@ public class ProdutoService {
 		return produtos.findAll(filtro, Sort.by("nome"));
 	}
 
+	public List<ContagemPorTipo> contagemPorTipo() {
+		return produtos.contarPorTipo();
+	}
+
 	@Transactional(readOnly = true)
 	public byte[] foto(Long id) {
-		return buscar(id).getFoto();
+		ProdutoFoto foto = fotoDe(id);
+		return foto == null ? null : foto.getConteudo();
 	}
 
 	@Transactional(readOnly = true)
 	public String fotoContentType(Long id) {
-		String tipo = buscar(id).getFotoContentType();
-		return tipo == null ? "application/octet-stream" : tipo;
+		ProdutoFoto foto = fotoDe(id);
+		return foto == null || foto.getContentType() == null ? TIPO_PADRAO : foto.getContentType();
 	}
 
-	public List<ContagemPorTipo> contagemPorTipo() {
-		return produtos.contarPorTipo();
+	@Transactional(readOnly = true)
+	public byte[] miniatura(Long id) {
+		ProdutoFoto foto = fotoDe(id);
+		return foto == null ? null : foto.getMiniatura();
+	}
+
+	private ProdutoFoto fotoDe(Long id) {
+		return buscar(id).getFoto();
+	}
+
+	private void aplicarFoto(Produto produto, byte[] conteudo, String contentType) {
+		if (conteudo == null || conteudo.length == 0) {
+			return;
+		}
+		ProdutoFoto foto = produto.getFoto();
+		if (foto == null) {
+			foto = new ProdutoFoto();
+			foto.setProduto(produto);
+			produto.setFoto(foto);
+		}
+		foto.setConteudo(conteudo);
+		foto.setContentType(contentType);
+		byte[] miniatura = miniaturas.gerar(conteudo);
+		foto.setMiniatura(miniatura);
+		foto.setMiniaturaContentType(miniatura == null ? null : TIPO_MINIATURA);
 	}
 
 }

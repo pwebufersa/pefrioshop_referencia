@@ -60,6 +60,13 @@ Os valores de negócio ficam em `application.properties`, sob o prefixo
 `pefrioshop`, e são lidos por `ParametrosLoja`. Nenhum cálculo é feito no
 template.
 
+A foto do produto fica em uma tabela própria (`produto_foto`), para a linha do
+produto permanecer leve: a listagem lê apenas as colunas do produto. Ao lado da
+imagem original é guardada uma miniatura de 160 pixels, gerada no envio pelo
+próprio JDK, por `ImageIO` e `Graphics2D`, sem ImageMagick e sem biblioteca
+externa. A listagem usa a miniatura; a tela de detalhe usa a imagem original.
+Sem foto, o endereço da miniatura devolve o marcador `sem-foto.svg`.
+
 A carga inicial fica em `import.sql`: três clientes, uma ficha, cinco produtos,
 dois pagamentos, dois pedidos e três itens.
 

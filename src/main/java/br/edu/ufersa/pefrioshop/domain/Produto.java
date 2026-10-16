@@ -1,6 +1,6 @@
 package br.edu.ufersa.pefrioshop.domain;
 
-import jakarta.persistence.Basic;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -9,7 +9,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -62,13 +62,9 @@ public class Produto {
 	@Column(nullable = false, updatable = false)
 	private LocalDate dataCadastro;
 
-	// A foto fica no banco, nao em pasta. Nao e carregada por padrao nas listagens.
-	@Lob
-	@Basic(fetch = FetchType.LAZY)
-	private byte[] foto;
-
-	@Column(length = 60)
-	private String fotoContentType;
+	// A foto fica em tabela propria. A linha do produto nao carrega os bytes.
+	@OneToOne(mappedBy = "produto", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+	private ProdutoFoto foto;
 
 	@PrePersist
 	void definirDataCadastro() {
@@ -149,24 +145,12 @@ public class Produto {
 		this.dataCadastro = dataCadastro;
 	}
 
-	public byte[] getFoto() {
+	public ProdutoFoto getFoto() {
 		return foto;
 	}
 
-	public void setFoto(byte[] foto) {
+	public void setFoto(ProdutoFoto foto) {
 		this.foto = foto;
-	}
-
-	public String getFotoContentType() {
-		return fotoContentType;
-	}
-
-	public void setFotoContentType(String fotoContentType) {
-		this.fotoContentType = fotoContentType;
-	}
-
-	public boolean isTemFoto() {
-		return foto != null && foto.length > 0;
 	}
 
 }
