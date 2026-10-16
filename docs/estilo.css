@@ -23,6 +23,11 @@
 	box-sizing: border-box;
 }
 
+html,
+body {
+	overflow-x: hidden;
+}
+
 body {
 	margin: 0;
 	background-color: var(--cal);
@@ -51,6 +56,7 @@ a:hover {
 	border-bottom: 3px solid var(--areia);
 	padding: 2.5rem clamp(1rem, 5vw, 3rem) 2rem;
 	color: #f4f8fb;
+	text-align: center;
 }
 
 .cabecalho .marca {
@@ -63,7 +69,7 @@ a:hover {
 
 .cabecalho p {
 	max-width: none;
-	margin: 0.5rem 0 0;
+	margin: 0.5rem auto 0;
 	color: #dbe7ee;
 	font-size: 1rem;
 	white-space: nowrap;
