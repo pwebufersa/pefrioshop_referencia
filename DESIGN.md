@@ -59,15 +59,13 @@ vazio com aviso em tinta suave.
 
 ## Detalhes desenhados pelo próprio navegador
 
-Três recursos que o navegador desenha sozinho foram ajustados à paleta e à
-leitura da tabela:
+Três recursos desenhados pelo próprio navegador foram ajustados à paleta:
 
-- Seleção de texto (`::selection`): fundo em areia, para o trecho marcado.
+- Seleção de texto (`::selection`): fundo em areia.
 - Anel de foco (`:focus-visible`): contorno em azulejo claro, para a navegação
   por teclado.
 - Numeral tabular (`font-variant-numeric`): dígitos de largura fixa, o que
-  mantém dinheiro, peso e contagem alinhados na vertical, casa decimal sob casa
-  decimal.
+  alinha dinheiro, peso e contagem na vertical.
 
 ## Movimento
 
