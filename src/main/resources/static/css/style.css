@@ -328,9 +328,9 @@ caption {
 th,
 td {
 	border-bottom: 1px solid var(--borda);
-	padding: var(--passo-3) var(--passo-4);
+	padding: var(--passo-2) var(--passo-3);
 	text-align: left;
-	font-size: 0.94rem;
+	font-size: 0.9rem;
 	vertical-align: middle;
 }
 

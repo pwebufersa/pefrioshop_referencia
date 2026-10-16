@@ -28,7 +28,9 @@ public class ClienteService {
 		return clientes.findById(id).orElseThrow(() -> new IllegalArgumentException(mensagemNaoEncontrado(id)));
 	}
 
+	@Transactional
 	public Cliente salvar(Cliente cliente) {
+		prepararEndereco(cliente);
 		return clientes.save(cliente);
 	}
 
@@ -44,16 +46,31 @@ public class ClienteService {
 		cliente.setEmail(dados.getEmail());
 		cliente.setTelefone(dados.getTelefone());
 		cliente.setDataNascimento(dados.getDataNascimento());
-		copiarEndereco(dados.getEndereco(), cliente.getEndereco());
+		copiarEndereco(dados.getEndereco(), prepararEndereco(cliente));
 		return clientes.save(cliente);
 	}
 
+	/** Garante o endereco do cliente, ligado de volta ao cliente. */
+	private Endereco prepararEndereco(Cliente cliente) {
+		Endereco endereco = cliente.getEndereco();
+		if (endereco == null) {
+			endereco = new Endereco();
+			cliente.setEndereco(endereco);
+		}
+		endereco.setCliente(cliente);
+		return endereco;
+	}
+
 	private void copiarEndereco(Endereco origem, Endereco destino) {
+		if (origem == null) {
+			return;
+		}
 		destino.setRua(origem.getRua());
 		destino.setBairro(origem.getBairro());
 		destino.setNumero(origem.getNumero());
 		destino.setCidade(origem.getCidade());
 		destino.setCep(origem.getCep());
+		destino.setPais(origem.getPais());
 	}
 
 	@Transactional

@@ -30,7 +30,7 @@
 		</label>
 
 		<label>Telefone com DDD
-			<input type="text" th:field="*{telefone}" required maxlength="15" placeholder="(84) 99999-0000"/>
+			<input type="text" th:field="*{telefone}" required maxlength="20" placeholder="(84) 99999-0000"/>
 			<span class="campo-erro" th:errors="*{telefone}"></span>
 		</label>
 
@@ -64,6 +64,14 @@
 
 			<label>Cidade
 				<input type="text" th:field="*{endereco.cidade}" maxlength="80"/>
+			</label>
+
+			<label>País
+				<select th:field="*{endereco.pais}" required>
+					<option th:each="p : ${T(br.edu.ufersa.pefrioshop.domain.Pais).values()}"
+					        th:value="${p}" th:text="${p.rotulo}">País</option>
+				</select>
+				<span class="campo-erro" th:errors="*{endereco.pais}"></span>
 			</label>
 		</fieldset>
 

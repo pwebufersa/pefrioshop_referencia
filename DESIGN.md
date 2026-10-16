@@ -56,7 +56,7 @@ espaço acima de um título é maior que o espaço a seguir.
 Hover em linhas e botões; foco visível em todo elemento interativo; erro com
 borda e texto em vermelho; vazio com aviso em tinta suave.
 
-## Superfícies do navegador
+## Detalhes nativos do navegador
 
 Seleção em areia, anel de foco em azulejo claro, numeral tabular em dinheiro e
 comprimento.

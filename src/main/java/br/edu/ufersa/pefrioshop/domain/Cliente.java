@@ -2,7 +2,6 @@ package br.edu.ufersa.pefrioshop.domain;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
-import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -40,7 +39,7 @@ public class Cliente {
 	private String email;
 
 	@NotBlank(message = "O telefone com DDD é obrigatório.")
-	@Column(nullable = false, length = 15)
+	@Column(nullable = false, length = 20)
 	private String telefone;
 
 	@NotNull(message = "A data de nascimento é obrigatória.")
@@ -51,8 +50,9 @@ public class Cliente {
 	@Column(nullable = false, updatable = false)
 	private LocalDateTime dataCadastro;
 
-	@Embedded
-	private Endereco endereco = new Endereco();
+	// O endereço fica em tabela própria. Excluir o cliente exclui o endereço.
+	@OneToOne(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+	private Endereco endereco;
 
 	// A ficha pertence ao cliente: excluir o cliente exclui a ficha em cascata.
 	@OneToOne(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)

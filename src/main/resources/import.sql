@@ -4,15 +4,27 @@
 
 -- Clientes: os três gêneros, com e sem e-mail, nascimentos em meses variados,
 -- cadastros em meses variados (para o relatório de novatos e de aniversariantes).
-INSERT INTO cliente (id, nome_completo, genero, email, telefone, data_nascimento, data_cadastro, rua, bairro, numero, cidade, cep) VALUES (1, 'Ana Maria da Silva', 'FEMININO', 'ana@exemplo.com', '(84) 99999-0001', DATE '1990-10-12', TIMESTAMP '2026-09-05 08:30:00', 'Rua das Flores', 'Centro', '10', 'Açu', '59650000');
-INSERT INTO cliente (id, nome_completo, genero, email, telefone, data_nascimento, data_cadastro, rua, bairro, numero, cidade, cep) VALUES (2, 'Bruno Costa Medeiros', 'MASCULINO', 'bruno@exemplo.com', '(84) 99999-0002', DATE '1985-11-03', TIMESTAMP '2026-10-05 09:15:00', 'Rua Gamaliel Martins Bezerra', 'Alto da Alegria', '587', 'Angicos', '59515000');
-INSERT INTO cliente (id, nome_completo, genero, email, telefone, data_nascimento, data_cadastro, rua, bairro, numero, cidade, cep) VALUES (3, 'Carla Souza Lima', 'FEMININO', null, '(84) 99999-0003', DATE '2000-10-25', TIMESTAMP '2026-10-14 14:40:00', 'Avenida Abel Cabral', 'Nova Parnamirim', '100', 'Parnamirim', '59151250');
-INSERT INTO cliente (id, nome_completo, genero, email, telefone, data_nascimento, data_cadastro, rua, bairro, numero, cidade, cep) VALUES (4, 'Diego Alves Pereira', 'MASCULINO', null, '(84) 99999-0004', DATE '1978-06-30', TIMESTAMP '2026-06-10 10:05:00', 'Rua do Sol', 'Boa Vista', '45', 'Mossoró', '59600000');
-INSERT INTO cliente (id, nome_completo, genero, email, telefone, data_nascimento, data_cadastro, rua, bairro, numero, cidade, cep) VALUES (5, 'Elisa Nunes Barbosa', 'NAO_INFORMADO', 'elisa@exemplo.com', '(84) 99999-0005', DATE '1995-02-14', TIMESTAMP '2026-07-20 17:25:00', 'Rua das Acácias', 'Centro', '220', 'Caicó', '59300000');
-INSERT INTO cliente (id, nome_completo, genero, email, telefone, data_nascimento, data_cadastro, rua, bairro, numero, cidade, cep) VALUES (6, 'Fabio Ramos Teixeira', 'NAO_INFORMADO', null, '(84) 99999-0006', DATE '2002-10-02', TIMESTAMP '2026-10-16 07:50:00', 'Rua Projetada', 'Santa Maria', '9', 'Natal', '59000000');
+INSERT INTO cliente (id, nome_completo, genero, email, telefone, data_nascimento, data_cadastro) VALUES (1, 'Ana Maria da Silva', 'FEMININO', 'ana@exemplo.com', '(84) 99999-0001', DATE '1990-10-12', TIMESTAMP '2026-09-05 08:30:00');
+INSERT INTO cliente (id, nome_completo, genero, email, telefone, data_nascimento, data_cadastro) VALUES (2, 'Bruno Costa Medeiros', 'MASCULINO', 'bruno@exemplo.com', '(84) 99999-0002', DATE '1985-11-03', TIMESTAMP '2026-10-05 09:15:00');
+INSERT INTO cliente (id, nome_completo, genero, email, telefone, data_nascimento, data_cadastro) VALUES (3, 'Carla Souza Lima', 'FEMININO', null, '(84) 99999-0003', DATE '2000-10-25', TIMESTAMP '2026-10-14 14:40:00');
+INSERT INTO cliente (id, nome_completo, genero, email, telefone, data_nascimento, data_cadastro) VALUES (4, 'Diego Alves Pereira', 'MASCULINO', null, '(84) 99999-0004', DATE '1978-06-30', TIMESTAMP '2026-06-10 10:05:00');
+INSERT INTO cliente (id, nome_completo, genero, email, telefone, data_nascimento, data_cadastro) VALUES (5, 'Elisa Nunes Barbosa', 'NAO_INFORMADO', 'elisa@exemplo.com', '(84) 99999-0005', DATE '1995-02-14', TIMESTAMP '2026-07-20 17:25:00');
+INSERT INTO cliente (id, nome_completo, genero, email, telefone, data_nascimento, data_cadastro) VALUES (6, 'Fabio Ramos Teixeira', 'NAO_INFORMADO', null, '(84) 99999-0006', DATE '2002-10-02', TIMESTAMP '2026-10-16 07:50:00');
+INSERT INTO cliente (id, nome_completo, genero, email, telefone, data_nascimento, data_cadastro) VALUES (7, 'Helena Duarte Almeida', 'FEMININO', 'helena@exemplo.pt', '+351 912 345 678', DATE '1988-03-22', TIMESTAMP '2026-05-12 11:10:00');
+
+-- Endereço em tabela própria: um por cliente; o país cobre os dois valores mais
+-- prováveis na loja, Brasil e Portugal.
+INSERT INTO endereco (id, cliente_id, rua, bairro, numero, cidade, cep, pais) VALUES (1, 1, 'Rua das Flores', 'Centro', '10', 'Açu', '59650000', 'BRASIL');
+INSERT INTO endereco (id, cliente_id, rua, bairro, numero, cidade, cep, pais) VALUES (2, 2, 'Rua Gamaliel Martins Bezerra', 'Alto da Alegria', '587', 'Angicos', '59515000', 'BRASIL');
+INSERT INTO endereco (id, cliente_id, rua, bairro, numero, cidade, cep, pais) VALUES (3, 3, 'Avenida Abel Cabral', 'Nova Parnamirim', '100', 'Parnamirim', '59151250', 'BRASIL');
+INSERT INTO endereco (id, cliente_id, rua, bairro, numero, cidade, cep, pais) VALUES (4, 4, 'Rua do Sol', 'Boa Vista', '45', 'Mossoró', '59600000', 'BRASIL');
+INSERT INTO endereco (id, cliente_id, rua, bairro, numero, cidade, cep, pais) VALUES (5, 5, 'Rua das Acácias', 'Centro', '220', 'Caicó', '59300000', 'BRASIL');
+INSERT INTO endereco (id, cliente_id, rua, bairro, numero, cidade, cep, pais) VALUES (6, 6, 'Rua Projetada', 'Santa Maria', '9', 'Natal', '59000000', 'BRASIL');
+INSERT INTO endereco (id, cliente_id, rua, bairro, numero, cidade, cep, pais) VALUES (7, 7, 'Rua Augusta', 'Baixa', '120', 'Lisboa', '1100-053', 'PORTUGAL');
 
 -- Ficha clínica: todas as larguras, pisadas, temperaturas e odores; joanete nos
--- dois valores; visita ao podólogo informada e em branco. O cliente 6 não tem ficha.
+-- dois valores; visita ao podólogo informada e em branco. Os clientes 6 e 7 não
+-- têm ficha.
 INSERT INTO ficha_clinica_do_pe (id, cliente_id, comprimento_cm, largura, pisada, numero_preferido_br, marca_preferida, temperatura, odor, data_ultima_visita_podologo, tem_joanete) VALUES (1, 1, 24.50, 'NORMAL', 'NEUTRA', 37, 'PéFrioSports', 'FRIO', 'LEVE', DATE '2026-08-15', false);
 INSERT INTO ficha_clinica_do_pe (id, cliente_id, comprimento_cm, largura, pisada, numero_preferido_br, marca_preferida, temperatura, odor, data_ultima_visita_podologo, tem_joanete) VALUES (2, 2, 27.80, 'LARGO', 'SUPINADA', 43, 'PassoFrio', 'QUENTE', 'FORTE', null, true);
 INSERT INTO ficha_clinica_do_pe (id, cliente_id, comprimento_cm, largura, pisada, numero_preferido_br, marca_preferida, temperatura, odor, data_ultima_visita_podologo, tem_joanete) VALUES (3, 3, 23.10, 'ESTREITO', 'PRONADA', 36, 'PéFrioSports', 'NORMAL', 'SEM_ODOR', DATE '2026-09-20', false);
@@ -43,7 +55,7 @@ INSERT INTO pagamento_do_pedido (id, forma, cartao_ultimos_digitos, chave_pix, v
 INSERT INTO pagamento_do_pedido (id, forma, cartao_ultimos_digitos, chave_pix, valor_pago) VALUES (6, 'CARTAO_CREDITO', '9876', null, null);
 
 -- Pedidos: espalhados por cinco meses, para o faturamento de doze meses. O
--- cliente 1 tem dois pedidos; o cliente 6 não tem nenhum.
+-- cliente 1 tem dois pedidos; os clientes 6 e 7 não têm nenhum.
 INSERT INTO pedido (id, cliente_id, data_pedido, pagamento_id) VALUES (1, 1, TIMESTAMP '2026-09-05 10:30:00', 1);
 INSERT INTO pedido (id, cliente_id, data_pedido, pagamento_id) VALUES (2, 2, TIMESTAMP '2026-10-05 15:00:00', 2);
 INSERT INTO pedido (id, cliente_id, data_pedido, pagamento_id) VALUES (3, 1, TIMESTAMP '2026-06-20 09:00:00', 3);

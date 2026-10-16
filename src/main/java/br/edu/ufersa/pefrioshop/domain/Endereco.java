@@ -1,29 +1,77 @@
 package br.edu.ufersa.pefrioshop.domain;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.Embeddable;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 
 /**
- * Endereco do cliente. E um objeto de valor, por isso nao tem identidade
- * propria: fica embutido na tabela do cliente.
+ * Endereço do cliente, em tabela própria.
+ *
+ * <p>A tabela tem identidade, e o endereço pode crescer (país, complemento,
+ * referência) sem inchar a linha do cliente.
  */
-@Embeddable
+@Entity
 public class Endereco {
 
-	@Column(length = 120)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
+	@OneToOne(optional = false, fetch = FetchType.LAZY)
+	@JoinColumn(name = "cliente_id", nullable = false, unique = true)
+	private Cliente cliente;
+
+	@NotBlank(message = "A rua é obrigatória.")
+	@Column(nullable = false, length = 120)
 	private String rua;
 
 	@Column(length = 80)
 	private String bairro;
 
-	@Column(length = 10)
+	@NotBlank(message = "O número é obrigatório.")
+	@Column(nullable = false, length = 10)
 	private String numero;
 
-	@Column(length = 80)
+	@NotBlank(message = "A cidade é obrigatória.")
+	@Column(nullable = false, length = 80)
 	private String cidade;
 
-	@Column(length = 9)
+	@NotBlank(message = "O CEP é obrigatório.")
+	@Pattern(regexp = "[0-9A-Za-z-]{3,10}",
+			message = "O CEP informado é inválido: use de 3 a 10 caracteres, como 59650000 ou 1100-053.")
+	@Column(nullable = false, length = 10)
 	private String cep;
+
+	@NotNull(message = "O país é obrigatório.")
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false, length = 20)
+	private Pais pais = Pais.BRASIL;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
 
 	public String getRua() {
 		return rua;
@@ -63,6 +111,14 @@ public class Endereco {
 
 	public void setCep(String cep) {
 		this.cep = cep;
+	}
+
+	public Pais getPais() {
+		return pais;
+	}
+
+	public void setPais(Pais pais) {
+		this.pais = pais;
 	}
 
 }

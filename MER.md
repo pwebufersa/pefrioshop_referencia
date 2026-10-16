@@ -5,6 +5,7 @@ banco, com as chaves, os tipos e as relações.
 
 ```mermaid
 erDiagram
+    CLIENTE ||--|| ENDERECO : possui
     CLIENTE ||--o| FICHA_CLINICA_DO_PE : possui
     CLIENTE ||--o{ PEDIDO : realiza
     PEDIDO ||--|{ ITEM_PEDIDO : contem
@@ -20,11 +21,17 @@ erDiagram
         varchar telefone
         date data_nascimento
         timestamp data_cadastro
+    }
+
+    ENDERECO {
+        bigint id PK
+        bigint cliente_id FK
         varchar rua
         varchar bairro
         varchar numero
         varchar cidade
         varchar cep
+        enum pais
     }
 
     FICHA_CLINICA_DO_PE {
@@ -90,6 +97,7 @@ erDiagram
 
 | Relação | Cardinalidade | Regra |
 |---|---|---|
+| Cliente e endereço | 1 para 1 | Cada cliente tem um endereço, em tabela própria. Excluir o cliente exclui o endereço. |
 | Cliente e ficha clínica | 1 para 0 ou 1 | Cada cliente tem no máximo uma ficha. Excluir o cliente exclui a ficha em cascata. |
 | Cliente e pedido | 1 para 0 ou muitos | Excluir o cliente não é permitido enquanto houver pedido. |
 | Pedido e item | 1 para 1 ou muitos | Excluir o pedido exclui os itens em cascata. |
@@ -99,12 +107,14 @@ erDiagram
 
 ## Observações
 
-- O endereço é um objeto de valor: as colunas `rua`, `bairro`, `numero`, `cidade`
-  e `cep` ficam na tabela `cliente`, sem tabela própria.
+- O endereço tem tabela e identidade próprias, com a chave estrangeira
+  `cliente_id` única. Assim, campos como `pais` entram sem inchar a linha do
+  cliente.
+- O campo `pais` é um enum, e não texto livre, para evitar grafias divergentes.
 - A foto do produto fica em `produto_foto` para a linha do produto permanecer
   leve; a listagem não carrega os bytes.
-- Chaves únicas: `ficha_clinica_do_pe.cliente_id`, `produto_foto.produto_id` e
-  `pedido.pagamento_id`.
+- Chaves únicas: `endereco.cliente_id`, `ficha_clinica_do_pe.cliente_id`,
+  `produto_foto.produto_id` e `pedido.pagamento_id`.
 - O `item_pedido.valor_unitario` é uma cópia do preço no momento da compra, e
   não o preço atual do produto.
 - Nenhum valor calculável é guardado: o total do pedido, o imposto e o desconto
@@ -115,6 +125,7 @@ erDiagram
 | Enum | Valores |
 |---|---|
 | Genero | MASCULINO, FEMININO, NAO_INFORMADO |
+| Pais | BRASIL, PORTUGAL, ESTADOS_UNIDOS, ESPANHA, ARGENTINA, OUTRO |
 | TipoProduto | TENIS, SANDALIA, BOTA, SAPATENIS, CHINELO |
 | GeneroAlvo | MASCULINO, FEMININO, UNISSEX, INFANTIL |
 | LarguraPe | ESTREITO, NORMAL, LARGO |
