@@ -196,6 +196,12 @@ pre {
 	margin: 0.5rem 0 0;
 }
 
+.linha-unica {
+	max-width: none;
+	white-space: nowrap;
+	overflow-x: auto;
+}
+
 .botao {
 	display: inline-flex;
 	align-items: center;
