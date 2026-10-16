@@ -465,11 +465,6 @@ td + td {
 	}
 }
 
-.acoes form {
-	display: inline-block;
-	margin: 0;
-}
-
 .miniatura {
 	width: 44px;
 	height: 44px;

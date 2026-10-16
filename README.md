@@ -56,6 +56,9 @@ No Windows, `mvnw.cmd` pode ser usado no lugar de `./mvnw`.
 - `web`: controladores e formulários.
 - `config`: parâmetros da loja, cliente HTTP e carga inicial.
 
+Fora de `src`, a pasta `scripts` guarda a minificação do CSS e do JavaScript,
+usada apenas na hospedagem.
+
 Os valores de negócio ficam em `application.properties`, sob o prefixo
 `pefrioshop`, e são lidos por `ParametrosLoja`. Nenhum cálculo é feito no
 template.
@@ -87,3 +90,22 @@ da branch `main`.
 
 Para executar de fato, a aplicação precisa de um serviço que rode Java, como
 Railway, Render ou um servidor próprio.
+
+### Minificação dos assets
+
+O CSS e o JavaScript são mantidos legíveis em `src/main/resources/static`,
+porque servem de material de leitura da disciplina. A minificação é reservada à
+hospedagem, quando o tamanho transferido importa, e é feita em três comandos:
+
+```
+./mvnw -DskipTests package
+python scripts/minificar.py
+./mvnw jar:jar
+```
+
+A leitura é feita de `src/main/resources/static`, e a gravação é feita em
+`target/classes/static`, que é o diretório levado para dentro do jar, com o
+tamanho de cada arquivo informado antes e depois. Os originais não são
+alterados. No CSS são removidos os comentários e o espaço entre as regras; no
+JavaScript, os comentários e a indentação, sem que as linhas sejam unidas, para
+não alterar nenhuma inserção automática de ponto e vírgula.
