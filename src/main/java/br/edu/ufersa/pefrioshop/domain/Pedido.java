@@ -37,8 +37,8 @@ public class Pedido {
 	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<ItemPedido> itens = new ArrayList<>();
 
-	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-	@JoinColumn(name = "pagamento_id")
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, optional = false, fetch = FetchType.LAZY)
+	@JoinColumn(name = "pagamento_id", nullable = false)
 	private PagamentoDoPedido pagamento;
 
 	@PrePersist
