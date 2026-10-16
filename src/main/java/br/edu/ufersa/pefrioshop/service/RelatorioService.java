@@ -60,11 +60,13 @@ public class RelatorioService {
 		return valor.multiply(parametros.imposto()).setScale(2, RoundingMode.HALF_UP);
 	}
 
-	/** Produtos com frete estimado para Marte, do menor ao maior numero BR (US 13). */
-	public List<ProdutoComFrete> freteParaMarte() {
-		return produtos.findAllByOrderByNumeroBrAsc().stream()
-				.map(produto -> new ProdutoComFrete(produto, parametros.freteMartePorPar()))
+	/** Produtos com frete estimado para Marte, com os totais, do menor ao maior número BR (US 13). */
+	public ResumoFreteMarte freteParaMarte() {
+		BigDecimal frete = parametros.freteMartePorPar();
+		List<ProdutoComFrete> itens = produtos.findAllByOrderByNumeroBrAsc().stream()
+				.map(produto -> new ProdutoComFrete(produto, frete))
 				.toList();
+		return ResumoFreteMarte.de(itens);
 	}
 
 	/** Os 4 produtos mais novos, com desconto, do maior para o menor preco (US 14). */

@@ -55,7 +55,7 @@ public class RelatorioController {
 	/** Frete estimado para Marte (US 13). */
 	@GetMapping("/frete-marte")
 	public String freteMarte(Model model) {
-		model.addAttribute("itens", relatorios.freteParaMarte());
+		model.addAttribute("resumo", relatorios.freteParaMarte());
 		model.addAttribute("fretePorPar", relatorios.getFreteMartePorPar());
 		return "relatorio/frete-marte";
 	}

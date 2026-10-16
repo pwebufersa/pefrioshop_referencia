@@ -6,22 +6,39 @@
 
 <main class="conteudo">
 	<h1>Frete para Marte</h1>
-	<p>Valor por par: <strong th:text="${#numbers.formatCurrency(fretePorPar)}">R$ 0,00</strong></p>
+	<p>Frete fixo de <strong th:text="${#numbers.formatCurrency(fretePorPar)}">R$ 0,00</strong> por par. O total de
+		cada linha é o preço do par somado ao frete.</p>
 
-	<p th:if="${#lists.isEmpty(itens)}">Nenhum produto cadastrado.</p>
+	<p th:if="${#lists.isEmpty(resumo.itens)}">Nenhum produto cadastrado.</p>
 
-	<table th:unless="${#lists.isEmpty(itens)}">
-		<thead><tr><th>Código</th><th>Nome</th><th>Preço</th><th>Nº BR</th><th>Frete estimado</th></tr></thead>
+	<table th:unless="${#lists.isEmpty(resumo.itens)}">
+		<caption>Do menor ao maior número BR.</caption>
+		<thead>
+			<tr>
+				<th>Código</th><th>Nome</th><th>Nº BR</th>
+				<th>Preço</th><th>Frete estimado</th><th>Total</th>
+			</tr>
+		</thead>
 		<tbody>
-			<tr th:each="linha : ${itens}">
+			<tr th:each="linha : ${resumo.itens}">
 				<td class="centro" th:text="${linha.produto.id}">1</td>
 				<td th:text="${linha.produto.nome}">Produto</td>
-				<td class="numero" th:text="${#numbers.formatCurrency(linha.produto.precoVenda)}">R$ 0,00</td>
 				<td class="centro" th:text="${linha.produto.numeroBr}">40</td>
+				<td class="numero" th:text="${#numbers.formatCurrency(linha.preco)}">R$ 0,00</td>
 				<td class="numero" th:text="${#numbers.formatCurrency(linha.frete)}">R$ 0,00</td>
+				<td class="numero" th:text="${#numbers.formatCurrency(linha.total)}">R$ 0,00</td>
 			</tr>
 		</tbody>
 	</table>
+
+	<dl class="detalhes resumo-tabela" th:unless="${#lists.isEmpty(resumo.itens)}">
+		<dt>Preço dos pares</dt>
+		<dd th:text="${#numbers.formatCurrency(resumo.totalPreco)}">R$ 0,00</dd>
+		<dt>Frete dos pares</dt>
+		<dd th:text="${#numbers.formatCurrency(resumo.totalFrete)}">R$ 0,00</dd>
+		<dt>Total</dt>
+		<dd th:text="${#numbers.formatCurrency(resumo.totalGeral)}">R$ 0,00</dd>
+	</dl>
 </main>
 
 <footer th:replace="~{layout :: rodape}"></footer>
