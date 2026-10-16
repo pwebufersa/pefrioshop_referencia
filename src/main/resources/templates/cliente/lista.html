@@ -12,6 +12,7 @@
 
 	<p th:if="${#lists.isEmpty(clientes)}">Nenhum cliente cadastrado ainda.</p>
 
+	<div class="rolagem">
 	<table th:unless="${#lists.isEmpty(clientes)}">
 		<thead>
 			<tr>
@@ -49,6 +50,7 @@
 			</tr>
 		</tbody>
 	</table>
+	</div>
 </main>
 
 <footer th:replace="~{layout :: rodape}"></footer>

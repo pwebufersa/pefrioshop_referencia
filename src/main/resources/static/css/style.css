@@ -359,9 +359,18 @@ tbody tr:last-child td {
 
 .acoes {
 	display: flex;
-	flex-wrap: wrap;
+	flex-wrap: nowrap;
 	gap: var(--passo-2) var(--passo-3);
 	align-items: center;
+}
+
+.acoes a,
+.acoes button {
+	white-space: nowrap;
+}
+
+.rolagem {
+	overflow-x: auto;
 }
 
 .acoes form {

@@ -20,6 +20,7 @@
 
 	<p th:if="${#lists.isEmpty(produtos)}">Nenhum produto encontrado.</p>
 
+	<div class="rolagem">
 	<table th:unless="${#lists.isEmpty(produtos)}">
 		<thead>
 			<tr>
@@ -52,6 +53,7 @@
 			</tr>
 		</tbody>
 	</table>
+	</div>
 </main>
 
 <footer th:replace="~{layout :: rodape}"></footer>
