@@ -11,14 +11,15 @@ import java.util.List;
  *
  * <p>Uso: {@code ResumoFreteMarte.de(itens)}.
  */
-public record ResumoFreteMarte(List<ProdutoComFrete> itens, BigDecimal totalPreco, BigDecimal totalFrete,
-		BigDecimal totalGeral) {
+public record ResumoFreteMarte(List<ProdutoComFrete> itens, int totalPesoGramas, BigDecimal totalPreco,
+		BigDecimal totalFrete, BigDecimal totalGeral) {
 
-	/** Soma os preços e os fretes dos itens e monta o resumo da tabela. */
+	/** Soma os pesos, os preços e os fretes dos itens e monta o resumo da tabela. */
 	public static ResumoFreteMarte de(List<ProdutoComFrete> itens) {
+		int peso = itens.stream().mapToInt(ProdutoComFrete::pesoGramas).sum();
 		BigDecimal preco = itens.stream().map(ProdutoComFrete::preco).reduce(BigDecimal.ZERO, BigDecimal::add);
 		BigDecimal frete = itens.stream().map(ProdutoComFrete::frete).reduce(BigDecimal.ZERO, BigDecimal::add);
-		return new ResumoFreteMarte(itens, preco, frete, preco.add(frete));
+		return new ResumoFreteMarte(itens, peso, preco, frete, preco.add(frete));
 	}
 
 }

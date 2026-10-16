@@ -32,15 +32,15 @@ INSERT INTO ficha_clinica_do_pe (id, cliente_id, comprimento_cm, largura, pisada
 INSERT INTO ficha_clinica_do_pe (id, cliente_id, comprimento_cm, largura, pisada, numero_preferido_br, marca_preferida, temperatura, odor, data_ultima_visita_podologo, tem_joanete) VALUES (5, 5, 25.30, 'NORMAL', 'PRONADA', 39, null, 'QUENTE', 'SEM_ODOR', DATE '2026-07-01', false);
 
 -- Produtos: os cinco tipos e os quatro públicos; preço de compra zero em um item.
-INSERT INTO produto (id, nome, marca, tipo, genero_alvo, numero_br, peso_kg, preco_compra, preco_venda, data_cadastro) VALUES (1, 'Tênis Corrida X', 'PéFrioSports', 'TENIS', 'UNISSEX', 42, 0.620, 120.00, 259.90, DATE '2026-10-14');
-INSERT INTO produto (id, nome, marca, tipo, genero_alvo, numero_br, peso_kg, preco_compra, preco_venda, data_cadastro) VALUES (2, 'Sandália Verão', 'PéFrioSports', 'SANDALIA', 'FEMININO', 37, 0.380, 45.00, 99.90, DATE '2026-10-13');
-INSERT INTO produto (id, nome, marca, tipo, genero_alvo, numero_br, peso_kg, preco_compra, preco_venda, data_cadastro) VALUES (3, 'Bota Campo', 'PéFrioSports', 'BOTA', 'MASCULINO', 41, 1.250, 180.00, 349.90, DATE '2026-10-12');
-INSERT INTO produto (id, nome, marca, tipo, genero_alvo, numero_br, peso_kg, preco_compra, preco_venda, data_cadastro) VALUES (4, 'Sapatênis Casual', 'PéFrioSports', 'SAPATENIS', 'MASCULINO', 40, 0.700, 95.00, 189.90, DATE '2026-10-11');
-INSERT INTO produto (id, nome, marca, tipo, genero_alvo, numero_br, peso_kg, preco_compra, preco_venda, data_cadastro) VALUES (5, 'Chinelo Praia', 'PéFrioSports', 'CHINELO', 'UNISSEX', 39, 0.240, 15.00, 39.90, DATE '2026-10-10');
-INSERT INTO produto (id, nome, marca, tipo, genero_alvo, numero_br, peso_kg, preco_compra, preco_venda, data_cadastro) VALUES (6, 'Tênis Infantil', 'PéFrioSports', 'TENIS', 'INFANTIL', 28, 0.350, 60.00, 149.90, DATE '2026-09-30');
-INSERT INTO produto (id, nome, marca, tipo, genero_alvo, numero_br, peso_kg, preco_compra, preco_venda, data_cadastro) VALUES (7, 'Chinelo Infantil', 'SolaBoa', 'CHINELO', 'INFANTIL', 30, 0.150, 0.00, 29.90, DATE '2026-09-15');
-INSERT INTO produto (id, nome, marca, tipo, genero_alvo, numero_br, peso_kg, preco_compra, preco_venda, data_cadastro) VALUES (8, 'Sandália Unissex', 'SolaBoa', 'SANDALIA', 'UNISSEX', 38, 0.400, 50.00, 109.90, DATE '2026-08-01');
-INSERT INTO produto (id, nome, marca, tipo, genero_alvo, numero_br, peso_kg, preco_compra, preco_venda, data_cadastro) VALUES (9, 'Tênis Balenciaga de Coleção', 'Balenciaga', 'TENIS', 'UNISSEX', 43, 1.450, 900000.00, 1500000.00, DATE '2026-10-09');
+INSERT INTO produto (id, nome, marca, tipo, genero_alvo, numero_br, peso_gramas, preco_compra, preco_venda, data_cadastro) VALUES (1, 'Tênis Corrida X', 'PéFrioSports', 'TENIS', 'UNISSEX', 42, 620, 120.00, 259.90, DATE '2026-10-14');
+INSERT INTO produto (id, nome, marca, tipo, genero_alvo, numero_br, peso_gramas, preco_compra, preco_venda, data_cadastro) VALUES (2, 'Sandália Verão', 'PéFrioSports', 'SANDALIA', 'FEMININO', 37, 380, 45.00, 99.90, DATE '2026-10-13');
+INSERT INTO produto (id, nome, marca, tipo, genero_alvo, numero_br, peso_gramas, preco_compra, preco_venda, data_cadastro) VALUES (3, 'Bota Campo', 'PéFrioSports', 'BOTA', 'MASCULINO', 41, 1250, 180.00, 349.90, DATE '2026-10-12');
+INSERT INTO produto (id, nome, marca, tipo, genero_alvo, numero_br, peso_gramas, preco_compra, preco_venda, data_cadastro) VALUES (4, 'Sapatênis Casual', 'PéFrioSports', 'SAPATENIS', 'MASCULINO', 40, 700, 95.00, 189.90, DATE '2026-10-11');
+INSERT INTO produto (id, nome, marca, tipo, genero_alvo, numero_br, peso_gramas, preco_compra, preco_venda, data_cadastro) VALUES (5, 'Chinelo Praia', 'PéFrioSports', 'CHINELO', 'UNISSEX', 39, 240, 15.00, 39.90, DATE '2026-10-10');
+INSERT INTO produto (id, nome, marca, tipo, genero_alvo, numero_br, peso_gramas, preco_compra, preco_venda, data_cadastro) VALUES (6, 'Tênis Infantil', 'PéFrioSports', 'TENIS', 'INFANTIL', 28, 350, 60.00, 149.90, DATE '2026-09-30');
+INSERT INTO produto (id, nome, marca, tipo, genero_alvo, numero_br, peso_gramas, preco_compra, preco_venda, data_cadastro) VALUES (7, 'Chinelo Infantil', 'SolaBoa', 'CHINELO', 'INFANTIL', 30, 150, 0.00, 29.90, DATE '2026-09-15');
+INSERT INTO produto (id, nome, marca, tipo, genero_alvo, numero_br, peso_gramas, preco_compra, preco_venda, data_cadastro) VALUES (8, 'Sandália Unissex', 'SolaBoa', 'SANDALIA', 'UNISSEX', 38, 400, 50.00, 109.90, DATE '2026-08-01');
+INSERT INTO produto (id, nome, marca, tipo, genero_alvo, numero_br, peso_gramas, preco_compra, preco_venda, data_cadastro) VALUES (9, 'Tênis Balenciaga de Coleção', 'Balenciaga', 'TENIS', 'UNISSEX', 43, 1450, 900000.00, 1500000.00, DATE '2026-10-09');
 
 -- Foto do produto: uma com imagem e miniatura, outra com imagem e sem miniatura,
 -- para exercitar o marcador da listagem. Conteúdo: um PNG de 1 por 1 pixel.

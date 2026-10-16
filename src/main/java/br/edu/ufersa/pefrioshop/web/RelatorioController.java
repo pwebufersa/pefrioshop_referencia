@@ -66,7 +66,7 @@ public class RelatorioController {
 	/** Desconto nos quatro produtos mais novos (US 14). */
 	@GetMapping("/desconto")
 	public String desconto(Model model) {
-		model.addAttribute("itens", relatorios.produtosComDesconto());
+		model.addAttribute("resumo", relatorios.produtosComDesconto());
 		model.addAttribute("descontoPercentual", relatorios.getDescontoRelatorio().movePointRight(2));
 		return "relatorio/desconto";
 	}
@@ -74,7 +74,7 @@ public class RelatorioController {
 	/** Contagem de produtos por tipo (US 15). */
 	@GetMapping("/contagem-tipo")
 	public String contagemTipo(Model model) {
-		model.addAttribute("itens", relatorios.contagemPorTipo());
+		model.addAttribute("resumo", relatorios.contagemPorTipo());
 		return "relatorio/contagem-tipo";
 	}
 

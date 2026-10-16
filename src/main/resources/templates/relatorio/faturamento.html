@@ -25,19 +25,23 @@
 				<td class="numero" th:text="${#numbers.formatCurrency(linha.faturamento)}">R$ 0,00</td>
 			</tr>
 		</tbody>
+		<tfoot>
+			<tr>
+				<th scope="row">Faturamento total</th>
+				<td class="numero" th:text="${#numbers.formatCurrency(total)}">R$ 0,00</td>
+			</tr>
+			<tr>
+				<th scope="row">Imposto
+					<span class="nota" th:text="'(' + ${#numbers.formatDecimal(taxaPercentual, 1, 1)} + '%)'">(18,5%)</span>
+				</th>
+				<td class="numero" th:text="${#numbers.formatCurrency(imposto)}">R$ 0,00</td>
+			</tr>
+			<tr>
+				<th scope="row">Total com imposto</th>
+				<td class="numero" th:text="${#numbers.formatCurrency(totalComImposto)}">R$ 0,00</td>
+			</tr>
+		</tfoot>
 	</table>
-
-	<dl class="detalhes resumo-tabela">
-		<dt>Faturamento total</dt>
-		<dd th:text="${#numbers.formatCurrency(total)}">R$ 0,00</dd>
-		<dt>Imposto</dt>
-		<dd>
-			<span th:text="${#numbers.formatCurrency(imposto)}">R$ 0,00</span>
-			<span class="nota" th:text="'(' + ${#numbers.formatDecimal(taxaPercentual, 1, 1)} + '%)'">(18,5%)</span>
-		</dd>
-		<dt>Total com imposto</dt>
-		<dd th:text="${#numbers.formatCurrency(totalComImposto)}">R$ 0,00</dd>
-	</dl>
 </main>
 
 <footer th:replace="~{layout :: rodape}"></footer>

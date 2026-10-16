@@ -46,7 +46,7 @@
 				<td data-rotulo="Tipo" th:text="${p.tipo.rotulo}">Tipo</td>
 				<td data-rotulo="Público" th:text="${p.generoAlvo.rotulo}">Público</td>
 				<td class="centro" data-rotulo="Nº BR" th:text="${p.numeroBr}">40</td>
-				<td class="numero" data-rotulo="Peso" th:text="${#numbers.formatDecimal(p.pesoKg, 1, 3)} + ' kg'">0,000 kg</td>
+				<td class="numero" data-rotulo="Peso" th:text="${p.pesoGramas} + ' g'">0 g</td>
 				<td class="numero" data-rotulo="Compra" th:text="${#numbers.formatCurrency(p.precoCompra)}">R$ 0,00</td>
 				<td class="numero" data-rotulo="Venda" th:text="${#numbers.formatCurrency(p.precoVenda)}">R$ 0,00</td>
 				<td class="centro" data-rotulo="Cadastro" th:text="${#temporals.format(p.dataCadastro, 'dd/MM/yyyy')}">01/01/2026</td>

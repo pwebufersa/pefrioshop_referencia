@@ -7,16 +7,22 @@
 <main class="conteudo">
 	<h1>Produtos por tipo</h1>
 
-	<p th:if="${#lists.isEmpty(itens)}">Nenhum produto cadastrado.</p>
+	<p th:if="${#lists.isEmpty(resumo.itens)}">Nenhum produto cadastrado.</p>
 
-	<table th:unless="${#lists.isEmpty(itens)}">
+	<table th:unless="${#lists.isEmpty(resumo.itens)}">
 		<thead><tr><th>Tipo</th><th>Quantidade</th></tr></thead>
 		<tbody>
-			<tr th:each="linha : ${itens}">
+			<tr th:each="linha : ${resumo.itens}">
 				<td th:text="${linha.tipo.rotulo}">Tipo</td>
 				<td class="centro" th:text="${linha.quantidade}">0</td>
 			</tr>
 		</tbody>
+		<tfoot>
+			<tr>
+				<th scope="row">Total</th>
+				<td class="centro" th:text="${resumo.totalQuantidade}">0</td>
+			</tr>
+		</tfoot>
 	</table>
 </main>
 

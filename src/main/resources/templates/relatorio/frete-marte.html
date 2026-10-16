@@ -6,17 +6,19 @@
 
 <main class="conteudo">
 	<h1>Frete para Marte</h1>
-	<p>Frete fixo de <strong th:text="${#numbers.formatCurrency(baseline)}">R$ 0,00</strong> por viagem, mais
-		<strong th:text="${#numbers.formatCurrency(porQuilo)}">R$ 0,00</strong> por quilo transportado. O total de
-		cada linha é o preço do par somado ao frete.</p>
-	<p class="nota">O quilo é o preço publicado pela SpaceX para carga ao solo marciano, a partir de 2028:
+
+	<p class="prosa-tabela">Frete fixo de <strong th:text="${#numbers.formatCurrency(baseline)}">R$ 0,00</strong> por
+		viagem, mais <strong th:text="${#numbers.formatCurrency(porQuilo)}">R$ 0,00</strong> por quilo transportado. O quilo
+		é o preço publicado pela SpaceX para carga ao solo marciano, de
 		<strong th:text="'US$ ' + ${#numbers.formatDecimal(porQuiloDolar, 1, 'POINT', 2, 'COMMA')}">US$ 100.000,00</strong>
-		por quilo, ao câmbio de <strong th:text="${#numbers.formatCurrency(cambio)}">R$ 0,00</strong> por dólar.</p>
+		por quilo a partir de 2028, ao câmbio de
+		<strong th:text="${#numbers.formatCurrency(cambio)}">R$ 0,00</strong> por dólar. A lista segue do menor ao maior
+		número BR, com o peso de um par, em gramas, o preço, o frete estimado por par e o total, que é o preço do par
+		somado ao frete.</p>
 
 	<p th:if="${#lists.isEmpty(resumo.itens)}">Nenhum produto cadastrado.</p>
 
 	<table th:unless="${#lists.isEmpty(resumo.itens)}">
-		<caption>Do menor ao maior número BR, com o peso de um par e o frete estimado por par.</caption>
 		<thead>
 			<tr>
 				<th>Código</th><th>Nome</th><th>Nº BR</th><th>Peso</th>
@@ -28,22 +30,22 @@
 				<td class="centro" th:text="${linha.produto.id}">1</td>
 				<td th:text="${linha.produto.nome}">Produto</td>
 				<td class="centro" th:text="${linha.produto.numeroBr}">40</td>
-				<td class="numero" th:text="${#numbers.formatDecimal(linha.peso, 1, 3)} + ' kg'">0,000 kg</td>
+				<td class="numero" th:text="${linha.pesoGramas} + ' g'">0 g</td>
 				<td class="numero" th:text="${#numbers.formatCurrency(linha.preco)}">R$ 0,00</td>
 				<td class="numero" th:text="${#numbers.formatCurrency(linha.frete)}">R$ 0,00</td>
 				<td class="numero" th:text="${#numbers.formatCurrency(linha.total)}">R$ 0,00</td>
 			</tr>
 		</tbody>
+		<tfoot>
+			<tr>
+				<th colspan="3" scope="row">Total</th>
+				<td class="numero" th:text="${resumo.totalPesoGramas} + ' g'">0 g</td>
+				<td class="numero" th:text="${#numbers.formatCurrency(resumo.totalPreco)}">R$ 0,00</td>
+				<td class="numero" th:text="${#numbers.formatCurrency(resumo.totalFrete)}">R$ 0,00</td>
+				<td class="numero" th:text="${#numbers.formatCurrency(resumo.totalGeral)}">R$ 0,00</td>
+			</tr>
+		</tfoot>
 	</table>
-
-	<dl class="detalhes resumo-tabela" th:unless="${#lists.isEmpty(resumo.itens)}">
-		<dt>Preço dos pares</dt>
-		<dd th:text="${#numbers.formatCurrency(resumo.totalPreco)}">R$ 0,00</dd>
-		<dt>Frete dos pares</dt>
-		<dd th:text="${#numbers.formatCurrency(resumo.totalFrete)}">R$ 0,00</dd>
-		<dt>Total</dt>
-		<dd th:text="${#numbers.formatCurrency(resumo.totalGeral)}">R$ 0,00</dd>
-	</dl>
 </main>
 
 <footer th:replace="~{layout :: rodape}"></footer>

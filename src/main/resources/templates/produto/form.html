@@ -43,9 +43,9 @@
 			<span class="campo-erro" th:errors="*{numeroBr}"></span>
 		</label>
 
-		<label>Peso do par (kg)
-			<input type="number" step="0.001" min="0.001" th:field="*{pesoKg}" required/>
-			<span class="campo-erro" th:errors="*{pesoKg}"></span>
+		<label>Peso do par (g)
+			<input type="number" min="1" step="1" th:field="*{pesoGramas}" required/>
+			<span class="campo-erro" th:errors="*{pesoGramas}"></span>
 		</label>
 
 		<label>Preço de compra

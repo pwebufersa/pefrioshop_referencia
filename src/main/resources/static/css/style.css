@@ -322,12 +322,6 @@ table {
 	font-variant-numeric: tabular-nums;
 }
 
-caption {
-	text-align: left;
-	padding: var(--passo-3) var(--passo-4);
-	color: var(--tinta-suave);
-}
-
 th,
 td {
 	border-bottom: 1px solid var(--divisoria-linha);
@@ -376,6 +370,29 @@ td + td {
 /* Colunas curtas: identificador, código, data, hora e contagem. */
 .centro {
 	text-align: center;
+}
+
+/* Rodapé de totalização: o rótulo encosta nos valores da própria coluna. */
+tfoot th,
+tfoot td {
+	border-bottom: none;
+	border-top: 2px solid var(--borda-forte);
+	background-color: var(--cal-fundo);
+	font-family: var(--fonte-titulo);
+	font-weight: 600;
+	font-size: 0.9rem;
+	color: var(--tinta);
+}
+
+tfoot th {
+	text-align: right;
+	text-transform: none;
+	letter-spacing: 0;
+}
+
+/* Prosa que acompanha uma tabela larga: acompanha a largura do conteúdo. */
+.prosa-tabela {
+	max-width: none;
 }
 
 .acoes {
@@ -614,12 +631,6 @@ legend {
 	padding: var(--passo-5);
 	max-width: var(--medida);
 	margin: 0 0 var(--passo-5);
-}
-
-/* O resumo com a mesma largura da tabela acima. */
-.detalhes.resumo-tabela {
-	max-width: none;
-	width: 100%;
 }
 
 .detalhes dt {

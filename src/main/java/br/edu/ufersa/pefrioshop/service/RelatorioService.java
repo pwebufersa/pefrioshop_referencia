@@ -3,7 +3,6 @@ package br.edu.ufersa.pefrioshop.service;
 import br.edu.ufersa.pefrioshop.config.ParametrosLoja;
 import br.edu.ufersa.pefrioshop.domain.Pedido;
 import br.edu.ufersa.pefrioshop.domain.Produto;
-import br.edu.ufersa.pefrioshop.repository.ContagemPorTipo;
 import br.edu.ufersa.pefrioshop.repository.PedidoRepository;
 import br.edu.ufersa.pefrioshop.repository.ProdutoRepository;
 import java.math.BigDecimal;
@@ -71,18 +70,19 @@ public class RelatorioService {
 	}
 
 	/** Os 4 produtos mais novos, com desconto, do maior para o menor preco (US 14). */
-	public List<ProdutoComDesconto> produtosComDesconto() {
+	public ResumoDesconto produtosComDesconto() {
 		BigDecimal fator = BigDecimal.ONE.subtract(parametros.descontoRelatorio());
-		return produtos.findTop4ByOrderByDataCadastroDescIdDesc().stream()
+		List<ProdutoComDesconto> itens = produtos.findTop4ByOrderByDataCadastroDescIdDesc().stream()
 				.map(produto -> new ProdutoComDesconto(produto,
 						produto.getPrecoVenda().multiply(fator).setScale(2, RoundingMode.HALF_UP)))
 				.sorted(Comparator.comparing(ProdutoComDesconto::precoComDesconto).reversed())
 				.toList();
+		return ResumoDesconto.de(itens);
 	}
 
 	/** Contagem de produtos por tipo (US 15). */
-	public List<ContagemPorTipo> contagemPorTipo() {
-		return produtos.contarPorTipo();
+	public ResumoContagemPorTipo contagemPorTipo() {
+		return ResumoContagemPorTipo.de(produtos.contarPorTipo());
 	}
 
 	public BigDecimal getTaxaImposto() {

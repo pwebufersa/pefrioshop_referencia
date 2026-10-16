@@ -8,17 +8,24 @@
 	<h1>Desconto nos 4 produtos mais novos</h1>
 	<p>Desconto aplicado: <strong th:text="${#numbers.formatDecimal(descontoPercentual, 1, 1)} + '%'">7,3%</strong></p>
 
-	<p th:if="${#lists.isEmpty(itens)}">Nenhum produto cadastrado.</p>
+	<p th:if="${#lists.isEmpty(resumo.itens)}">Nenhum produto cadastrado.</p>
 
-	<table th:unless="${#lists.isEmpty(itens)}">
+	<table th:unless="${#lists.isEmpty(resumo.itens)}">
 		<thead><tr><th>Nome</th><th>Preço original</th><th>Preço com desconto</th></tr></thead>
 		<tbody>
-			<tr th:each="linha : ${itens}">
+			<tr th:each="linha : ${resumo.itens}">
 				<td th:text="${linha.produto.nome}">Produto</td>
-				<td class="numero" th:text="${#numbers.formatCurrency(linha.produto.precoVenda)}">R$ 0,00</td>
+				<td class="numero" th:text="${#numbers.formatCurrency(linha.precoOriginal)}">R$ 0,00</td>
 				<td class="numero" th:text="${#numbers.formatCurrency(linha.precoComDesconto)}">R$ 0,00</td>
 			</tr>
 		</tbody>
+		<tfoot>
+			<tr>
+				<th scope="row">Total</th>
+				<td class="numero" th:text="${#numbers.formatCurrency(resumo.totalOriginal)}">R$ 0,00</td>
+				<td class="numero" th:text="${#numbers.formatCurrency(resumo.totalComDesconto)}">R$ 0,00</td>
+			</tr>
+		</tfoot>
 	</table>
 </main>
 

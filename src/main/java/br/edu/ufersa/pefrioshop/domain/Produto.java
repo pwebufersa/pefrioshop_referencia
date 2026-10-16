@@ -50,8 +50,8 @@ public class Produto {
 
 	@NotNull(message = "O peso do par é obrigatório.")
 	@Positive(message = "O peso do par deve ser maior que zero.")
-	@Column(nullable = false, precision = 6, scale = 3)
-	private BigDecimal pesoKg;
+	@Column(nullable = false)
+	private Integer pesoGramas;
 
 	@NotNull(message = "O preço de compra é obrigatório.")
 	@PositiveOrZero(message = "O preço de compra não pode ser negativo.")
@@ -126,12 +126,12 @@ public class Produto {
 		this.numeroBr = numeroBr;
 	}
 
-	public BigDecimal getPesoKg() {
-		return pesoKg;
+	public Integer getPesoGramas() {
+		return pesoGramas;
 	}
 
-	public void setPesoKg(BigDecimal pesoKg) {
-		this.pesoKg = pesoKg;
+	public void setPesoGramas(Integer pesoGramas) {
+		this.pesoGramas = pesoGramas;
 	}
 
 	public BigDecimal getPrecoCompra() {
