@@ -15,7 +15,7 @@
 	<description>Sistema para loja de calcados - projeto de referencia da disciplina Programacao Web 2026.2</description>
 
 	<properties>
-		<java.version>25</java.version>
+		<java.version>21</java.version>
 	</properties>
 
 	<dependencies>

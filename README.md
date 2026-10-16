@@ -18,7 +18,7 @@ No Windows, `mvnw.cmd` pode ser usado no lugar de `./mvnw`.
 
 ## Pilha
 
-- Spring Boot 4.1.1 e Java 25.
+- Spring Boot 4.1.1 e Java 21.
 - Thymeleaf como motor de template.
 - Spring Data JPA, com consultas derivadas e uma `Specification`.
 - H2 em memória, no modo MySQL.
@@ -57,7 +57,7 @@ No Windows, `mvnw.cmd` pode ser usado no lugar de `./mvnw`.
 - `config`: parâmetros da loja, cliente HTTP e carga inicial.
 
 Os valores de negócio ficam em `application.properties`, sob o prefixo
-`pefrihop`, e são lidos por `ParametrosLoja`. Nenhum cálculo é feito no
+`pefrioshop`, e são lidos por `ParametrosLoja`. Nenhum cálculo é feito no
 template.
 
 A carga inicial fica em `import.sql`: três clientes, uma ficha, cinco produtos,

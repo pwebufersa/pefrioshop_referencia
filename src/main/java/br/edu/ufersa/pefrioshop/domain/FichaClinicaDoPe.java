@@ -13,6 +13,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class FichaClinicaDoPe {
@@ -56,6 +57,7 @@ public class FichaClinicaDoPe {
 	@Column(nullable = false, length = 12)
 	private OdorPe odor;
 
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private LocalDate dataUltimaVisitaPodologo;
 
 	@Column(nullable = false)

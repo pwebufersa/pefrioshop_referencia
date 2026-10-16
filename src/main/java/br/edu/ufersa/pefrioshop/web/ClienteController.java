@@ -60,7 +60,7 @@ public class ClienteController {
 		if (resultado.hasErrors()) {
 			return "cliente/form";
 		}
-		clientes.salvar(cliente);
+		clientes.atualizar(id, cliente);
 		return "redirect:/clientes";
 	}
 

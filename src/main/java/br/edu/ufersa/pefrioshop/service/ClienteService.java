@@ -1,6 +1,7 @@
 package br.edu.ufersa.pefrioshop.service;
 
 import br.edu.ufersa.pefrioshop.domain.Cliente;
+import br.edu.ufersa.pefrioshop.domain.Endereco;
 import br.edu.ufersa.pefrioshop.repository.ClienteRepository;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -29,6 +30,30 @@ public class ClienteService {
 
 	public Cliente salvar(Cliente cliente) {
 		return clientes.save(cliente);
+	}
+
+	/**
+	 * Atualiza os campos editaveis do cliente, sem tocar na data de cadastro nem
+	 * na ficha clinica, que nao vem do formulario.
+	 */
+	@Transactional
+	public Cliente atualizar(Long id, Cliente dados) {
+		Cliente cliente = buscar(id);
+		cliente.setNomeCompleto(dados.getNomeCompleto());
+		cliente.setGenero(dados.getGenero());
+		cliente.setEmail(dados.getEmail());
+		cliente.setTelefone(dados.getTelefone());
+		cliente.setDataNascimento(dados.getDataNascimento());
+		copiarEndereco(dados.getEndereco(), cliente.getEndereco());
+		return clientes.save(cliente);
+	}
+
+	private void copiarEndereco(Endereco origem, Endereco destino) {
+		destino.setRua(origem.getRua());
+		destino.setBairro(origem.getBairro());
+		destino.setNumero(origem.getNumero());
+		destino.setCidade(origem.getCidade());
+		destino.setCep(origem.getCep());
 	}
 
 	@Transactional

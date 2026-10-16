@@ -15,7 +15,7 @@
 	<table th:unless="${#lists.isEmpty(clientes)}">
 		<thead>
 			<tr>
-				<th>Id</th><th>Nome</th><th>Gênero</th><th>Telefone</th><th>Cidade</th><th>Ficha clínica</th><th>Ações</th>
+				<th>Id</th><th>Nome</th><th>Gênero</th><th>Nascimento</th><th>Cadastro</th><th>Telefone</th><th>Cidade</th><th>Ficha clínica</th><th>Ações</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -23,6 +23,8 @@
 				<td th:text="${cliente.id}">1</td>
 				<td th:text="${cliente.nomeCompleto}">Nome</td>
 				<td th:text="${cliente.genero.rotulo}">Gênero</td>
+				<td th:text="${#temporals.format(cliente.dataNascimento, 'dd/MM/yyyy')}">01/01/2000</td>
+				<td th:text="${#temporals.format(cliente.dataCadastro, 'dd/MM/yyyy HH:mm')}">01/01/2026 10:00</td>
 				<td th:text="${cliente.telefone}">Telefone</td>
 				<td th:text="${cliente.endereco.cidade}">Cidade</td>
 				<td>

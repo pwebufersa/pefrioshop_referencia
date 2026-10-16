@@ -40,13 +40,28 @@ public class FichaClinicaService {
 	}
 
 	@Transactional
-	public FichaClinicaDoPe salvarPara(Long clienteId, FichaClinicaDoPe ficha) {
+	public FichaClinicaDoPe salvarPara(Long clienteId, FichaClinicaDoPe dados) {
 		Cliente cliente = buscarCliente(clienteId);
-		ficha.setCliente(cliente);
-		FichaClinicaDoPe salva = fichas.save(ficha);
-		cliente.setFichaClinica(salva);
-		clientes.save(cliente);
-		return salva;
+		FichaClinicaDoPe ficha = cliente.getFichaClinica();
+		if (ficha == null) {
+			ficha = new FichaClinicaDoPe();
+			ficha.setCliente(cliente);
+			cliente.setFichaClinica(ficha);
+		}
+		copiar(dados, ficha);
+		return fichas.save(ficha);
+	}
+
+	private void copiar(FichaClinicaDoPe origem, FichaClinicaDoPe destino) {
+		destino.setComprimentoCm(origem.getComprimentoCm());
+		destino.setLargura(origem.getLargura());
+		destino.setPisada(origem.getPisada());
+		destino.setNumeroPreferidoBr(origem.getNumeroPreferidoBr());
+		destino.setMarcaPreferida(origem.getMarcaPreferida());
+		destino.setTemperatura(origem.getTemperatura());
+		destino.setOdor(origem.getOdor());
+		destino.setDataUltimaVisitaPodologo(origem.getDataUltimaVisitaPodologo());
+		destino.setTemJoanete(origem.isTemJoanete());
 	}
 
 	@Transactional

@@ -34,6 +34,27 @@ public class ProdutoService {
 		return produtos.save(produto);
 	}
 
+	/**
+	 * Atualiza os campos editaveis do produto. A data de cadastro nao e tocada, e
+	 * a foto so e substituida quando um arquivo novo chega.
+	 */
+	@Transactional
+	public Produto atualizar(Long id, Produto dados, byte[] foto, String fotoContentType) {
+		Produto produto = buscar(id);
+		produto.setNome(dados.getNome());
+		produto.setMarca(dados.getMarca());
+		produto.setTipo(dados.getTipo());
+		produto.setGeneroAlvo(dados.getGeneroAlvo());
+		produto.setNumeroBr(dados.getNumeroBr());
+		produto.setPrecoCompra(dados.getPrecoCompra());
+		produto.setPrecoVenda(dados.getPrecoVenda());
+		if (foto != null && foto.length > 0) {
+			produto.setFoto(foto);
+			produto.setFotoContentType(fotoContentType);
+		}
+		return produtos.save(produto);
+	}
+
 	@Transactional
 	public void excluir(Long id) {
 		Produto produto = buscar(id);

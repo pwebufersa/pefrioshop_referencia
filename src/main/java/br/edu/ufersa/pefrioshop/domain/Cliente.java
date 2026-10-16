@@ -17,6 +17,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Cliente {
@@ -43,6 +44,7 @@ public class Cliente {
 	private String telefone;
 
 	@NotNull(message = "A data de nascimento é obrigatória.")
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private LocalDate dataNascimento;
 
 	// Definida pelo sistema, nao pelo formulario.

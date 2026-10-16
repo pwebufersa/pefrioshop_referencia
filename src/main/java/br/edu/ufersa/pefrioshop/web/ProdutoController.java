@@ -52,7 +52,6 @@ public class ProdutoController {
 	@GetMapping("/novo")
 	public String novo(Model model) {
 		model.addAttribute("produto", new Produto());
-		adicionarEnumeracoes(model);
 		return "produto/form";
 	}
 
@@ -62,7 +61,8 @@ public class ProdutoController {
 		if (resultado.hasErrors()) {
 			return "produto/form";
 		}
-		aplicarFoto(produto, foto, null);
+		produto.setFoto(conteudoDaFoto(foto));
+		produto.setFotoContentType(tipoDaFoto(foto));
 		produtos.salvar(produto);
 		return "redirect:/produtos";
 	}
@@ -70,7 +70,6 @@ public class ProdutoController {
 	@GetMapping("/{id}/editar")
 	public String editar(@PathVariable Long id, Model model) {
 		model.addAttribute("produto", produtos.buscar(id));
-		adicionarEnumeracoes(model);
 		return "produto/form";
 	}
 
@@ -82,8 +81,7 @@ public class ProdutoController {
 		if (resultado.hasErrors()) {
 			return "produto/form";
 		}
-		aplicarFoto(produto, foto, produtos.buscar(id));
-		produtos.salvar(produto);
+		produtos.atualizar(id, produto, conteudoDaFoto(foto), tipoDaFoto(foto));
 		return "redirect:/produtos";
 	}
 
@@ -104,21 +102,12 @@ public class ProdutoController {
 				.body(conteudo);
 	}
 
-	private void aplicarFoto(Produto produto, MultipartFile foto, Produto atual) throws IOException {
-		if (foto != null && !foto.isEmpty()) {
-			produto.setFoto(foto.getBytes());
-			produto.setFotoContentType(foto.getContentType());
-			return;
-		}
-		if (atual != null) {
-			produto.setFoto(atual.getFoto());
-			produto.setFotoContentType(atual.getFotoContentType());
-		}
+	private byte[] conteudoDaFoto(MultipartFile foto) throws IOException {
+		return foto == null || foto.isEmpty() ? null : foto.getBytes();
 	}
 
-	private void adicionarEnumeracoes(Model model) {
-		model.addAttribute("tipos", TipoProduto.values());
-		model.addAttribute("generos", GeneroAlvo.values());
+	private String tipoDaFoto(MultipartFile foto) {
+		return foto == null || foto.isEmpty() ? null : foto.getContentType();
 	}
 
 }
