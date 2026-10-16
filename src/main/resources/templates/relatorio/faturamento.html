@@ -11,7 +11,10 @@
 		<label>Data de referência
 			<input type="date" name="referencia" th:value="${referencia}"/>
 		</label>
-		<button class="botao" type="submit">Atualizar</button>
+		<button class="botao" type="submit">
+			<span th:replace="~{icones :: atualizar}"></span>
+			<span>Atualizar</span>
+		</button>
 	</form>
 
 	<table>

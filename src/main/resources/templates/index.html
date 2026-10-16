@@ -7,7 +7,10 @@
 <main class="conteudo">
 	<div class="titulo-linha">
 		<h1>Balcão</h1>
-		<a class="botao" th:href="@{/pedidos/novo}">Registrar pedido</a>
+		<a class="botao" th:href="@{/pedidos/novo}">
+			<span th:replace="~{icones :: adicionar}"></span>
+			<span>Registrar pedido</span>
+		</a>
 	</div>
 
 	<div class="balcao">

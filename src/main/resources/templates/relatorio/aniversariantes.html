@@ -11,7 +11,10 @@
 		<label>Mês (1 a 12)
 			<input type="number" name="mes" min="1" max="12" th:value="${mes}"/>
 		</label>
-		<button class="botao" type="submit">Consultar</button>
+		<button class="botao" type="submit">
+			<span th:replace="~{icones :: busca}"></span>
+			<span>Consultar</span>
+		</button>
 	</form>
 
 	<p th:if="${#lists.isEmpty(clientes)}">Nenhum aniversariante no mês informado.</p>

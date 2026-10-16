@@ -25,7 +25,10 @@
 				        th:selected="${g == generoSelecionado}">Público</option>
 			</select>
 		</label>
-		<button class="botao" type="submit">Buscar</button>
+		<button class="botao" type="submit">
+			<span th:replace="~{icones :: busca}"></span>
+			<span>Buscar</span>
+		</button>
 	</form>
 
 	<p th:if="${#lists.isEmpty(produtos)}">Nenhum produto encontrado.</p>

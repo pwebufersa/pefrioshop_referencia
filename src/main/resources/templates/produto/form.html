@@ -64,8 +64,14 @@
 		</label>
 
 		<div class="acoes-formulario">
-			<button class="botao" type="submit">Salvar</button>
-			<a th:href="@{/produtos}">Cancelar</a>
+			<button class="botao" type="submit">
+				<span th:replace="~{icones :: salvar}"></span>
+				<span>Salvar</span>
+			</button>
+			<a class="acao" th:href="@{/produtos}">
+				<span th:replace="~{icones :: cancelar}"></span>
+				<span>Cancelar</span>
+			</a>
 		</div>
 	</form>
 </main>

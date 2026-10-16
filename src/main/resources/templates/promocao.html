@@ -16,7 +16,10 @@
 				        th:selected="${clienteId != null and c.id == clienteId}">Cliente</option>
 			</select>
 		</label>
-		<button class="botao" type="submit">Gerar e-mail</button>
+		<button class="botao" type="submit">
+			<span th:replace="~{icones :: enviar}"></span>
+			<span>Gerar e-mail</span>
+		</button>
 	</form>
 
 	<div th:if="${aviso}" class="aviso" th:text="${aviso}">Aviso.</div>

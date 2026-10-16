@@ -261,6 +261,7 @@ a:hover {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
+	gap: 0.4rem;
 	min-height: var(--altura-campo);
 	background-color: var(--couro);
 	color: #ffffff;
@@ -363,7 +364,6 @@ tbody tr:last-child td {
 }
 
 .acoes > * {
-	display: inline-block;
 	vertical-align: middle;
 	margin-right: var(--passo-3);
 }
@@ -373,7 +373,26 @@ tbody tr:last-child td {
 }
 
 .acoes form {
+	display: inline-block;
 	margin: 0;
+}
+
+.acao {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.35rem;
+}
+
+.acao .icone-svg {
+	width: 16px;
+	height: 16px;
+	flex: none;
+}
+
+.botao .icone-svg {
+	width: 18px;
+	height: 18px;
+	flex: none;
 }
 
 .rolagem {
@@ -381,6 +400,7 @@ tbody tr:last-child td {
 }
 
 .acoes form {
+	display: inline-block;
 	margin: 0;
 }
 

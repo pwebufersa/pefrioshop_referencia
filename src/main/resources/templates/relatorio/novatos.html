@@ -14,7 +14,10 @@
 		<label>Ano
 			<input type="number" name="ano" min="2000" max="2100" th:value="${ano}"/>
 		</label>
-		<button class="botao" type="submit">Consultar</button>
+		<button class="botao" type="submit">
+			<span th:replace="~{icones :: busca}"></span>
+			<span>Consultar</span>
+		</button>
 	</form>
 
 	<p th:if="${#lists.isEmpty(clientes)}">Nenhum cliente cadastrado no período informado.</p>

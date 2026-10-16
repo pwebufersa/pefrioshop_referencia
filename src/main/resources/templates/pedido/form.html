@@ -57,8 +57,14 @@
 		</table>
 
 		<div class="acoes-formulario">
-			<button class="botao" type="submit">Registrar pedido</button>
-			<a th:href="@{/pedidos}">Cancelar</a>
+			<button class="botao" type="submit">
+				<span th:replace="~{icones :: salvar}"></span>
+				<span>Registrar pedido</span>
+			</button>
+			<a class="acao" th:href="@{/pedidos}">
+				<span th:replace="~{icones :: cancelar}"></span>
+				<span>Cancelar</span>
+			</a>
 		</div>
 	</form>
 </main>
