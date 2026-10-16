@@ -62,9 +62,12 @@ a:hover {
 }
 
 .cabecalho p {
-	max-width: 60ch;
+	max-width: none;
 	margin: 0.5rem 0 0;
 	color: #dbe7ee;
+	font-size: 1rem;
+	white-space: nowrap;
+	overflow-x: auto;
 }
 
 main {
@@ -220,5 +223,7 @@ pre {
 	color: var(--tinta-suave);
 	font-size: 0.9rem;
 	text-align: center;
+	white-space: nowrap;
+	overflow-x: auto;
 	border-top: 1px solid var(--borda);
 }
