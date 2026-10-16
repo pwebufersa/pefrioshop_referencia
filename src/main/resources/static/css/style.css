@@ -17,6 +17,8 @@
 	--areia: #d99a2b;
 	--borda: #d5cec0;
 	--borda-forte: #b6ad9c;
+	--divisoria-linha: rgba(20, 32, 42, 0.12);
+	--divisoria-coluna: rgba(20, 32, 42, 0.06);
 	--erro: #a3281c;
 	--sucesso: #2f6b46;
 
@@ -328,7 +330,7 @@ caption {
 
 th,
 td {
-	border-bottom: 1px solid var(--borda);
+	border-bottom: 1px solid var(--divisoria-linha);
 	padding: var(--passo-2) var(--passo-3);
 	text-align: left;
 	font-size: 0.9rem;
@@ -362,7 +364,7 @@ tbody tr:last-child td {
 /* Linha suave entre as colunas. */
 th + th,
 td + td {
-	border-left: 1px solid var(--borda);
+	border-left: 1px solid var(--divisoria-coluna);
 }
 
 /* Colunas de valor, centralizadas e com numeral tabular. */
