@@ -4,15 +4,15 @@ Sistema visual do projeto de referência. Vale para todas as telas.
 
 ## Cena
 
-O sistema é operado no balcão da loja, à luz do dia, em tela de desktop. Por
-isso a superfície é clara, e o azul da navegação ancora a página.
+O sistema é operado no balcão da loja, à luz do dia, em tela de desktop. A
+superfície é clara, e o azul da navegação ancora a página.
 
 ## Paleta
 
 | Papel | Valor | Uso |
 |---|---|---|
 | Cal | `#f5f2ec` | Fundo da página |
-| Cal escuro | `#ebe6dc` | Cabeçalho de tabela |
+| Cal escuro | `#ebe6dc` | Cabeçalho de tabela e rodapé de total |
 | Superfície | `#ffffff` | Tabelas, painéis, formulários |
 | Tinta | `#14202a` | Texto principal |
 | Tinta suave | `#46545f` | Texto secundário |
@@ -24,42 +24,50 @@ isso a superfície é clara, e o azul da navegação ancora a página.
 | Borda | `#d5cec0` | Divisórias |
 | Erro | `#a3281c` | Mensagens de erro |
 
-A paleta do projeto parte da foto colorida de autoria do aluno. O arquivo
-`src/main/resources/static/imagens/foto-referencia.svg` é um substituto e deve
-ser trocado pela foto.
+A paleta parte da foto colorida de autoria do aluno;
+`src/main/resources/static/imagens/foto-referencia.svg` é o substituto.
 
 ## Tipografia
 
 - Títulos: Archivo, pesos 500, 600 e 700.
 - Corpo: Source Sans 3, pesos 400 e 600.
 
-Escala: corpo 1rem; h1 entre 1,7rem e 2,5rem; h2 entre 1,2rem e 1,5rem. A
-medida de leitura é de 68ch.
+Corpo em 1rem, h1 entre 1,7rem e 2,5rem, h2 entre 1,2rem e 1,5rem, e medida de
+leitura de 68ch.
 
 ## Espaçamento
 
 Escala de 0,25rem a 3,5rem, em passos nomeados `--passo-1` a `--passo-7`. O
-espaço acima de um título é maior que o espaço a seguir.
+espaço anterior a um título é maior que o posterior.
 
 ## Componentes
 
-- Navegação: barra azulejo com borda inferior de areia.
-- Tabela: superfície branca, cabeçalho em versalete, numeral tabular, sombra
-  suave e cantos de 10px.
-- Botão: couro, com texto branco; estado desabilitado em borda forte.
+- Navegação: barra azulejo, com borda inferior de areia.
+- Tabela: superfície branca, cabeçalho em versalete, numeral tabular, cantos de
+  10px e sombra suave.
+- Rodapé de totalização: borda superior forte, fundo cal escuro, e o rótulo
+  encostado nos valores da própria coluna.
+- Botão: couro, com texto branco; desabilitado em borda forte.
 - Formulário: rótulos em tinta suave, campos com borda forte e foco azulejo.
-- Painel: superfície branca para os últimos pedidos e para o resumo do pedido.
+- Painel: superfície branca, para os últimos pedidos e para o resumo do pedido.
 - Lista de atalhos: linhas com divisória, sem grade de cartões.
 
 ## Estados
 
-Hover em linhas e botões; foco visível em todo elemento interativo; erro com
-borda e texto em vermelho; vazio com aviso em tinta suave.
+Hover em linhas e botões; foco visível no que é interativo; erro em vermelho;
+vazio com aviso em tinta suave.
 
-## Detalhes nativos do navegador
+## Detalhes desenhados pelo próprio navegador
 
-Seleção em areia, anel de foco em azulejo claro, numeral tabular em dinheiro e
-comprimento.
+Três recursos que o navegador desenha sozinho foram ajustados à paleta e à
+leitura da tabela:
+
+- Seleção de texto (`::selection`): fundo em areia, para o trecho marcado.
+- Anel de foco (`:focus-visible`): contorno em azulejo claro, para a navegação
+  por teclado.
+- Numeral tabular (`font-variant-numeric`): dígitos de largura fixa, o que
+  mantém dinheiro, peso e contagem alinhados na vertical, casa decimal sob casa
+  decimal.
 
 ## Movimento
 
@@ -68,8 +76,9 @@ Uma transição curta de cor em botões e linhas, com curva exponencial. Sob
 
 ## Responsividade
 
-Abaixo de 780px, o painel do balcão passa a uma coluna e as tabelas rolam na
-horizontal.
+Abaixo de 820px, as tabelas de listagem viram cartões, com um rótulo por célula.
+Abaixo de 780px, o painel do balcão passa a uma coluna, e as demais tabelas
+rolam na horizontal.
 
 ## Restrições
 

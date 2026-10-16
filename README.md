@@ -1,9 +1,9 @@
 # PéFrioShop - implementação de referência
 
-Sistema de informação para loja de calçados, com ficha clínica do pé do cliente.
-Projeto de referência da disciplina **Programação Web 2026.2** - UFERSA Angicos.
+Sistema de informação para loja de calçados, com ficha clínica do pé. Projeto de
+referência da disciplina **Programação Web 2026.2** - UFERSA Angicos.
 
-Repositório do projeto: https://github.com/pwebufersa/pefrioshop_referencia
+Repositório: https://github.com/pwebufersa/pefrioshop_referencia
 
 ## Como executar
 
@@ -11,18 +11,14 @@ Repositório do projeto: https://github.com/pwebufersa/pefrioshop_referencia
 ./mvnw spring-boot:run
 ```
 
-A aplicação sobe em http://localhost:8080. O console do H2 fica em
-`/h2-console`, com usuário `admin` e senha `admin`.
-
-No Windows, `mvnw.cmd` pode ser usado no lugar de `./mvnw`.
+A aplicação sobe em http://localhost:8080, e o console do H2 fica em
+`/h2-console`, com usuário `admin` e senha `admin`. No Windows, `mvnw.cmd`
+substitui `./mvnw`.
 
 ## Pilha
 
-- Spring Boot 4.1.1 e Java 21.
-- Thymeleaf como motor de template.
-- Spring Data JPA, com consultas derivadas e uma `Specification`.
-- H2 em memória, no modo MySQL.
-- Maven, com o wrapper incluído.
+Spring Boot 4.1.1, Java 21, Thymeleaf, Spring Data JPA, H2 em memória no modo
+MySQL e Maven com wrapper.
 
 ## User stories
 
@@ -55,64 +51,55 @@ No Windows, `mvnw.cmd` pode ser usado no lugar de `./mvnw`.
 - `service`: regras de negócio e cálculos.
 - `web`: controladores e formulários.
 - `config`: parâmetros da loja, cliente HTTP e carga inicial.
-
-Fora de `src`, a pasta `scripts` guarda a minificação do CSS e do JavaScript,
-usada apenas na hospedagem.
+- `ferramenta`: minificação dos assets, executada no empacotamento.
 
 Os valores de negócio ficam em `application.properties`, sob o prefixo
 `pefrioshop`, e são lidos por `ParametrosLoja`. Nenhum cálculo é feito no
 template.
 
-O frete para Marte é a soma de dois valores de configuração: a viagem, de
-`pefrioshop.frete-marte-baseline`, e o peso transportado, pelo preço do quilo
-de `pefrioshop.frete-marte-por-quilo-dolar`, convertido pelo
-`pefrioshop.cambio-dolar`. O preço do quilo é o que a SpaceX publica para carga
-ao solo marciano, a partir de 2028, de US$ 100 milhões por tonelada métrica, o
-equivalente a US$ 100.000,00 por quilo.
+## Frete para Marte
 
-A foto do produto fica em uma tabela própria (`produto_foto`), para a linha do
-produto permanecer leve: a listagem lê apenas as colunas do produto. Ao lado da
-imagem original é guardada uma miniatura de 160 pixels, gerada no envio pelo
-próprio JDK, por `ImageIO` e `Graphics2D`, sem ImageMagick e sem biblioteca
-externa. A listagem usa a miniatura; a tela de detalhe usa a imagem original.
-Sem foto, o endereço da miniatura devolve o marcador `sem-foto.svg`.
+O frete soma a viagem, de `pefrioshop.frete-marte-baseline`, ao peso
+transportado, pelo preço do quilo de `pefrioshop.frete-marte-por-quilo-dolar`,
+convertido pelo `pefrioshop.cambio-dolar`. O preço do quilo é o publicado pela
+SpaceX para carga ao solo marciano, a partir de 2028: US$ 100 milhões por
+tonelada métrica, o equivalente a US$ 100.000,00 por quilo.
+
+O peso do par é guardado em gramas, e não em quilo. A conversão para quilo é
+feita em `BigDecimal`, com duas casas e arredondamento, porque a divisão
+inteira de gramas por mil daria zero em qualquer par abaixo de um quilo: o
+número pequeno desapareceria dentro do número grande, e o frete sairia sem o
+peso. O caso está fixado em `ResumoFreteMarteTest`.
+
+## Dados e foto
 
 A carga inicial fica em `import.sql`: sete clientes, cinco fichas, nove
 produtos, seis pagamentos, seis pedidos e nove itens. Um dos produtos é um tênis
 de coleção, com preço na casa do milhão, para exercitar a formatação de valores
 altos.
 
+A foto do produto fica em `produto_foto`, e a miniatura de 160 pixels é gerada
+no envio pelo próprio JDK, por `ImageIO` e `Graphics2D`, sem ImageMagick e sem
+biblioteca externa. Sem foto, o endereço da miniatura devolve `sem-foto.svg`.
+
 ## Design system
 
 O sistema visual está em [DESIGN.md](DESIGN.md), e o contexto do produto em
-[PRODUCT.md](PRODUCT.md). A paleta usa cal, azulejo, couro e areia; os títulos
-usam Archivo, e o corpo usa Source Sans 3.
+[PRODUCT.md](PRODUCT.md).
 
 ## Publicação
 
-O PéFrioShop é uma aplicação Java, e não roda no GitHub Pages. O que é
-publicado é a documentação estática da pasta `docs/`, em
-https://pwebufersa.github.io/pefrioshop_referencia/, a partir da pasta `/docs`
-da branch `main`.
+No GitHub Pages é publicada a documentação estática de `docs/`, em
+https://pwebufersa.github.io/pefrioshop_referencia/. A aplicação precisa de um
+serviço que rode Java, como o Railway.
 
-Para executar de fato, a aplicação precisa de um serviço que rode Java, como
-Railway, Render ou um servidor próprio.
+Na hospedagem, a construção executa `./mvnw package`, e a porta é lida da
+variável `PORT`, por `server.port=${PORT:8080}`, com 8080 como valor local.
 
-### Minificação dos assets
-
-O CSS e o JavaScript são mantidos legíveis em `src/main/resources/static`,
-porque servem de material de leitura da disciplina. A minificação é reservada à
-hospedagem, quando o tamanho transferido importa, e é feita em três comandos:
-
-```
-./mvnw -DskipTests package
-python scripts/minificar.py
-./mvnw jar:jar
-```
-
-A leitura é feita de `src/main/resources/static`, e a gravação é feita em
-`target/classes/static`, que é o diretório levado para dentro do jar, com o
-tamanho de cada arquivo informado antes e depois. Os originais não são
-alterados. No CSS são removidos os comentários e o espaço entre as regras; no
-JavaScript, os comentários e a indentação, sem que as linhas sejam unidas, para
-não alterar nenhuma inserção automática de ponto e vírgula.
+A minificação do CSS e do JavaScript é feita por `ferramenta.Minificador`,
+executado pelo `exec-maven-plugin` na fase `prepare-package`, e gravada em
+`target/classes`, sem que os originais de `src/main/resources/static` sejam
+tocados. Como `spring-boot:run` não chega ao empacotamento, o desenvolvimento
+permanece com os arquivos legíveis, e apenas a publicação recebe os compactos:
+o CSS cai de 13.960 para 11.250 bytes, e o JavaScript, de 3.116 para 2.916. A
+ferramenta não acompanha o jar, por exclusão no `maven-jar-plugin`.

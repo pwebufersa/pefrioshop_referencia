@@ -57,6 +57,43 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<!--
+				Minificação do CSS e do JavaScript, na fase anterior à montagem do jar.
+				Fica fora do desenvolvimento, porque spring-boot:run não chega ao
+				empacotamento, e entra em toda construção de publicação, como a do
+				Railway, que executa package.
+			-->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>3.5.0</version>
+				<executions>
+					<execution>
+						<id>minificar-assets</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>java</goal>
+						</goals>
+						<configuration>
+							<mainClass>br.edu.ufersa.pefrioshop.ferramenta.Minificador</mainClass>
+							<arguments>
+								<argument>${project.basedir}/src/main/resources/static</argument>
+								<argument>${project.build.outputDirectory}/static</argument>
+							</arguments>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- A ferramenta de minificação não acompanha a aplicação publicada. -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>**/ferramenta/**</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 

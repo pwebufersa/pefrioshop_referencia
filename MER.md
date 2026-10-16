@@ -1,6 +1,6 @@
 # MER - modelo entidade-relacionamento do PéFrioShop
 
-Diagrama gerado a partir das entidades JPA. É o esquema que o Hibernate cria no
+Diagrama gerado a partir das entidades JPA: o esquema que o Hibernate cria no
 banco, com as chaves, os tipos e as relações.
 
 ```mermaid
@@ -78,7 +78,7 @@ erDiagram
         enum tipo
         enum genero_alvo
         int numero_br
-        numeric peso_kg
+        int peso_gramas
         numeric preco_compra
         numeric preco_venda
         date data_cadastro
@@ -98,26 +98,25 @@ erDiagram
 
 | Relação | Cardinalidade | Regra |
 |---|---|---|
-| Cliente e endereço | 1 para 1 | Cada cliente tem um endereço, em tabela própria. Excluir o cliente exclui o endereço. |
-| Cliente e ficha clínica | 1 para 0 ou 1 | Cada cliente tem no máximo uma ficha. Excluir o cliente exclui a ficha em cascata. |
-| Cliente e pedido | 1 para 0 ou muitos | Excluir o cliente não é permitido enquanto houver pedido. |
+| Cliente e endereço | 1 para 1 | Endereço em tabela própria; excluir o cliente exclui o endereço. |
+| Cliente e ficha clínica | 1 para 0 ou 1 | No máximo uma ficha por cliente; excluir o cliente exclui a ficha em cascata. |
+| Cliente e pedido | 1 para 0 ou muitos | A exclusão do cliente é impedida enquanto houver pedido. |
 | Pedido e item | 1 para 1 ou muitos | Excluir o pedido exclui os itens em cascata. |
-| Pedido e pagamento | 1 para 1 | Cada pedido tem um pagamento. Excluir o pedido exclui o pagamento. |
-| Produto e foto | 1 para 0 ou 1 | A foto fica em tabela própria. Excluir o produto exclui a foto. |
-| Produto e item | 1 para 0 ou muitos | Excluir o produto não é permitido enquanto houver item. Excluir o pedido não afeta o produto. |
+| Pedido e pagamento | 1 para 1 | Cada pedido tem um pagamento; excluir o pedido exclui o pagamento. |
+| Produto e foto | 1 para 0 ou 1 | Foto em tabela própria; excluir o produto exclui a foto. |
+| Produto e item | 1 para 0 ou muitos | A exclusão do produto é impedida enquanto houver item. Excluir o pedido não afeta o produto. |
 
 ## Observações
 
-- O endereço tem tabela e identidade próprias, com a chave estrangeira
-  `cliente_id` única. Assim, campos como `pais` entram sem inchar a linha do
-  cliente.
-- O campo `pais` é um enum, e não texto livre, para evitar grafias divergentes.
-- A foto do produto fica em `produto_foto` para a linha do produto permanecer
-  leve; a listagem não carrega os bytes.
+- O endereço tem tabela e identidade próprias, com `cliente_id` único, o que
+  permite acrescentar campos como `pais` sem inchar a linha do cliente.
+- O `pais` é enum, e não texto livre, para evitar grafias divergentes.
+- A foto do produto fica em `produto_foto`, para a linha do produto permanecer
+  leve e a listagem não carregar os bytes.
 - Chaves únicas: `endereco.cliente_id`, `ficha_clinica_do_pe.cliente_id`,
   `produto_foto.produto_id` e `pedido.pagamento_id`.
-- O `item_pedido.valor_unitario` é uma cópia do preço no momento da compra, e
-  não o preço atual do produto.
+- O `item_pedido.valor_unitario` é cópia do preço no momento da compra, e não o
+  preço atual do produto.
 - Nenhum valor calculável é guardado: o total do pedido, o imposto e o desconto
   são obtidos em tempo de execução.
 
