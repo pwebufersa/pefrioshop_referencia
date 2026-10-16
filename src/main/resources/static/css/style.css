@@ -447,7 +447,9 @@ tfoot th {
 	height: 22px;
 }
 
-.submenu .icone-svg {
+/* No submenu, dentro do painel branco, o ícone é menor e em azulejo. O seletor
+   fica preso ao ul para não alcançar o ícone do resumo, que fica na barra. */
+.submenu ul .icone-svg {
 	width: 20px;
 	height: 20px;
 	color: var(--azulejo);
