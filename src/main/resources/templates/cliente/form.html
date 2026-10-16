@@ -43,7 +43,7 @@
 			<legend>Endereço</legend>
 
 			<label>CEP
-				<span class="linha">
+				<span class="campo-cep">
 					<input type="text" th:field="*{endereco.cep}" id="cep" maxlength="9" placeholder="59650000"/>
 					<button type="button" class="botao" onclick="buscarCep()">
 						<span th:replace="~{icones :: busca}"></span>
@@ -92,7 +92,6 @@
 </main>
 
 <footer th:replace="~{layout :: rodape}"></footer>
-<script th:src="@{/js/cep.js}"></script>
-<script th:src="@{/js/validacao.js}"></script>
+<script th:src="@{/js/cliente.js}"></script>
 </body>
 </html>

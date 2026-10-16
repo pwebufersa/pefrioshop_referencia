@@ -25,6 +25,8 @@
 	--raio: 6px;
 	--raio-grande: 10px;
 	--sombra: 0 1px 2px rgba(20, 32, 42, 0.08), 0 6px 18px rgba(20, 32, 42, 0.06);
+	--transicao: background-color 160ms cubic-bezier(0.16, 1, 0.3, 1);
+	--transicao-curta: background-color 140ms cubic-bezier(0.16, 1, 0.3, 1);
 
 	--fonte-titulo: "Archivo", "Segoe UI", system-ui, sans-serif;
 	--fonte-corpo: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
@@ -40,6 +42,8 @@
 	--medida: 68ch;
 	--altura-campo: 2.6rem;
 }
+
+/* Base */
 
 *,
 *::before,
@@ -70,6 +74,48 @@ body {
 	outline-offset: 2px;
 	border-radius: 2px;
 }
+
+h1,
+h2,
+h3 {
+	font-family: var(--fonte-titulo);
+	line-height: 1.15;
+	letter-spacing: -0.015em;
+	text-wrap: balance;
+}
+
+h1 {
+	font-size: clamp(1.7rem, 1.2rem + 2vw, 2.5rem);
+	font-weight: 700;
+	margin: 0 0 var(--passo-4);
+}
+
+h2 {
+	font-size: clamp(1.2rem, 1rem + 0.7vw, 1.5rem);
+	font-weight: 600;
+	margin: var(--passo-6) 0 var(--passo-3);
+}
+
+p {
+	max-width: var(--medida);
+	margin: 0 0 var(--passo-4);
+}
+
+/* Uma prosa que acompanha tabela larga ocupa a largura do conteúdo. */
+.prosa-tabela {
+	max-width: none;
+}
+
+a {
+	color: var(--azulejo);
+	text-underline-offset: 3px;
+}
+
+a:hover {
+	color: var(--couro-escuro);
+}
+
+/* Navegação */
 
 .menu {
 	display: flex;
@@ -122,8 +168,7 @@ body {
 	letter-spacing: 0.005em;
 	line-height: 1.2;
 	cursor: pointer;
-	transition: background-color 160ms cubic-bezier(0.16, 1, 0.3, 1),
-		color 160ms cubic-bezier(0.16, 1, 0.3, 1);
+	transition: var(--transicao);
 }
 
 .menu a.menu-item:hover,
@@ -137,13 +182,6 @@ body {
 .menu a.menu-item[aria-current="page"] {
 	background-color: var(--areia);
 	color: #1b1503;
-}
-
-.menu .icone-svg {
-	width: 22px;
-	height: 22px;
-	display: block;
-	flex: none;
 }
 
 .menu summary {
@@ -186,62 +224,39 @@ body {
 }
 
 .submenu ul a:hover,
-.submenu ul a:focus-visible {
+.submenu ul a:focus-visible,
+.submenu ul a[aria-current="page"] {
 	background-color: var(--cal-fundo);
 	color: var(--azulejo);
 }
 
 .submenu ul a[aria-current="page"] {
-	background-color: var(--cal-fundo);
-	color: var(--azulejo);
 	font-weight: 600;
 }
 
-.submenu ul .icone-svg {
-	width: 20px;
-	height: 20px;
-	color: var(--azulejo);
+/* Estrutura da página */
+
+.conteudo,
+.rodape {
+	max-width: 1280px;
+	margin: 0 auto;
+	padding: var(--passo-6) clamp(1rem, 4vw, 2.5rem);
 }
 
 .conteudo {
-	max-width: 1280px;
-	margin: 0 auto;
-	padding: var(--passo-6) clamp(1rem, 4vw, 2.5rem) var(--passo-7);
+	padding-bottom: var(--passo-7);
 }
 
-h1,
-h2,
-h3 {
-	font-family: var(--fonte-titulo);
-	line-height: 1.15;
-	letter-spacing: -0.015em;
-	text-wrap: balance;
+.rodape {
+	color: var(--tinta-suave);
+	font-size: 0.9rem;
+	text-align: center;
+	white-space: nowrap;
+	border-top: 1px solid var(--borda);
 }
 
-h1 {
-	font-size: clamp(1.7rem, 1.2rem + 2vw, 2.5rem);
-	font-weight: 700;
-	margin: 0 0 var(--passo-4);
-}
-
-h2 {
-	font-size: clamp(1.2rem, 1rem + 0.7vw, 1.5rem);
-	font-weight: 600;
-	margin: var(--passo-6) 0 var(--passo-3);
-}
-
-p {
-	max-width: var(--medida);
-	margin: 0 0 var(--passo-4);
-}
-
-a {
-	color: var(--azulejo);
-	text-underline-offset: 3px;
-}
-
-a:hover {
-	color: var(--couro-escuro);
+.rodape-texto {
+	display: inline-block;
 }
 
 .titulo-linha {
@@ -258,6 +273,111 @@ a:hover {
 .titulo-linha h1 {
 	margin: 0;
 }
+
+/* Tabelas: o numeral fica tabular para alinhar dinheiro. */
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	background-color: var(--superficie);
+	box-shadow: var(--sombra);
+	border-radius: var(--raio-grande);
+	overflow: hidden;
+	margin-bottom: var(--passo-5);
+	font-variant-numeric: tabular-nums;
+}
+
+th,
+td {
+	border-bottom: 1px solid var(--divisoria-linha);
+	padding: var(--passo-2) var(--passo-3);
+	text-align: left;
+	font-size: 0.9rem;
+	vertical-align: middle;
+	white-space: nowrap;
+}
+
+th {
+	background-color: var(--cal-fundo);
+	font-family: var(--fonte-titulo);
+	font-weight: 600;
+	font-size: 0.82rem;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+	color: var(--tinta-suave);
+	text-align: center;
+}
+
+/* Linha suave entre as colunas. */
+th + th,
+td + td {
+	border-left: 1px solid var(--divisoria-coluna);
+}
+
+tbody tr {
+	transition: var(--transicao-curta);
+}
+
+tbody tr:hover {
+	background-color: #fbf9f4;
+}
+
+tbody tr:last-child td {
+	border-bottom: none;
+}
+
+/* Rodapé de totalização: o rótulo encosta nos valores da própria coluna. */
+tfoot th,
+tfoot td {
+	border-bottom: none;
+	border-top: 2px solid var(--borda-forte);
+	background-color: var(--cal-fundo);
+	font-family: var(--fonte-titulo);
+	font-weight: 600;
+	font-size: 0.9rem;
+	color: var(--tinta);
+}
+
+tfoot th {
+	text-align: right;
+	text-transform: none;
+	letter-spacing: 0;
+}
+
+/* Colunas de valor: alinhadas à direita, com numeral tabular. */
+.numero {
+	text-align: right;
+	font-variant-numeric: tabular-nums;
+}
+
+/* Colunas curtas: identificador, código, data, hora e contagem. */
+.centro {
+	text-align: center;
+}
+
+.acoes {
+	white-space: nowrap;
+	text-align: center;
+}
+
+.acoes > * {
+	vertical-align: middle;
+}
+
+.acoes > * + * {
+	margin-left: var(--passo-2);
+}
+
+.acoes form {
+	display: inline-block;
+	margin: 0;
+}
+
+.rolagem {
+	overflow-x: auto;
+}
+
+/* Botões, ligações de ação e ícones */
 
 .botao {
 	display: inline-flex;
@@ -276,7 +396,7 @@ a:hover {
 	line-height: 1.3;
 	cursor: pointer;
 	text-decoration: none;
-	transition: background-color 160ms cubic-bezier(0.16, 1, 0.3, 1);
+	transition: var(--transicao);
 }
 
 .botao:hover {
@@ -310,195 +430,40 @@ a:hover {
 	text-underline-offset: 3px;
 }
 
-/* Tabelas: o numeral fica tabular para alinhar dinheiro. */
-table {
-	width: 100%;
-	border-collapse: collapse;
-	background-color: var(--superficie);
-	box-shadow: var(--sombra);
-	border-radius: var(--raio-grande);
-	overflow: hidden;
-	margin-bottom: var(--passo-5);
-	font-variant-numeric: tabular-nums;
-}
-
-th,
-td {
-	border-bottom: 1px solid var(--divisoria-linha);
-	padding: var(--passo-2) var(--passo-3);
-	text-align: left;
-	font-size: 0.9rem;
-	vertical-align: middle;
-	white-space: nowrap;
-}
-
-th {
-	background-color: var(--cal-fundo);
-	font-family: var(--fonte-titulo);
-	font-weight: 600;
-	font-size: 0.82rem;
-	letter-spacing: 0.04em;
-	text-transform: uppercase;
-	color: var(--tinta-suave);
-	text-align: center;
-}
-
-tbody tr {
-	transition: background-color 140ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-tbody tr:hover {
-	background-color: #fbf9f4;
-}
-
-tbody tr:last-child td {
-	border-bottom: none;
-}
-
-/* Linha suave entre as colunas. */
-th + th,
-td + td {
-	border-left: 1px solid var(--divisoria-coluna);
-}
-
-/* Colunas de valor: alinhadas à direita, com numeral tabular. */
-.numero {
-	text-align: right;
-	font-variant-numeric: tabular-nums;
-}
-
-/* Colunas curtas: identificador, código, data, hora e contagem. */
-.centro {
-	text-align: center;
-}
-
-/* Rodapé de totalização: o rótulo encosta nos valores da própria coluna. */
-tfoot th,
-tfoot td {
-	border-bottom: none;
-	border-top: 2px solid var(--borda-forte);
-	background-color: var(--cal-fundo);
-	font-family: var(--fonte-titulo);
-	font-weight: 600;
-	font-size: 0.9rem;
-	color: var(--tinta);
-}
-
-tfoot th {
-	text-align: right;
-	text-transform: none;
-	letter-spacing: 0;
-}
-
-/* Prosa que acompanha uma tabela larga: acompanha a largura do conteúdo. */
-.prosa-tabela {
-	max-width: none;
-}
-
-.acoes {
-	white-space: nowrap;
-	text-align: center;
-}
-
-.acoes > * {
-	vertical-align: middle;
-	margin-right: var(--passo-2);
-}
-
-.acoes > *:last-child {
-	margin-right: 0;
-}
-
-.acoes form {
-	display: inline-block;
-	margin: 0;
-}
-
 .acao {
 	display: inline-flex;
 	align-items: center;
 	gap: 0.25rem;
 }
 
-.acao .icone-svg {
-	width: 16px;
-	height: 16px;
+/* O ícone acompanha o tamanho do contexto em que aparece. */
+.icone-svg {
+	display: block;
 	flex: none;
+}
+
+.menu .icone-svg {
+	width: 22px;
+	height: 22px;
+}
+
+.submenu .icone-svg {
+	width: 20px;
+	height: 20px;
+	color: var(--azulejo);
 }
 
 .botao .icone-svg {
 	width: 18px;
 	height: 18px;
-	flex: none;
 }
 
-.rolagem {
-	overflow-x: auto;
+.acao .icone-svg {
+	width: 16px;
+	height: 16px;
 }
 
-/*
- * Em janela estreita, cada linha vira um cartão e cada célula recebe o próprio
- * rótulo, o que mantém todas as colunas visíveis, sem rolagem horizontal.
- */
-@media (max-width: 820px) {
-	.rolagem table,
-	.rolagem thead,
-	.rolagem tbody,
-	.rolagem tr,
-	.rolagem td {
-		display: block;
-		width: auto;
-	}
-
-	.rolagem thead {
-		position: absolute;
-		left: -9999px;
-	}
-
-	.rolagem tr {
-		background-color: var(--superficie);
-		border: 1px solid var(--borda);
-		border-radius: var(--raio-grande);
-		box-shadow: var(--sombra);
-		margin-bottom: var(--passo-4);
-		padding: var(--passo-3) var(--passo-4);
-	}
-
-	.rolagem td {
-		border: none;
-		padding: var(--passo-1) 0;
-		white-space: normal;
-	}
-
-	.rolagem th + th,
-	.rolagem td + td {
-		border-left: none;
-	}
-
-	.rolagem td::before {
-		content: attr(data-rotulo) ": ";
-		font-weight: 600;
-		color: var(--tinta-suave);
-	}
-}
-
-.miniatura {
-	width: 44px;
-	height: 44px;
-	object-fit: cover;
-	border-radius: 4px;
-	border: 1px solid var(--borda);
-	background-color: var(--cal-fundo);
-}
-
-.miniatura-grande {
-	width: 160px;
-	height: 160px;
-	object-fit: cover;
-	border-radius: var(--raio);
-	border: 1px solid var(--borda);
-	background-color: var(--cal-fundo);
-}
+/* Formulários */
 
 .formulario {
 	display: flex;
@@ -532,6 +497,12 @@ tfoot th {
 	font-size: 0.98rem;
 }
 
+/* Todo campo do formulário ocupa a mesma largura. */
+.formulario input,
+.formulario select {
+	width: 100%;
+}
+
 .formulario input:focus-visible,
 .formulario select:focus-visible,
 .linha input:focus-visible,
@@ -539,11 +510,29 @@ tfoot th {
 	border-color: var(--azulejo-claro);
 }
 
-fieldset {
+/* O campo de CEP com o botão de busca: a linha ocupa a largura dos demais campos. */
+.campo-cep {
+	display: flex;
+	gap: var(--passo-2);
+	align-items: flex-start;
+}
+
+.campo-cep input {
+	flex: 1 1 auto;
+	min-width: 0;
+	width: auto;
+}
+
+fieldset,
+.painel,
+.detalhes {
+	background-color: var(--superficie);
 	border: 1px solid var(--borda);
 	border-radius: var(--raio-grande);
-	background-color: var(--superficie);
 	padding: var(--passo-5);
+}
+
+fieldset {
 	display: flex;
 	flex-direction: column;
 	gap: var(--passo-4);
@@ -587,15 +576,14 @@ legend {
 	margin-top: var(--passo-2);
 }
 
-.campo-erro {
-	color: var(--erro);
-	font-size: 0.85rem;
-	font-weight: 600;
-}
-
+.campo-erro,
 .erro {
 	color: var(--erro);
 	font-weight: 600;
+}
+
+.campo-erro {
+	font-size: 0.85rem;
 }
 
 .aviso {
@@ -621,33 +609,8 @@ legend {
 	font-size: 0.86rem;
 }
 
-.detalhes {
-	display: grid;
-	grid-template-columns: max-content 1fr;
-	gap: var(--passo-2) var(--passo-5);
-	background-color: var(--superficie);
-	border: 1px solid var(--borda);
-	border-radius: var(--raio-grande);
-	padding: var(--passo-5);
-	max-width: var(--medida);
-	margin: 0 0 var(--passo-5);
-}
-
-.detalhes dt {
-	font-family: var(--fonte-titulo);
-	font-weight: 600;
-	font-size: 0.86rem;
-	letter-spacing: 0.03em;
-	text-transform: uppercase;
-	color: var(--tinta-suave);
-}
-
-.detalhes dd {
-	margin: 0;
-	font-variant-numeric: tabular-nums;
-}
-
 /* Tela inicial: balcão, não uma grade de cartões. */
+
 .balcao {
 	display: grid;
 	grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
@@ -674,7 +637,7 @@ legend {
 	padding: var(--passo-4) var(--passo-2);
 	text-decoration: none;
 	color: inherit;
-	transition: background-color 140ms cubic-bezier(0.16, 1, 0.3, 1);
+	transition: var(--transicao-curta);
 }
 
 .atalhos a:hover {
@@ -693,10 +656,6 @@ legend {
 }
 
 .painel {
-	background-color: var(--superficie);
-	border: 1px solid var(--borda);
-	border-radius: var(--raio-grande);
-	padding: var(--passo-5);
 	box-shadow: var(--sombra);
 }
 
@@ -720,24 +679,92 @@ legend {
 	border-bottom: none;
 }
 
-.rodape {
-	max-width: 1280px;
-	margin: 0 auto;
-	padding: var(--passo-6) clamp(1rem, 4vw, 2.5rem);
+.detalhes {
+	display: grid;
+	grid-template-columns: max-content 1fr;
+	gap: var(--passo-2) var(--passo-5);
+	max-width: var(--medida);
+	margin: 0 0 var(--passo-5);
+}
+
+.detalhes dt {
+	font-family: var(--fonte-titulo);
+	font-weight: 600;
+	font-size: 0.86rem;
+	letter-spacing: 0.03em;
+	text-transform: uppercase;
 	color: var(--tinta-suave);
-	font-size: 0.9rem;
-	text-align: center;
-	white-space: nowrap;
-	border-top: 1px solid var(--borda);
 }
 
-.rodape-texto {
-	display: inline-block;
+.detalhes dd {
+	margin: 0;
+	font-variant-numeric: tabular-nums;
 }
 
-@media (max-width: 780px) {
-	.balcao {
-		grid-template-columns: 1fr;
+/* Imagens */
+
+.miniatura,
+.miniatura-grande {
+	object-fit: cover;
+	border: 1px solid var(--borda);
+	border-radius: var(--raio);
+	background-color: var(--cal-fundo);
+}
+
+.miniatura {
+	width: 44px;
+	height: 44px;
+}
+
+.miniatura-grande {
+	width: 160px;
+	height: 160px;
+}
+
+/*
+ * Em janela estreita, cada linha vira um cartão e cada célula recebe o próprio
+ * rótulo, o que mantém todas as colunas visíveis, sem rolagem horizontal. As
+ * tabelas fora da rolagem, e o painel do balcão, passam a uma coluna.
+ */
+@media (max-width: 820px) {
+	.rolagem table,
+	.rolagem thead,
+	.rolagem tbody,
+	.rolagem tr,
+	.rolagem td {
+		display: block;
+		width: auto;
+	}
+
+	.rolagem thead {
+		position: absolute;
+		left: -9999px;
+	}
+
+	.rolagem tr {
+		background-color: var(--superficie);
+		border: 1px solid var(--borda);
+		border-radius: var(--raio-grande);
+		box-shadow: var(--sombra);
+		margin-bottom: var(--passo-4);
+		padding: var(--passo-3) var(--passo-4);
+	}
+
+	.rolagem td {
+		border: none;
+		padding: var(--passo-1) 0;
+		white-space: normal;
+	}
+
+	.rolagem th + th,
+	.rolagem td + td {
+		border-left: none;
+	}
+
+	.rolagem td::before {
+		content: attr(data-rotulo) ": ";
+		font-weight: 600;
+		color: var(--tinta-suave);
 	}
 
 	table {
@@ -746,6 +773,7 @@ legend {
 		white-space: nowrap;
 	}
 
+	.balcao,
 	.detalhes {
 		grid-template-columns: 1fr;
 	}

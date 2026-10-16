@@ -48,7 +48,9 @@ espaço anterior a um título é maior que o posterior.
 - Rodapé de totalização: borda superior forte, fundo cal escuro, e o rótulo
   encostado nos valores da própria coluna.
 - Botão: couro, com texto branco; desabilitado em borda forte.
-- Formulário: rótulos em tinta suave, campos com borda forte e foco azulejo.
+- Formulário: rótulos em tinta suave, campos com borda forte e foco azulejo,
+  todos com a mesma largura. O campo de CEP traz o botão de busca na mesma
+  linha, que ocupa a largura dos demais campos.
 - Painel: superfície branca, para os últimos pedidos e para o resumo do pedido.
 - Lista de atalhos: linhas com divisória, sem grade de cartões.
 
@@ -74,9 +76,9 @@ Uma transição curta de cor em botões e linhas, com curva exponencial. Sob
 
 ## Responsividade
 
-Abaixo de 820px, as tabelas de listagem viram cartões, com um rótulo por célula.
-Abaixo de 780px, o painel do balcão passa a uma coluna, e as demais tabelas
-rolam na horizontal.
+Abaixo de 820px, as tabelas de listagem viram cartões, com um rótulo por célula,
+o painel do balcão passa a uma coluna, e as tabelas de relatório rolam na
+horizontal.
 
 ## Restrições
 
