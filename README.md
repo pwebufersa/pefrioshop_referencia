@@ -67,8 +67,10 @@ próprio JDK, por `ImageIO` e `Graphics2D`, sem ImageMagick e sem biblioteca
 externa. A listagem usa a miniatura; a tela de detalhe usa a imagem original.
 Sem foto, o endereço da miniatura devolve o marcador `sem-foto.svg`.
 
-A carga inicial fica em `import.sql`: três clientes, uma ficha, cinco produtos,
-dois pagamentos, dois pedidos e três itens.
+A carga inicial fica em `import.sql`: sete clientes, cinco fichas, nove
+produtos, seis pagamentos, seis pedidos e nove itens. Um dos produtos é um tênis
+de coleção, com preço na casa do milhão, para exercitar a formatação de valores
+altos.
 
 ## Design system
 

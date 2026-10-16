@@ -40,6 +40,7 @@ INSERT INTO produto (id, nome, marca, tipo, genero_alvo, numero_br, preco_compra
 INSERT INTO produto (id, nome, marca, tipo, genero_alvo, numero_br, preco_compra, preco_venda, data_cadastro) VALUES (6, 'Tênis Infantil', 'PéFrioSports', 'TENIS', 'INFANTIL', 28, 60.00, 149.90, DATE '2026-09-30');
 INSERT INTO produto (id, nome, marca, tipo, genero_alvo, numero_br, preco_compra, preco_venda, data_cadastro) VALUES (7, 'Chinelo Infantil', 'SolaBoa', 'CHINELO', 'INFANTIL', 30, 0.00, 29.90, DATE '2026-09-15');
 INSERT INTO produto (id, nome, marca, tipo, genero_alvo, numero_br, preco_compra, preco_venda, data_cadastro) VALUES (8, 'Sandália Unissex', 'SolaBoa', 'SANDALIA', 'UNISSEX', 38, 50.00, 109.90, DATE '2026-08-01');
+INSERT INTO produto (id, nome, marca, tipo, genero_alvo, numero_br, preco_compra, preco_venda, data_cadastro) VALUES (9, 'Tênis Balenciaga de Coleção', 'Balenciaga', 'TENIS', 'UNISSEX', 43, 900000.00, 1500000.00, DATE '2026-10-09');
 
 -- Foto do produto: uma com imagem e miniatura, outra com imagem e sem miniatura,
 -- para exercitar o marcador da listagem. Conteúdo: um PNG de 1 por 1 pixel.
