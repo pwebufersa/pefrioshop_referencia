@@ -24,19 +24,19 @@
 			<tr th:each="item : ${pedido.itens}">
 				<td th:text="${item.produto.nome}">Produto</td>
 				<td th:text="${item.quantidade}">1</td>
-				<td th:text="'R$ ' + ${#numbers.formatDecimal(item.valorUnitario, 1, 2)}">R$ 0,00</td>
-				<td th:text="'R$ ' + ${#numbers.formatDecimal(item.subtotal, 1, 2)}">R$ 0,00</td>
+				<td class="numero" th:text="${#numbers.formatCurrency(item.valorUnitario)}">R$ 0,00</td>
+				<td class="numero" th:text="${#numbers.formatCurrency(item.subtotal)}">R$ 0,00</td>
 			</tr>
 		</tbody>
 	</table>
 
 	<dl class="detalhes">
 		<dt>Valor total</dt>
-		<dd th:text="'R$ ' + ${#numbers.formatDecimal(resumo.valorTotal, 1, 2)}">R$ 0,00</dd>
+		<dd th:text="${#numbers.formatCurrency(resumo.valorTotal)}">R$ 0,00</dd>
 		<dt>Imposto</dt>
-		<dd th:text="'R$ ' + ${#numbers.formatDecimal(resumo.imposto, 1, 2)}">R$ 0,00</dd>
+		<dd th:text="${#numbers.formatCurrency(resumo.imposto)}">R$ 0,00</dd>
 		<dt>Total com imposto</dt>
-		<dd th:text="'R$ ' + ${#numbers.formatDecimal(resumo.totalComImposto, 1, 2)}">R$ 0,00</dd>
+		<dd th:text="${#numbers.formatCurrency(resumo.totalComImposto)}">R$ 0,00</dd>
 	</dl>
 
 	<p><a th:href="@{/pedidos}">Voltar aos pedidos</a></p>

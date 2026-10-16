@@ -7,7 +7,7 @@
 <main class="conteudo">
 	<h1>Faturamento dos últimos 12 meses</h1>
 
-	<form class="linha" method="get" th:action="@{/relatorios/faturamento}">
+	<form class="linha centralizada" method="get" th:action="@{/relatorios/faturamento}">
 		<label>Data de referência
 			<input type="date" name="referencia" th:value="${referencia}"/>
 		</label>
@@ -22,21 +22,21 @@
 		<tbody>
 			<tr th:each="linha : ${linhas}">
 				<td th:text="${linha.mes}">01/2026</td>
-				<td th:text="'R$ ' + ${#numbers.formatDecimal(linha.faturamento, 1, 2)}">R$ 0,00</td>
+				<td class="numero" th:text="${#numbers.formatCurrency(linha.faturamento)}">R$ 0,00</td>
 			</tr>
 		</tbody>
 	</table>
 
-	<dl class="detalhes">
+	<dl class="detalhes resumo-tabela">
 		<dt>Faturamento total</dt>
-		<dd th:text="'R$ ' + ${#numbers.formatDecimal(total, 1, 2)}">R$ 0,00</dd>
+		<dd th:text="${#numbers.formatCurrency(total)}">R$ 0,00</dd>
 		<dt>Imposto</dt>
 		<dd>
-			<span th:text="'R$ ' + ${#numbers.formatDecimal(imposto, 1, 2)}">R$ 0,00</span>
+			<span th:text="${#numbers.formatCurrency(imposto)}">R$ 0,00</span>
 			<span class="nota" th:text="'(' + ${#numbers.formatDecimal(taxaPercentual, 1, 1)} + '%)'">(18,5%)</span>
 		</dd>
 		<dt>Total com imposto</dt>
-		<dd th:text="'R$ ' + ${#numbers.formatDecimal(totalComImposto, 1, 2)}">R$ 0,00</dd>
+		<dd th:text="${#numbers.formatCurrency(totalComImposto)}">R$ 0,00</dd>
 	</dl>
 </main>
 

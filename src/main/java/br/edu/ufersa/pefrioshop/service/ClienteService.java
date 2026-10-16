@@ -88,7 +88,7 @@ public class ClienteService {
 	/** Aniversariantes do mes informado (US 11). */
 	public List<Cliente> aniversariantes(int mes) {
 		validarMes(mes);
-		return clientes.findByDataNascimentoMonth(mes);
+		return clientes.aniversariantesDoMes(mes);
 	}
 
 	/** Clientes cadastrados no mes e ano informados (US 16). */

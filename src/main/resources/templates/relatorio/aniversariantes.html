@@ -7,7 +7,7 @@
 <main class="conteudo">
 	<h1>Aniversariantes do mês</h1>
 
-	<form class="linha" method="get" th:action="@{/relatorios/aniversariantes}">
+	<form class="linha centralizada" method="get" th:action="@{/relatorios/aniversariantes}">
 		<label>Mês (1 a 12)
 			<input type="number" name="mes" min="1" max="12" th:value="${mes}"/>
 		</label>

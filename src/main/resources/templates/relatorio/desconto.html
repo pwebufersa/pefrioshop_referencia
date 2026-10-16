@@ -15,8 +15,8 @@
 		<tbody>
 			<tr th:each="linha : ${itens}">
 				<td th:text="${linha.produto.nome}">Produto</td>
-				<td th:text="'R$ ' + ${#numbers.formatDecimal(linha.produto.precoVenda, 1, 2)}">R$ 0,00</td>
-				<td th:text="'R$ ' + ${#numbers.formatDecimal(linha.precoComDesconto, 1, 2)}">R$ 0,00</td>
+				<td class="numero" th:text="${#numbers.formatCurrency(linha.produto.precoVenda)}">R$ 0,00</td>
+				<td class="numero" th:text="${#numbers.formatCurrency(linha.precoComDesconto)}">R$ 0,00</td>
 			</tr>
 		</tbody>
 	</table>

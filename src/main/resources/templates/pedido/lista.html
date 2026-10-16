@@ -25,14 +25,14 @@
 		</thead>
 		<tbody>
 			<tr th:each="linha : ${pedidos}">
-				<td th:text="${linha.pedido.id}">1</td>
-				<td th:text="${linha.pedido.cliente.nomeCompleto}">Cliente</td>
-				<td th:text="${#temporals.format(linha.pedido.dataPedido, 'dd/MM/yyyy HH:mm')}">01/01/2026 10:00</td>
-				<td th:text="'R$ ' + ${#numbers.formatDecimal(linha.resumo.valorTotal, 1, 2)}">R$ 0,00</td>
-				<td th:text="'R$ ' + ${#numbers.formatDecimal(linha.resumo.imposto, 1, 2)}">R$ 0,00</td>
-				<td th:text="'R$ ' + ${#numbers.formatDecimal(linha.resumo.totalComImposto, 1, 2)}">R$ 0,00</td>
-				<td th:text="${linha.pedido.pagamento?.forma?.rotulo}">Pagamento</td>
-				<td class="acoes">
+				<td data-rotulo="Id" th:text="${linha.pedido.id}">1</td>
+				<td data-rotulo="Cliente" th:text="${linha.pedido.cliente.nomeCompleto}">Cliente</td>
+				<td data-rotulo="Data" th:text="${#temporals.format(linha.pedido.dataPedido, 'dd/MM/yyyy HH:mm')}">01/01/2026 10:00</td>
+				<td class="numero" data-rotulo="Total" th:text="${#numbers.formatCurrency(linha.resumo.valorTotal)}">R$ 0,00</td>
+				<td class="numero" data-rotulo="Imposto" th:text="${#numbers.formatCurrency(linha.resumo.imposto)}">R$ 0,00</td>
+				<td class="numero" data-rotulo="Total com imposto" th:text="${#numbers.formatCurrency(linha.resumo.totalComImposto)}">R$ 0,00</td>
+				<td data-rotulo="Pagamento" th:text="${linha.pedido.pagamento?.forma?.rotulo}">Pagamento</td>
+				<td class="acoes" data-rotulo="Ações">
 					<a class="acao" th:href="@{/pedidos/{id}(id=${linha.pedido.id})}">
 						<span th:replace="~{icones :: ver}"></span>
 						<span>Ver</span>

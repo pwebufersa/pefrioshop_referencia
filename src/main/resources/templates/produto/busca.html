@@ -40,13 +40,13 @@
 		</thead>
 		<tbody>
 			<tr th:each="p : ${produtos}">
-				<td th:text="${p.id}">1</td>
-				<td th:text="${p.nome}">Nome</td>
-				<td th:text="${p.marca}">Marca</td>
-				<td th:text="${p.tipo.rotulo}">Tipo</td>
-				<td th:text="${p.generoAlvo.rotulo}">Público</td>
-				<td th:text="${p.numeroBr}">40</td>
-				<td th:text="'R$ ' + ${#numbers.formatDecimal(p.precoVenda, 1, 2)}">R$ 0,00</td>
+				<td data-rotulo="Id" th:text="${p.id}">1</td>
+				<td data-rotulo="Nome" th:text="${p.nome}">Nome</td>
+				<td data-rotulo="Marca" th:text="${p.marca}">Marca</td>
+				<td data-rotulo="Tipo" th:text="${p.tipo.rotulo}">Tipo</td>
+				<td data-rotulo="Público" th:text="${p.generoAlvo.rotulo}">Público</td>
+				<td data-rotulo="Nº BR" th:text="${p.numeroBr}">40</td>
+				<td class="numero" data-rotulo="Venda" th:text="${#numbers.formatCurrency(p.precoVenda)}">R$ 0,00</td>
 			</tr>
 		</tbody>
 	</table>

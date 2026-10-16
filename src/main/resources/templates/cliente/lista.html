@@ -24,17 +24,17 @@
 		</thead>
 		<tbody>
 			<tr th:each="cliente : ${clientes}">
-				<td th:text="${cliente.id}">1</td>
-				<td th:text="${cliente.nomeCompleto}">Nome</td>
-				<td th:text="${cliente.genero.rotulo}">Gênero</td>
-				<td th:text="${#temporals.format(cliente.dataNascimento, 'dd/MM/yyyy')}">01/01/2000</td>
-				<td th:text="${#temporals.format(cliente.dataCadastro, 'dd/MM/yyyy HH:mm')}">01/01/2026 10:00</td>
-				<td th:text="${cliente.telefone}">Telefone</td>
-				<td>
+				<td data-rotulo="Id" th:text="${cliente.id}">1</td>
+				<td data-rotulo="Nome" th:text="${cliente.nomeCompleto}">Nome</td>
+				<td data-rotulo="Gênero" th:text="${cliente.genero.rotulo}">Gênero</td>
+				<td data-rotulo="Nascimento" th:text="${#temporals.format(cliente.dataNascimento, 'dd/MM/yyyy')}">01/01/2000</td>
+				<td data-rotulo="Cadastro" th:text="${#temporals.format(cliente.dataCadastro, 'dd/MM/yyyy HH:mm')}">01/01/2026 10:00</td>
+				<td data-rotulo="Telefone" th:text="${cliente.telefone}">Telefone</td>
+				<td data-rotulo="Cidade">
 					<span th:text="${cliente.endereco.cidade}">Cidade</span><br/>
 					<span class="nota" th:text="${cliente.endereco.pais.rotulo}">País</span>
 				</td>
-				<td class="acoes">
+				<td class="acoes" data-rotulo="Ações">
 					<a class="acao" th:href="@{/clientes/{id}/editar(id=${cliente.id})}">
 						<span th:replace="~{icones :: editar}"></span>
 						<span>Editar</span>
@@ -47,7 +47,7 @@
 						</button>
 					</form>
 				</td>
-				<td class="acoes">
+				<td class="acoes" data-rotulo="Ficha">
 					<a class="acao" th:if="${cliente.fichaClinica == null}"
 					   th:href="@{/clientes/{id}/ficha/novo(id=${cliente.id})}">
 						<span th:replace="~{icones :: adicionar}"></span>

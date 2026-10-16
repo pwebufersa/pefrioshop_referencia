@@ -47,7 +47,7 @@
 					<td th:text="${p.marca}">Marca</td>
 					<td th:text="${p.tipo.rotulo}">Tipo</td>
 					<td th:text="${p.numeroBr}">40</td>
-					<td th:text="'R$ ' + ${#numbers.formatDecimal(p.precoVenda, 1, 2)}">R$ 0,00</td>
+					<td class="numero" th:text="${#numbers.formatCurrency(p.precoVenda)}">R$ 0,00</td>
 					<td>
 						<input type="hidden" th:field="*{itens[__${linha.index}__].produtoId}"/>
 						<input type="number" min="1" th:field="*{itens[__${linha.index}__].quantidade}"/>
