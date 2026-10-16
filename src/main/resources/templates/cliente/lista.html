@@ -15,7 +15,7 @@
 	<table th:unless="${#lists.isEmpty(clientes)}">
 		<thead>
 			<tr>
-				<th>Id</th><th>Nome</th><th>Gênero</th><th>Nascimento</th><th>Cadastro</th><th>Telefone</th><th>Cidade</th><th>Ficha clínica</th><th>Ações</th>
+				<th>Id</th><th>Nome</th><th>Gênero</th><th>Nascimento</th><th>Cadastro</th><th>Telefone</th><th>Cidade</th><th>Ficha clínica</th><th>Cliente</th><th>Ficha</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -33,15 +33,17 @@
 				</td>
 				<td class="acoes">
 					<a th:href="@{/clientes/{id}/editar(id=${cliente.id})}">Editar</a>
+					<form th:action="@{/clientes/{id}/excluir(id=${cliente.id})}" method="post"
+					      onsubmit="return confirm('Excluir o cliente e a ficha em cascata?');">
+						<button class="link-perigo" type="submit">Excluir</button>
+					</form>
+				</td>
+				<td class="acoes">
 					<a th:if="${cliente.fichaClinica == null}" th:href="@{/clientes/{id}/ficha/novo(id=${cliente.id})}">Nova ficha</a>
 					<a th:if="${cliente.fichaClinica != null}" th:href="@{/clientes/{id}/ficha/editar(id=${cliente.id})}">Editar ficha</a>
 					<form th:if="${cliente.fichaClinica != null}"
 					      th:action="@{/clientes/{id}/ficha/excluir(id=${cliente.id})}" method="post">
 						<button class="link-perigo" type="submit">Excluir ficha</button>
-					</form>
-					<form th:action="@{/clientes/{id}/excluir(id=${cliente.id})}" method="post"
-					      onsubmit="return confirm('Excluir o cliente e a ficha em cascata?');">
-						<button class="link-perigo" type="submit">Excluir</button>
 					</form>
 				</td>
 			</tr>
