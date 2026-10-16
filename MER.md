@@ -78,6 +78,7 @@ erDiagram
         enum tipo
         enum genero_alvo
         int numero_br
+        numeric peso_kg
         numeric preco_compra
         numeric preco_venda
         date data_cadastro

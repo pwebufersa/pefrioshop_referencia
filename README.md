@@ -43,7 +43,7 @@ No Windows, `mvnw.cmd` pode ser usado no lugar de `./mvnw`.
 10. Preenchimento do endereço pelo CEP, na BrasilAPI.
 11. Aniversariantes do mês.
 12. Foto do produto guardada no banco.
-13. Frete estimado para Marte.
+13. Frete estimado para Marte, pela viagem e pelo peso do par.
 14. Desconto de 7,3% nos quatro produtos mais novos.
 15. Contagem de produtos por tipo.
 16. Novatos do mês e do ano.
@@ -62,6 +62,13 @@ usada apenas na hospedagem.
 Os valores de negócio ficam em `application.properties`, sob o prefixo
 `pefrioshop`, e são lidos por `ParametrosLoja`. Nenhum cálculo é feito no
 template.
+
+O frete para Marte é a soma de dois valores de configuração: a viagem, de
+`pefrioshop.frete-marte-baseline`, e o peso transportado, pelo preço do quilo
+de `pefrioshop.frete-marte-por-quilo-dolar`, convertido pelo
+`pefrioshop.cambio-dolar`. O preço do quilo é o que a SpaceX publica para carga
+ao solo marciano, a partir de 2028, de US$ 100 milhões por tonelada métrica, o
+equivalente a US$ 100.000,00 por quilo.
 
 A foto do produto fica em uma tabela própria (`produto_foto`), para a linha do
 produto permanecer leve: a listagem lê apenas as colunas do produto. Ao lado da

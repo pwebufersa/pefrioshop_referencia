@@ -62,9 +62,10 @@ public class RelatorioService {
 
 	/** Produtos com frete estimado para Marte, com os totais, do menor ao maior número BR (US 13). */
 	public ResumoFreteMarte freteParaMarte() {
-		BigDecimal frete = parametros.freteMartePorPar();
+		BigDecimal baseline = parametros.freteMarteBaseline();
+		BigDecimal porQuilo = parametros.freteMartePorQuilo();
 		List<ProdutoComFrete> itens = produtos.findAllByOrderByNumeroBrAsc().stream()
-				.map(produto -> new ProdutoComFrete(produto, frete))
+				.map(produto -> new ProdutoComFrete(produto, baseline, porQuilo))
 				.toList();
 		return ResumoFreteMarte.de(itens);
 	}
@@ -92,8 +93,20 @@ public class RelatorioService {
 		return parametros.descontoRelatorio();
 	}
 
-	public BigDecimal getFreteMartePorPar() {
-		return parametros.freteMartePorPar();
+	public BigDecimal getFreteMarteBaseline() {
+		return parametros.freteMarteBaseline();
+	}
+
+	public BigDecimal getFreteMartePorQuilo() {
+		return parametros.freteMartePorQuilo();
+	}
+
+	public BigDecimal getFreteMartePorQuiloDolar() {
+		return parametros.freteMartePorQuiloDolar();
+	}
+
+	public BigDecimal getCambioDolar() {
+		return parametros.cambioDolar();
 	}
 
 }

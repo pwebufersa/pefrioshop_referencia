@@ -6,16 +6,20 @@
 
 <main class="conteudo">
 	<h1>Frete para Marte</h1>
-	<p>Frete fixo de <strong th:text="${#numbers.formatCurrency(fretePorPar)}">R$ 0,00</strong> por par. O total de
+	<p>Frete fixo de <strong th:text="${#numbers.formatCurrency(baseline)}">R$ 0,00</strong> por viagem, mais
+		<strong th:text="${#numbers.formatCurrency(porQuilo)}">R$ 0,00</strong> por quilo transportado. O total de
 		cada linha é o preço do par somado ao frete.</p>
+	<p class="nota">O quilo é o preço publicado pela SpaceX para carga ao solo marciano, a partir de 2028:
+		<strong th:text="'US$ ' + ${#numbers.formatDecimal(porQuiloDolar, 1, 'POINT', 2, 'COMMA')}">US$ 100.000,00</strong>
+		por quilo, ao câmbio de <strong th:text="${#numbers.formatCurrency(cambio)}">R$ 0,00</strong> por dólar.</p>
 
 	<p th:if="${#lists.isEmpty(resumo.itens)}">Nenhum produto cadastrado.</p>
 
 	<table th:unless="${#lists.isEmpty(resumo.itens)}">
-		<caption>Do menor ao maior número BR.</caption>
+		<caption>Do menor ao maior número BR, com o peso de um par e o frete estimado por par.</caption>
 		<thead>
 			<tr>
-				<th>Código</th><th>Nome</th><th>Nº BR</th>
+				<th>Código</th><th>Nome</th><th>Nº BR</th><th>Peso</th>
 				<th>Preço</th><th>Frete estimado</th><th>Total</th>
 			</tr>
 		</thead>
@@ -24,6 +28,7 @@
 				<td class="centro" th:text="${linha.produto.id}">1</td>
 				<td th:text="${linha.produto.nome}">Produto</td>
 				<td class="centro" th:text="${linha.produto.numeroBr}">40</td>
+				<td class="numero" th:text="${#numbers.formatDecimal(linha.peso, 1, 3)} + ' kg'">0,000 kg</td>
 				<td class="numero" th:text="${#numbers.formatCurrency(linha.preco)}">R$ 0,00</td>
 				<td class="numero" th:text="${#numbers.formatCurrency(linha.frete)}">R$ 0,00</td>
 				<td class="numero" th:text="${#numbers.formatCurrency(linha.total)}">R$ 0,00</td>

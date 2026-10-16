@@ -56,7 +56,10 @@ public class RelatorioController {
 	@GetMapping("/frete-marte")
 	public String freteMarte(Model model) {
 		model.addAttribute("resumo", relatorios.freteParaMarte());
-		model.addAttribute("fretePorPar", relatorios.getFreteMartePorPar());
+		model.addAttribute("baseline", relatorios.getFreteMarteBaseline());
+		model.addAttribute("porQuilo", relatorios.getFreteMartePorQuilo());
+		model.addAttribute("porQuiloDolar", relatorios.getFreteMartePorQuiloDolar());
+		model.addAttribute("cambio", relatorios.getCambioDolar());
 		return "relatorio/frete-marte";
 	}
 

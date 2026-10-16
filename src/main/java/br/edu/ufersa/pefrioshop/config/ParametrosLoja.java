@@ -1,6 +1,7 @@
 package br.edu.ufersa.pefrioshop.config;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -17,7 +18,20 @@ public record ParametrosLoja(
 		BigDecimal imposto,
 		BigDecimal descontoEmail,
 		BigDecimal descontoRelatorio,
-		BigDecimal freteMartePorPar,
+		BigDecimal freteMarteBaseline,
+		BigDecimal freteMartePorQuiloDolar,
+		BigDecimal cambioDolar,
 		int diasEmailPromocional,
 		String whatsapp) {
+
+	/**
+	 * Frete por quilo transportado, em reais.
+	 *
+	 * <p>O preco por quilo e publicado pela SpaceX em dolar; a conversao para
+	 * real e feita pelo cambio comercial informado na configuracao.
+	 */
+	public BigDecimal freteMartePorQuilo() {
+		return freteMartePorQuiloDolar.multiply(cambioDolar).setScale(2, RoundingMode.HALF_UP);
+	}
+
 }

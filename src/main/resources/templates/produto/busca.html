@@ -36,7 +36,7 @@
 	<div class="rolagem">
 	<table th:unless="${#lists.isEmpty(produtos)}">
 		<thead>
-			<tr><th>Id</th><th>Nome</th><th>Marca</th><th>Tipo</th><th>Público</th><th>Nº BR</th><th>Venda</th></tr>
+			<tr><th>Id</th><th>Nome</th><th>Marca</th><th>Tipo</th><th>Público</th><th>Nº BR</th><th>Peso</th><th>Venda</th></tr>
 		</thead>
 		<tbody>
 			<tr th:each="p : ${produtos}">
@@ -46,6 +46,7 @@
 				<td data-rotulo="Tipo" th:text="${p.tipo.rotulo}">Tipo</td>
 				<td data-rotulo="Público" th:text="${p.generoAlvo.rotulo}">Público</td>
 				<td class="centro" data-rotulo="Nº BR" th:text="${p.numeroBr}">40</td>
+				<td class="numero" data-rotulo="Peso" th:text="${#numbers.formatDecimal(p.pesoKg, 1, 3)} + ' kg'">0,000 kg</td>
 				<td class="numero" data-rotulo="Venda" th:text="${#numbers.formatCurrency(p.precoVenda)}">R$ 0,00</td>
 			</tr>
 		</tbody>

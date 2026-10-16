@@ -43,6 +43,11 @@
 			<span class="campo-erro" th:errors="*{numeroBr}"></span>
 		</label>
 
+		<label>Peso do par (kg)
+			<input type="number" step="0.001" min="0.001" th:field="*{pesoKg}" required/>
+			<span class="campo-erro" th:errors="*{pesoKg}"></span>
+		</label>
+
 		<label>Preço de compra
 			<input type="number" step="0.01" min="0" th:field="*{precoCompra}" required/>
 			<span class="campo-erro" th:errors="*{precoCompra}"></span>
