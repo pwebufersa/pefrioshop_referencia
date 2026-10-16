@@ -14,8 +14,12 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 	/**
 	 * Aniversariantes do mês, independente do ano (US 11).
 	 *
-	 * <p>A extração do mês é feita em JPQL porque a consulta derivada com a
-	 * palavra-chave Month não é resolvida pelo Hibernate desta versão.
+	 * <p>A consulta é declarada porque o nome do método não expressa extração de
+	 * mês. O Spring Data lê o nome como caminho de propriedade, e o sufixo Month
+	 * passa a ser a propriedade month de dataNascimento, o que produz uma junção
+	 * e falha. Das doze consultas do projeto, dez são derivadas do nome, e apenas
+	 * esta e a contagem por tipo são declaradas, por exigirem função de data e
+	 * agregação, que o analisador de nomes não cobre.
 	 */
 	@Query("select c from Cliente c where extract(month from c.dataNascimento) = :mes order by c.nomeCompleto")
 	List<Cliente> aniversariantesDoMes(@Param("mes") int mes);
