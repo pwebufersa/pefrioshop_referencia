@@ -94,7 +94,7 @@ erDiagram
     }
 ```
 
-## Relações e cardinalidades
+## Como as tabelas se relacionam
 
 | Relação | Cardinalidade | Regra |
 |---|---|---|
@@ -106,7 +106,7 @@ erDiagram
 | Produto e foto | 1 para 0 ou 1 | Foto em tabela própria; excluir o produto exclui a foto. |
 | Produto e item | 1 para 0 ou muitos | A exclusão do produto é impedida enquanto houver item. Excluir o pedido não afeta o produto. |
 
-## Observações
+## Decisões de modelagem
 
 - O endereço tem tabela e identidade próprias, com `cliente_id` único, o que
   permite acrescentar campos como `pais` sem inchar a linha do cliente.
@@ -120,7 +120,7 @@ erDiagram
 - Nenhum valor calculável é guardado: o total do pedido, o imposto e o desconto
   são obtidos em tempo de execução.
 
-## Valores dos enums
+## Valores possíveis de cada enum
 
 | Enum | Valores |
 |---|---|

@@ -7,15 +7,33 @@ Repositório: https://github.com/pwebufersa/pefrioshop_referencia
 
 ## Como executar
 
+No Windows, a partir da raiz do projeto:
+
 ```
+cd C:\repos_github_2026\peFrioShop_referencia
+mvnw.cmd spring-boot:run
+```
+
+No Linux, no macOS e no bash do Windows:
+
+```
+cd /c/repos_github_2026/peFrioShop_referencia
 ./mvnw spring-boot:run
 ```
 
 A aplicação sobe em http://localhost:8080, e o console do H2 fica em
-`/h2-console`, com usuário `admin` e senha `admin`. No Windows, `mvnw.cmd`
-substitui `./mvnw`.
+http://localhost:8080/h2-console, com usuário `admin` e senha `admin`. A
+execução é encerrada com Ctrl+C.
 
-## Pilha
+Para gerar o jar, com o CSS e o JavaScript minificados, que é o que a
+hospedagem usa:
+
+```
+mvnw.cmd -DskipTests clean package
+java -jar target\pefrioshop-0.0.1-SNAPSHOT.jar
+```
+
+## Tecnologias usadas
 
 Spring Boot 4.1.1, Java 21, Thymeleaf, Spring Data JPA, H2 em memória no modo
 MySQL e Maven com wrapper.
@@ -44,7 +62,7 @@ MySQL e Maven com wrapper.
 15. Contagem de produtos por tipo.
 16. Novatos do mês e do ano.
 
-## Organização
+## Organização do código
 
 - `domain`: entidades e enums.
 - `repository`: acesso a dados.
@@ -71,7 +89,7 @@ inteira de gramas por mil daria zero em qualquer par abaixo de um quilo: o
 número pequeno desapareceria dentro do número grande, e o frete sairia sem o
 peso. O caso está fixado em `ResumoFreteMarteTest`.
 
-## Dados e foto
+## Dados de exemplo e foto do produto
 
 A carga inicial fica em `import.sql`: sete clientes, cinco fichas, nove
 produtos, seis pagamentos, seis pedidos e nove itens. Um dos produtos é um tênis
@@ -82,12 +100,12 @@ A foto do produto fica em `produto_foto`, e a miniatura de 160 pixels é gerada
 no envio pelo próprio JDK, por `ImageIO` e `Graphics2D`, sem ImageMagick e sem
 biblioteca externa. Sem foto, o endereço da miniatura devolve `sem-foto.svg`.
 
-## Design system
+## Sistema visual e contexto do produto
 
 O sistema visual está em [DESIGN.md](DESIGN.md), e o contexto do produto em
 [PRODUCT.md](PRODUCT.md).
 
-## Publicação
+## Como o sistema é publicado
 
 No GitHub Pages é publicada a documentação estática de `docs/`, em
 https://pwebufersa.github.io/pefrioshop_referencia/. A aplicação precisa de um

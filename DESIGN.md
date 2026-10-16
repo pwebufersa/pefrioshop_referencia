@@ -1,8 +1,8 @@
-# Design System - PéFrioShop
+# Sistema visual - PéFrioShop
 
 Sistema visual do projeto de referência. Vale para todas as telas.
 
-## Cena
+## Onde o sistema é usado
 
 O sistema é operado no balcão da loja, à luz do dia, em tela de desktop. A
 superfície é clara, e o azul da navegação ancora a página.
@@ -52,7 +52,7 @@ espaço anterior a um título é maior que o posterior.
 - Painel: superfície branca, para os últimos pedidos e para o resumo do pedido.
 - Lista de atalhos: linhas com divisória, sem grade de cartões.
 
-## Estados
+## Estados dos elementos interativos
 
 Hover em linhas e botões; foco visível no que é interativo; erro em vermelho;
 vazio com aviso em tinta suave.

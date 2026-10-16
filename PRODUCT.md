@@ -23,7 +23,7 @@ sistema de informação incremental em Spring Boot, Thymeleaf e JPA. O êxito é
 `./mvnw spring-boot:run` funcionar sem ajuda, e cada user story ser encontrada
 em segundos.
 
-## Posicionamento
+## O que o produto tem de próprio
 
 A ficha clínica do pé, com comprimento, pisada, temperatura e odor, transforma
 um CRUD de loja em um domínio que nenhum cadastro genérico de pessoa copiaria. O
