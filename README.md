@@ -121,3 +121,9 @@ tocados. Como `spring-boot:run` não chega ao empacotamento, o desenvolvimento
 permanece com os arquivos legíveis, e apenas a publicação recebe os compactos:
 o CSS cai de 13.960 para 11.250 bytes, e o JavaScript, de 3.116 para 2.916. A
 ferramenta não acompanha o jar, por exclusão no `maven-jar-plugin`.
+
+O CSS, o JavaScript e as imagens são entregues com o resumo do conteúdo no
+endereço, por `spring.web.resources.chain.strategy.content.enabled`. Assim, a
+versão escrita à mão no template é dispensada: quando o arquivo muda, o endereço
+muda junto, e o navegador busca o arquivo novo. Sem isso, a folha de estilo
+antiga permaneceria no cache do navegador depois de uma alteração.
