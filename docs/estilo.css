@@ -67,7 +67,6 @@ a:hover {
 	color: #dbe7ee;
 	font-size: 1rem;
 	white-space: nowrap;
-	overflow-x: auto;
 }
 
 main {
@@ -199,7 +198,15 @@ pre {
 .linha-unica {
 	max-width: none;
 	white-space: nowrap;
-	overflow-x: auto;
+}
+
+/* Em janela estreita, o texto volta a quebrar, sem rolagem horizontal. */
+@media (max-width: 780px) {
+	.cabecalho p,
+	.rodape,
+	.linha-unica {
+		white-space: normal;
+	}
 }
 
 .botao {
@@ -230,6 +237,5 @@ pre {
 	font-size: 0.9rem;
 	text-align: center;
 	white-space: nowrap;
-	overflow-x: auto;
 	border-top: 1px solid var(--borda);
 }
