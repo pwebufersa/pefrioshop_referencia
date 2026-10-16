@@ -61,8 +61,10 @@ tom lúdico sustenta o conteúdo sem infantilizar.
 - Carga inicial de clientes, produtos e pedidos em `import.sql`.
 - `src/main/resources/static/imagens/foto-referencia.svg`, substituto a ser
   trocado pela foto colorida de autoria do aluno.
-- Ausência a não preencher: dados comerciais reais, preços de mercado e marcas
-  verdadeiras.
+- Ausência a não preencher: dados comerciais reais e preços de mercado. As
+  marcas da carga inicial são fictícias, com a exceção pedida pelo professor: o
+  tênis de coleção cita uma marca verdadeira, para exercitar a formatação de
+  valor na casa do milhão.
 
 ## Princípios do produto
 

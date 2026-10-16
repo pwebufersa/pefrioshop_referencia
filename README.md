@@ -28,8 +28,8 @@ java -jar target\pefrioshop-0.0.1-SNAPSHOT.jar
 
 ## Tecnologias usadas
 
-Spring Boot 4.1.1, Java 21, Thymeleaf, Spring Data JPA, H2 em memória no modo
-MySQL e Maven com invólucro (wrapper).
+Spring Boot 4.1.1, Java 21, Thymeleaf, Spring Data JPA, validação com Bean
+Validation, H2 em memória no modo MySQL e Maven com invólucro (wrapper).
 
 ## User stories
 
@@ -49,7 +49,7 @@ mês e do ano.
 - `repository`: acesso a dados.
 - `service`: regras de negócio e cálculos.
 - `web`: controladores e formulários.
-- `config`: parâmetros da loja, cliente HTTP e carga inicial (seed).
+- `config`: parâmetros da loja e cliente HTTP.
 - `ferramenta`: minificação do CSS e do JavaScript, executada no empacotamento.
 
 Os valores de negócio ficam em `application.properties`, sob o prefixo
@@ -66,8 +66,8 @@ tonelada métrica.
 
 O peso do par é guardado em gramas, e não em quilo. A conversão é feita em
 `BigDecimal`, com duas casas e arredondamento, porque a divisão inteira de
-gramas por mil daria zero em qualquer par abaixo de um quilo, e o frete sairia
-sem o peso. O caso está fixado em `ResumoFreteMarteTest`.
+gramas por mil daria zero em qualquer par com menos de um quilo, e o frete
+sairia sem o peso. O caso está fixado em `ResumoFreteMarteTest`.
 
 ## Dados e foto
 

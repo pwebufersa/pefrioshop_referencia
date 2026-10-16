@@ -32,8 +32,9 @@
 	</div>
 
 	<h2>Como executar</h2>
-	<p>O projeto roda com o wrapper do Maven, sem instalação prévia do Maven.</p>
-<pre><code>./mvnw spring-boot:run</code></pre>
+	<p>O projeto roda com o wrapper do Maven, sem instalação prévia do Maven. No Windows:</p>
+<pre><code>mvnw.cmd spring-boot:run</code></pre>
+	<p>No bash do Windows, no Linux e no macOS, o comando é <code>./mvnw spring-boot:run</code>.</p>
 	<p>A aplicação sobe em <code>http://localhost:8080</code>. O console do H2 fica em <code>/h2-console</code>, com usuário <code>admin</code> e senha <code>admin</code>. A carga inicial vem do <code>import.sql</code>.</p>
 
 	<h2>User stories</h2>
@@ -43,8 +44,8 @@
 			<ol>
 				<li>Manter e exibir informações de um cliente.</li>
 				<li>Manter e exibir informações de produtos.</li>
-				<li>Manter e exibir a ficha clínica do pé.</li>
-				<li>Manter e exibir pedidos, com itens e pagamento.</li>
+				<li>Manter e exibir a ficha clínica do pé, com exclusão em cascata.</li>
+				<li>Manter e exibir pedidos, com itens, pagamento, imposto e total.</li>
 			</ol>
 		</div>
 		<div>
@@ -54,19 +55,19 @@
 				<li>Busca de produto pelo nome.</li>
 				<li>Busca de produto por qualquer campo.</li>
 				<li>Contato pelo WhatsApp.</li>
-				<li>E-mail promocional.</li>
-				<li>Endereço preenchido pelo CEP.</li>
+				<li>E-mail promocional, com 5% no tênis mais caro do último pedido.</li>
+				<li>Endereço pelo CEP, na BrasilAPI.</li>
 				<li>Aniversariantes do mês.</li>
 				<li>Foto do produto guardada no banco.</li>
 				<li>Frete estimado para Marte, pela viagem e pelo peso.</li>
-				<li>Desconto nos quatro produtos mais novos.</li>
+				<li>Desconto de 7,3% nos quatro produtos mais novos.</li>
 				<li>Contagem de produtos por tipo.</li>
 				<li>Novatos do mês e do ano.</li>
 			</ol>
 		</div>
 	</div>
 
-	<h2>Design system</h2>
+	<h2>Sistema visual</h2>
 	<div class="cores">
 		<div class="cor">
 			<div class="amostra" style="background:#14425f"></div>
